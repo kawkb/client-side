@@ -2,11 +2,11 @@ import React from 'react'
 
 function ChatSearch() {
   return (
-	<div className='search'>
-		<div className='search-form'>
-			<input type="text" placeholder="Find a chat" />
+	// <div className='chat-search debug'>
+		<div className='chat-search-form'>
+			<input type="text" placeholder="Search" />
 		</div>
-	</div>
+	// </div>
   )
 }
 

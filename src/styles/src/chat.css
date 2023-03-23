@@ -16,6 +16,7 @@
 
 .chat-side-bar {
 	flex: 1;
+	overflow: hidden;
 }
 
 .copy-book-background {
@@ -32,4 +33,41 @@
 .chat-box {
 	flex: 2;
 	margin-left: 10%;
+	overflow: hidden;
 }
+
+.chat-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 10px solid var(--shadow);
+	background-color: var(--apricot);
+	height: 10%;
+	color: var(--dark);
+}
+
+.chat-box-header {
+
+}
+
+.chat-navbar {
+
+}
+
+.chat-search-form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 10%;
+}
+
+.chat-search-form input {
+	border: 6px solid var(--dark);
+	background-color: rgb(247, 215, 186, 0.6);
+	padding: 10px;
+	font-size: 2rem;
+	width: 90%;
+	font-family: var(--font);
+	outline: none;
+}
+

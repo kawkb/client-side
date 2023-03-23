@@ -6,10 +6,10 @@ import ChatsList from './ChatsList'
 
 function ChatSideBar() {
   return (
-	<div className='chat-side-bar copy-book-background'>ChatSideBar
-		{/* <ChatNavBar />
+	<div className='chat-side-bar copy-book-background'>
+		<ChatNavBar />
 		<ChatSearch />
-		<ChatsList /> */}
+		{/* <ChatsList /> */}
 	</div>
   );
 }
