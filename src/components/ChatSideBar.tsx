@@ -9,7 +9,7 @@ function ChatSideBar() {
 	<div className='chat-side-bar copy-book-background'>
 		<ChatNavBar />
 		<ChatSearch />
-		{/* <ChatsList /> */}
+		<ChatsList />
 	</div>
   );
 }

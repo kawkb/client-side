@@ -1,8 +1,22 @@
 import React from 'react'
+import ChatMsg from './ChatMsg'
+
 
 function ChatMessages() {
   return (
-	<div>ChatMessages</div>
+	<div className='chat-messages-list'>
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+		<ChatMsg />
+	</div>
   )
 }
 
