@@ -1,0 +1,35 @@
+.chat-page {
+	background-color: var(--beige);
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.chat-container {
+	border: 1px solid black;
+	width: 80%;
+	height: 70%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.chat-side-bar {
+	flex: 1;
+}
+
+.copy-book-background {
+	background-color: var(--light);
+	background-image: linear-gradient(0deg, transparent 48%, var(--line) 48.1%, var(--line) 52.9%, transparent 53%), 
+					  linear-gradient(90deg, transparent 48%, var(--line) 48.1%, var(--line) 52.9%, transparent 53%);
+	background-size: 40px 40px;
+	background-position: 0 0, 0 0;
+	border: 10px solid var(--shadow);
+	border-radius: 30px;
+	box-shadow: 20px 20px 0px var(--shadow);
+}
+
+.chat-box {
+	flex: 2;
+	margin-left: 10%;
+}

@@ -1,7 +1,11 @@
 :root{
     --dark: #333231;
+	--shadow: #272324;
+	--light: #fff6eb;
+	--line: #e3dbd1;
     --orange: #fbbe86;
     --red: #F68074;
+	--beige: #f9e1bd;
     --font: 'League Gothic', sans-serif;
 }
 

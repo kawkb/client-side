@@ -3,6 +3,7 @@
 @import url('./src/varibales.css');
 @import url('./src/navbar.css');
 @import url('./src/home.css');
+@import url('./src/chat.css');
 
 body {
   font-family: var(--font);

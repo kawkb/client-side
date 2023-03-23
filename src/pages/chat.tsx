@@ -1,8 +1,12 @@
 import React from 'react'
+import ChatDisplay from '../components/ChatDisplay'
 
 function Chat() {
+  
   return (
-    <div>Chat</div>
+    <div>
+		<ChatDisplay />
+	</div>
   )
 }
 
