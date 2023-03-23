@@ -4,7 +4,7 @@ import ChatMsg from './ChatMsg'
 
 function ChatMessages() {
   return (
-	<div className='chat-messages-list'>
+	<div className='chat-messages-list scrollable'>
 		<ChatMsg />
 		<ChatMsg />
 		<ChatMsg />

@@ -2,7 +2,7 @@ import React from 'react'
 
 function ChatsList() {
   return (
-	<div className='chats-list'>
+	<div className='chats-list scrollable'>
 		<div className='chat-list-item'>
 			<span>Kawkab</span>
 		</div>
