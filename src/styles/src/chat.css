@@ -17,6 +17,7 @@
 .chat-side-bar {
 	flex: 1;
 	overflow: hidden;
+	padding-bottom: 80px;
 }
 
 .copy-book-background {
@@ -76,30 +77,43 @@
 	
 }
 
+.scrollable::-webkit-scrollbar {
+	width: 15px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+	background-color: rgb(239, 179, 146, 0.4);
+	border-radius: 10px;
+	border: 1px solid var(--dark);
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+	border: 1px solid var(--dark);
+	border-radius: 10px;
+}
+
 .chat-list {
+	padding: 20px;
+	margin: 10px 20px;
+	height: 85%;
 	overflow-y: scroll;
 }
 
-/* style the scrollbar */
-.chat-list::-webkit-scrollbar {
-	width: 8px; /* width of the scrollbar */
-  }
+
   
-  /* style the scrollbar track */
-  .chat-list::-webkit-scrollbar-track {
-	background-color: #f1f1f1; /* color of the scrollbar track */
-  }
-  
-  /* style the scrollbar thumb */
-  .chat-list::-webkit-scrollbar-thumb {
-	background-color: #888; /* color of the scrollbar thumb */
-	border-radius: 5px; /* round the corners of the scrollbar thumb */
-  }
-  
-  /* style the scrollbar thumb when hovering */
-  .chat-list::-webkit-scrollbar-thumb:hover {
-	background-color: #555; /* color of the scrollbar thumb on hover */
-  }
+.chat-list::-webkit-scrollbar-track {
+	background-color: rgb(69, 136, 88, 0.4);;
+}
+
+.chat-list::-webkit-scrollbar-thumb {
+	background-color: var(--green);
+	border-radius: 5px;
+}
+
+
+.chat-list::-webkit-scrollbar-thumb:hover {
+	background-color: var(--teal);
+}
   
 
 .chat-list-item {
@@ -128,20 +142,7 @@
 	overflow-y: scroll;
 }
 
-.scrollable::-webkit-scrollbar {
-	width: 15px;
-}
 
-.scrollable::-webkit-scrollbar-track {
-	background-color: rgb(239, 179, 146, 0.4);
-	border-radius: 10px;
-	border: 1px solid var(--dark);
-}
-
-.scrollable::-webkit-scrollbar-thumb {
-	border: 1px solid var(--dark);
-	border-radius: 10px;
-}
 
 .chat-messages-list::-webkit-scrollbar-thumb:hover {
 	background-color: var(--orange);
