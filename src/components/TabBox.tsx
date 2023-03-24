@@ -1,31 +1,32 @@
 import React from 'react'
 import { useState } from 'react';
-
+import Settings from './Settings';
 
 function TabBox() {
-	const [activeTab, setActiveTab] = useState(1);
+	const [activeTab, setActiveTab] = useState(3);
 
 	const changeTab = (index : number) => {
 		setActiveTab(index);
 	}
 
   return (
-	<div className='tab-box chat-container retro-border-box'>
+	<div className='tab-box chat-container retro-border-box light-box'>
 
 		<div className='tabs-header pink-header'>
 			<button className={activeTab === 1? "tab active-tab" : "tab"} onClick={() => changeTab(1)}>
-				Tab 1
+				Profil
 			</button>
 			<button className={activeTab === 2? "tab active-tab" : "tab"} onClick={() => changeTab(2)}>
-				Tab 2
+				Friends
 			</button>
 			<button className={activeTab === 3? "tab active-tab" : "tab"} onClick={() => changeTab(3)}>
-				Tab 3
+				Settings
 			</button>
 		</div>
 		
 		<div className='tabs-content'>
 			<div className={activeTab === 1? "tab-content active-tab-content" : "tab-content"}>
+				
 				<h2>Content 1</h2>
 				<hr />
 				<p>
@@ -45,7 +46,8 @@ function TabBox() {
 			</div>
 
 			<div className={activeTab === 3? "tab-content active-tab-content" : "tab-content"}>
-				<h2>Content 3</h2>
+				<Settings />
+				{/* <h2>Content 3</h2>
 				<hr />
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos sed
@@ -54,7 +56,7 @@ function TabBox() {
 					recusandae totam quidem repudiandae omnis veritatis nostrum
 					laboriosam architecto optio rem, dignissimos voluptatum beatae
 					aperiam voluptatem atque. Beatae rerum dolores sunt.
-				</p>
+				</p> */}
 			</div>
 		</div>
 	</div>

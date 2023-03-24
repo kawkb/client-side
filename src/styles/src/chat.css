@@ -31,8 +31,15 @@
 	
 }
 
-.retro-border-box {
+.light-box {
 	background-color: var(--light);
+}
+
+.trans-pink-box {
+	background-color: var(--transpink);
+}
+
+.retro-border-box {
 	border: 10px solid var(--shadow);
 	border-radius: 30px;
 	box-shadow: -20px 20px 0px var(--shadow);
