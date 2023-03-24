@@ -107,7 +107,6 @@
 
 .chat-list::-webkit-scrollbar-thumb {
 	background-color: var(--green);
-	border-radius: 5px;
 }
 
 
