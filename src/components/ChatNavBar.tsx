@@ -3,7 +3,7 @@ import React from 'react'
 function ChatNavBar() {
   return (
 	<div className='chat-navbar chat-header'>
-		<h2>Chat NavBar</h2>
+		<h1>Chat NavBar</h1>
 	</div>
   )
 }
