@@ -7,6 +7,8 @@ function ChatDisplay() {
 
   return (
 	<div className='chat-page'>
+		{/* <div className='color-curve'>
+		</div> */}
 		<div className='chat-container'>
 			<ChatSideBar />
 			<ChatBox />

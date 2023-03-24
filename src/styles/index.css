@@ -4,6 +4,8 @@
 @import url('./src/navbar.css');
 @import url('./src/home.css');
 @import url('./src/chat.css');
+@import url('./src/profil.css');
+@import url('./src/tabs.css');
 
 body {
   font-family: var(--font);

@@ -1,0 +1,12 @@
+.pattern-background {
+	background-repeat: no-repeat;
+  	background-size: cover;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.pink-pattern {
+	background-image: url(/public/pinkbg.svg);
+}

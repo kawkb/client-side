@@ -1,0 +1,45 @@
+.tab-box {
+	display:flex;
+	flex-direction: column;
+	position: relative;
+	word-break: break-all;
+	overflow: hidden;
+}
+
+.tabs-header {
+	display: flex;
+	height: 10%;
+	padding-left: 30px;
+	border-bottom: 5px solid var(--dark);
+	padding-bottom: 10px;
+	overflow: visible;
+}
+
+.tabs-content {
+	height: 90%;
+}
+
+.pink-header {
+	background-color: var(--hotpink);
+}
+
+.tab {
+	background-color: var(--sunny);
+	border: 5px solid var(--dark);
+	border-radius: 20px 20px 0 0;
+	width: 10%;
+	margin-top: 2%;
+	cursor: pointer;
+	outline: none;
+	font-family: var(--font);
+	font-size: 1.5rem;
+	margin-bottom: -15px;
+}
+
+.active-tab {
+	background-color: var(--light);
+	border-bottom: transparent;
+}
+
+
+
