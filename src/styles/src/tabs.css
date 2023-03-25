@@ -117,8 +117,8 @@
 }
 
 .nickname-input input {
-	border: 6px solid var(--dark);
-	background-color: rgb(255, 177, 175, 0.6);
+	border: 4px solid var(--dark);
+	background-color: rgb(255, 177, 175, 0.4);
 	padding: 20px;
 	margin-right: 10px;
 	margin-left: 10px;

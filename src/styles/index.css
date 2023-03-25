@@ -6,6 +6,7 @@
 @import url('./src/chat.css');
 @import url('./src/profil.css');
 @import url('./src/tabs.css');
+@import url('./src/toggle.css');
 
 body {
   font-family: var(--font);
