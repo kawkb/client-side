@@ -1,10 +1,17 @@
 import React from 'react'
 import TabBox from './TabBox'
+import Settings from './Settings';
 
 function ProfilComp() {
-  return (
+	const options = [
+		{ name: "Profil", content: <Settings />},
+		{ name: "Friends", content: <Settings />},
+		{ name: "Settings", content: <Settings />}
+	];
+	
+	return (
 	<div className='pattern-background pink-pattern'>
-		<TabBox />		
+		<TabBox options={options} />		
 	</div>
   )
 }

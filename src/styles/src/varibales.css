@@ -13,7 +13,17 @@
 	--teal: #00AA7C;
 	--sunny: #FECD1A;
 	--hotpink: #DF7495;
-	--transpink: #fce9e9; 
+	--transpink: #fce9e9;
+	--lightpink: #ffb1af;
+	--hotorange: #ff8443;
+	--transorange: #fae9e0;
+	--lightorange: #fc985b;
+	--hotblue: #4470ae;
+	--transblue: #f5f9ff;
+	--lightblue: #6b92c9;
+	--hotgreen: #CDE223;
+	--transgreen: #FDFBE4;
+	--lightgreen: #DDED80;
     --font: 'League Gothic', sans-serif;
 }
 
