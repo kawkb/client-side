@@ -67,6 +67,8 @@
 	height: 80%;
 	width: 30%;
 	display: flex;
+	position: relative;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 }
@@ -77,4 +79,25 @@
 
 .svg-text-margin {
 	max-width: 90%;
+}
+
+.retro-button-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 20%;
+	width: 100%;
+}
+
+.retro-button {
+	background-color: var(--hotpink);
+	cursor: pointer;
+	outline: none;
+	font-family: var(--font);
+	font-size: 2rem;
+	height: 60%;
+	width: 50%;
+	border: 5px solid var(--shadow);
+	border-radius: 40px;
+	box-shadow: -10px 10px 0px var(--shadow);
 }
