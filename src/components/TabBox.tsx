@@ -1,7 +1,6 @@
-import { tab } from '@testing-library/user-event/dist/tab';
 import React from 'react'
 import { useState } from 'react';
-import Settings from './Settings';
+
 
 // interface TabBoxProps {
 // 	options:[{

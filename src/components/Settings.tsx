@@ -10,7 +10,7 @@ function Settings() {
 			<img className="svg-text" src={editpic} alt="" />
 		</div>
 		<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-			<img className="svg-text" src={nickname} alt="" />
+			<img className="svg-text svg-text-margin" src={nickname} alt="" />
 		</div>
 		<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
 			<img className="svg-text" src={enable2fa} alt="" />
