@@ -75,10 +75,12 @@
 
 .svg-text {
 	max-width: 100%;
+	height: 50%
 }
 
 .svg-text-margin {
 	max-width: 90%;
+	margin-top: 20px;
 }
 
 .retro-button-container {
@@ -101,3 +103,39 @@
 	border-radius: 40px;
 	box-shadow: -10px 10px 0px var(--shadow);
 }
+
+.retro-button:hover {
+	background-color: var(--sunny);
+}
+
+.nickname-input {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+	height: 20%;
+}
+
+.nickname-input input {
+	border: 6px solid var(--dark);
+	background-color: rgb(255, 177, 175, 0.6);
+	padding: 20px;
+	margin-right: 10px;
+	margin-left: 10px;
+	font-size: 1.5rem;
+	height: 60%;
+	width: 80%;
+	font-family: var(--font);
+	outline: none;
+	color: var(--dark);
+}
+
+.nickname-button img {
+	max-width: 100%;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.nickname-button img:hover {
+
+}	

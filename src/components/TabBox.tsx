@@ -36,7 +36,7 @@ function TabBox({ options }:TabBoxProps) {
 		<div className='tabs-header pink-header'>
 
 			{options.map(({name, content}, index) => (
-				<button className={activeTab === index? "tab active-tab" : "tab"} onClick={() => changeTab(index)}>
+				<button key={index} className={activeTab === index? "tab active-tab" : "tab"} onClick={() => changeTab(index)}>
 					{name}
 				</button>
 			))}
@@ -45,7 +45,7 @@ function TabBox({ options }:TabBoxProps) {
 		<div className='tabs-content'>
 			
 			{options.map(({name, content}, index) => (
-				<div className={activeTab === index? "tab-content active-tab-content" : "tab-content"}>
+				<div key={index} className={activeTab === index? "tab-content active-tab-content" : "tab-content"}>
 					{content}
 				</div>
 			))}
