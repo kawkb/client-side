@@ -7,13 +7,13 @@ function Settings() {
   return (
 	<div className='settings-container'>
 		<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-			<img src={editpic} alt="" />
+			<img className="svg-text" src={editpic} alt="" />
 		</div>
 		<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-			<img src={nickname} alt="" />
+			<img className="svg-text" src={nickname} alt="" />
 		</div>
 		<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-			<img src={enable2fa} alt="" />
+			<img className="svg-text" src={enable2fa} alt="" />
 		</div>
 	</div>
   );

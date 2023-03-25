@@ -66,4 +66,11 @@
 .setting-box {
 	height: 80%;
 	width: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.svg-text {
+	max-width: 100%;
 }
