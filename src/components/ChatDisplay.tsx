@@ -6,14 +6,13 @@ import ChatBox from './ChatBox'
 function ChatDisplay() {
 
   return (
-	<div className='chat-page'>
-		{/* <div className='color-curve'>
-		</div> */}
+	// <div className='chat-page'>
+
 		<div className='chat-container'>
 			<ChatSideBar />
 			<ChatBox />
 		</div>
-	</div>
+	// </div>
   )
 }
 

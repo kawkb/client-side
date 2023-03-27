@@ -34,7 +34,7 @@ const CustomToggleButton = ({ onToggle, untoggledImage, toggledImage }: Props) =
         style={{
           position: 'absolute',
           top: '-45px',
-          left: isToggled ? '-30%' : '65%',
+          left: isToggled ? '65%' : '-30%',
           transition: 'left 0.2s ease-in-out',
           width: '100px',
           height: '100px',

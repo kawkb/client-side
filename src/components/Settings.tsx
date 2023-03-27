@@ -35,7 +35,7 @@ function Settings() {
 				<img className="svg-text svg-text-margin" src={nickname} alt="" />
 				<div className='nickname-input'>
 					<input type="text" placeholder='New Nickname' />
-					<ImgButton src={heart} alt="confirm" onClick={handleNewNickname} />
+					<ImgButton classes="backgroundless-image-button" src={heart} alt="confirm" onClick={handleNewNickname} />
 				</div>
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
@@ -43,8 +43,8 @@ function Settings() {
 				<div className='toggle-container'>
 					<CustomToggleButton 
 						onToggle={handleToggle} 
-						untoggledImage={greenflower}
-						toggledImage={redflower}
+						untoggledImage={redflower}
+						toggledImage={greenflower}
 					/>
 				</div>
 			</div>

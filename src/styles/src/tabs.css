@@ -24,9 +24,7 @@
 	height: 90%;
 }
 
-.pink-header {
-	background-color: var(--hotpink);
-}
+
 
 .tabs-container {
 	flex: 1.5;

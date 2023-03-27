@@ -8,10 +8,10 @@ function ProfilComp() {
 		{ name: "Friends", content: <Settings />},
 		{ name: "Settings", content: <Settings />}
 	];
-	
+	const color :string = "pink";
 	return (
 	<div className='pattern-background pink-pattern'>
-		<TabBox options={options} />		
+		<TabBox options={options} tabcolor={color} imgbtn={false}/>		
 	</div>
   )
 }

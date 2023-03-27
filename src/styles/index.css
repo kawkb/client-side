@@ -7,6 +7,7 @@
 @import url('./src/profil.css');
 @import url('./src/tabs.css');
 @import url('./src/toggle.css');
+@import url('./src/colors.css');
 
 body {
   font-family: var(--font);

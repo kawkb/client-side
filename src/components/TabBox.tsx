@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react';
 import baseavatar from './../assets/svg/baseavatar.svg'
 import squares from '../assets/img/squares.png'
+import ClassButton from './ClassButton';
+import ImgButton from './ImgButton';
 
 // interface TabBoxProps {
 // 	options:[{
@@ -20,10 +22,12 @@ interface TabBoxObj {
 }
 
 interface TabBoxProps {
+	imgbtn: boolean;
 	options: TabBoxObj[];
+	tabcolor: string;
 }
 
-function TabBox({ options }:TabBoxProps) {
+function TabBox({ imgbtn, options, tabcolor }:TabBoxProps) {
 	
 	const [activeTab, setActiveTab] = useState(0);
 
@@ -33,14 +37,19 @@ function TabBox({ options }:TabBoxProps) {
 
   return (
 	<div className='tab-box chat-container retro-border-box light-box'>
-
-		<div className='tabs-header pink-header'>
+		
+		<div className={"tabs-header " + tabcolor + "-header"}>
 			<div className='tabs-container'>
-				{options.map(({name, content}, index) => (
-					<button key={index} className={activeTab === index? "tab active-tab" : "tab"} onClick={() => changeTab(index)}>
-						{name}
-					</button>
-				))}
+				{options.map(({name, content}, index) => {
+					if (imgbtn) {
+						return ( <ImgButton classes={activeTab === index? "tab active-tab" : "tab"} key={index} src={name} alt={""} onClick={() => changeTab(index)} /> )
+					} else {
+						 return ( <ClassButton key={index} name={name} classes={activeTab === index? "tab active-tab" : "tab"} onClick={() => changeTab(index)}/> )
+					}
+					// <button key={index} className={activeTab === index? "tab active-tab" : "tab"} onClick={() => changeTab(index)}>
+					// 	{name}
+					// </button>
+			})}
 			</div>
 			<div className='tab-box-title'>
 				<h1>Mike Wazowski</h1>

@@ -31,14 +31,6 @@
 	
 }
 
-.light-box {
-	background-color: var(--light);
-}
-
-.trans-pink-box {
-	background-color: var(--transpink);
-}
-
 .retro-border-box {
 	border: 10px solid var(--shadow);
 	border-radius: 30px;
