@@ -1,5 +1,5 @@
 import React from 'react'
-import smiley from '../assets/img/smiley.png'
+import smiley from '../../assets/img/smiley.png'
 
 function ChatMsg() {
   return (

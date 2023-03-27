@@ -6,7 +6,7 @@ import ChatInput from './ChatInput'
 function ChatBox() {
   return (
 	<div className='chat-box copy-book-background retro-border-box light-box'>
-		<ChatBoxHead />
+		{/* <ChatBoxHead /> */}
 		<ChatMessages />
 		<ChatInput />
 	</div>

@@ -1,7 +1,7 @@
 import React from 'react'
 // import { createContext, useContext, useEffect, useState } from 'react';
-import ChatSideBar from './ChatSideBar'
-import ChatBox from './ChatBox'
+import ChatSideBar from './atoms/ChatSideBar'
+import ChatBox from './atoms/ChatBox'
 
 function ChatDisplay() {
 

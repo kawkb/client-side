@@ -7,7 +7,7 @@ import ChatsList from './ChatsList'
 function ChatSideBar() {
   return (
 	<div className='chat-side-bar copy-book-background retro-border-box light-box'>
-		<ChatNavBar />
+		{/* <ChatNavBar /> */}
 		<ChatSearch />
 		<ChatsList />
 	</div>
