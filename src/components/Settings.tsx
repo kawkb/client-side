@@ -43,8 +43,8 @@ function Settings() {
 				<div className='toggle-container'>
 					<CustomToggleButton 
 						onToggle={handleToggle} 
-						untoggledImage={redflower}
-						toggledImage={greenflower}
+						untoggledImage={greenflower}
+						toggledImage={redflower}
 					/>
 				</div>
 			</div>
