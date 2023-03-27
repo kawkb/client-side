@@ -82,7 +82,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 10%;
+	height: 20%;
 }
 
 .chat-search-form input {
@@ -182,7 +182,7 @@
 
 
 .chat-msg-input {
-	height: 15%;
+	height: 25%;
 	padding: 20px;
 	border-top: 10px solid var(--shadow);
 	/* background-color: brown; */
