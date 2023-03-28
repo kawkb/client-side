@@ -14,9 +14,9 @@ function CreateChat({onClose}: {onClose: () => void}) {
 
 	const handleCreateNewRoom = () => {}
 
-	const publicClasses = "new-room-option-btn new-room-option-first-btn " + (publicBtnState? "green-bg" : "coral-bg"); 
-	const privateClasses = "new-room-option-btn " + (privateBtnState? "green-bg" : "coral-bg"); 
-	const protectedClasses = "new-room-option-btn " + (protectedBtnState? "green-bg" : "coral-bg"); 
+	const publicClasses = "new-room-option-btn new-room-option-first-btn " + (publicBtnState? "green-bg" : "unclicked-new-room-option coral-bg"); 
+	const privateClasses = "new-room-option-btn " + (privateBtnState? "green-bg" : "unclicked-new-room-option coral-bg"); 
+	const protectedClasses = "new-room-option-btn " + (protectedBtnState? "green-bg" : "unclicked-new-room-option coral-bg"); 
 
 
   return (

@@ -87,7 +87,7 @@
 	border-left: 3px solid var(--dark);
 }
 
-.new-room-option-btn:hover {
+.unclicked-new-room-option:hover {
 	background-color: rgb(0, 170, 124, 0.8);
 }
 
