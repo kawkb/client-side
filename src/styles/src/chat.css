@@ -28,7 +28,9 @@
 .chat-side-bar {
 	flex: 1;
 	overflow: hidden;
-	padding-bottom: 80px;
+	padding-bottom: 40px;
+	display: flex;
+	flex-direction: column;
 }
 
 .copy-book-background {
@@ -129,6 +131,7 @@
 	padding: 20px;
 	margin: 10px 20px;
 	height: 85%;
+	/* width: 100%; */
 	overflow-y: scroll;
 }
 
@@ -157,7 +160,7 @@
 	background-color: rgb(69, 136, 88, 0.7);
 	border-radius: 10px;
 	overflow: hidden;
-	margin: 20px 30px;
+	margin: 20px 0;
 	cursor: pointer;
 }
 
