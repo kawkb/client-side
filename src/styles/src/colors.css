@@ -49,3 +49,11 @@
 .green-header {
 	background-color: var(--hotgreen);
 }
+
+.coral-bg {
+	background-color: var(--coral);
+}
+
+.green-bg {
+	background-color: var(--green);
+}
