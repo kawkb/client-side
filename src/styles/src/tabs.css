@@ -50,7 +50,7 @@
 
 .tab-box-avatar-container {
 	flex: 1;
-	z-index: 100;
+	z-index: 50;
 	display: flex;
 	justify-content: end;
 	overflow: visible;
@@ -145,7 +145,7 @@
 }
 
 .retro-button {
-	background-color: var(--hotpink);
+	/* background-color: var(--hotpink); */
 	cursor: pointer;
 	outline: none;
 	font-family: var(--font);

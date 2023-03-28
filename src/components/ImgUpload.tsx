@@ -1,6 +1,6 @@
 import React, {useRef} from 'react'
 
-function ImgUpload() {
+function ImgUpload({classes}: {classes: string}) {
 	
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -20,7 +20,7 @@ function ImgUpload() {
 	
 	return (
 		<div className='retro-button-container'>
-			<button className='retro-button' onClick={handleCLick}>Click here</button>
+			<button className={classes} onClick={handleCLick}>Click here</button>
 			<input type="file" accept="image/*" ref={fileInputRef} style={{display: 'none'}} onChange={handleFileInputChange} />
 		</div>
   	);

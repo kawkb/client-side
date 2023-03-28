@@ -96,7 +96,7 @@
 }
 
 .chat-search-form-minus {
-	height: 20%;
+	height: 15%;
 }
 
 .chat-search-form input {
@@ -115,20 +115,22 @@
 	display: flex;
 	position: relative;
 	align-items: center;
-	justify-content: space-around;
-	height: 20%;
+	justify-content: center;
+	height: 15%;
+	width: 100%;
 }
 
-.chat-search-plus input {
+.chat-search-plus-input {
 	border: 6px solid var(--dark);
 	background-color: rgb(247, 215, 186, 0.6);
 	padding: 10px;
 	font-size: 2rem;
-	width: 70%;
+	width: 65%;
 	height: 70%;
 	font-family: var(--font);
 	outline: none;
 	color: var(--dark);
+	margin: 2%;
 }
 
 .chat-plus-button {
@@ -139,7 +141,7 @@
 	border: 6px solid var(--dark);
 	background-color: rgb(247, 215, 186, 0.6);
 	padding: 10px;
-	font-size: 3rem;
+	font-size: 2rem;
 	cursor: pointer;
 }
 
