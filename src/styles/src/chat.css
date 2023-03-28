@@ -7,11 +7,20 @@
 	position: relative;
 }
 
-.chat-container {
+.box-container {
 	/* border: 1px solid black; */
 	z-index: 50;
 	width: 80%;
 	height: 70%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.chat-container {
+	/* border: 1px solid black; */
+	z-index: 50;
+	width: 90%;
+	height: 80%;
 	display: flex;
 	justify-content: space-between;
 }

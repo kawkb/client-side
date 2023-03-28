@@ -36,7 +36,7 @@ function TabBox({ imgbtn, options, tabcolor }:TabBoxProps) {
 	}
 
   return (
-	<div className='tab-box chat-container retro-border-box light-box'>
+	<div className='tab-box box-container retro-border-box light-box'>
 		
 		<div className={"tabs-header " + tabcolor + "-header"}>
 			<div className='tabs-container'>
