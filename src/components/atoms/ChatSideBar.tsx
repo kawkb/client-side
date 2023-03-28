@@ -4,11 +4,12 @@ import ChatSearch from './ChatSearch'
 import ChatsList from './ChatsList'
 
 
-function ChatSideBar() {
+function ChatSideBar({header} : {header: React.ReactNode;}) {
   return (
-	<div className='chat-side-bar copy-book-background retro-border-box light-box'>
+	<div className='chat-side-bar copy-book-background retro-border-box trans-orange-box'>
 		{/* <ChatNavBar /> */}
-		<ChatSearch />
+		{/* <ChatSearch /> */}
+		{header}
 		<ChatsList />
 	</div>
   );

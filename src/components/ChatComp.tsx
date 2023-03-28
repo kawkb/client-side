@@ -6,11 +6,13 @@ import ChatDisplay from './ChatDisplay';
 import ChatContainer from './ChatContainer';
 import le_chat from './../assets/svg/le_chat.svg'
 import les_chats from './../assets/svg/les_chats.svg'
+import ChatSearch from './atoms/ChatSearch';
+import ChatSearchPlus from './atoms/ChatSearchPlus';
 
 function ChatComp() {
 	const options = [
-		{ name: le_chat, content: <ChatDisplay />},
-		{ name: les_chats, content: <ChatDisplay />},
+		{ name: le_chat, content: <ChatDisplay sideheader={<ChatSearch />} />},
+		{ name: les_chats, content: <ChatDisplay sideheader={<ChatSearchPlus />} />},
 	];
 	const color:string = "orange";
 

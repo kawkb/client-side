@@ -93,6 +93,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.chat-search-form-minus {
 	height: 20%;
 }
 
@@ -106,6 +109,42 @@
 	font-family: var(--font);
 	outline: none;
 	color: var(--dark);
+}
+
+.chat-search-plus {
+	display: flex;
+	position: relative;
+	align-items: center;
+	justify-content: space-around;
+	height: 20%;
+}
+
+.chat-search-plus input {
+	border: 6px solid var(--dark);
+	background-color: rgb(247, 215, 186, 0.6);
+	padding: 10px;
+	font-size: 2rem;
+	width: 70%;
+	height: 70%;
+	font-family: var(--font);
+	outline: none;
+	color: var(--dark);
+}
+
+.chat-plus-button {
+	height: 70%;
+	width: 20%;
+	text-align: center;
+	outline: none;
+	border: 6px solid var(--dark);
+	background-color: rgb(247, 215, 186, 0.6);
+	padding: 10px;
+	font-size: 3rem;
+	cursor: pointer;
+}
+
+.chat-plus-button:hover {
+	background-color: rgb(0, 170, 124, 0.8);
 }
 
 .chat-search-form input::placeholder {
@@ -138,7 +177,7 @@
 
   
 .chat-list::-webkit-scrollbar-track {
-	background-color: rgb(69, 136, 88, 0.4);;
+	background-color: rgb(69, 136, 88, 0.4);
 }
 
 .chat-list::-webkit-scrollbar-thumb {
@@ -162,6 +201,10 @@
 	overflow: hidden;
 	margin: 20px 0;
 	cursor: pointer;
+}
+
+.chat-list-item:hover {
+	background-color: rgb(0, 170, 124, 0.8);
 }
 
 .chat-list-item span {
