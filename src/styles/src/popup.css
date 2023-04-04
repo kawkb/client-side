@@ -88,7 +88,8 @@
 }
 
 .unclicked-new-room-option:hover {
-	background-color: rgb(0, 170, 124, 0.8);
+	/* background-color: rgb(0, 170, 124, 0.8); */
+	background-color: rgb(69, 136, 88, 0.5);
 }
 
 .create-button-container {
