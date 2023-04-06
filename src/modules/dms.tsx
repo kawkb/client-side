@@ -2,16 +2,22 @@ import User from './user';
 import DMsMsg from './dmsmsg';
 
 class DMs {
+	private _id: string;
 	private _user : User;
 	private _messages: DMsMsg[];
 
-	constructor(user: User, messages: DMsMsg[] = []) {
+	constructor(user: User, messages: DMsMsg[] = [], id: string) {
+		this._id = id;
 		this._user = user;
 		this._messages = messages;
 	}
 
 	get user() {
 		return this._user;
+	}
+
+	get id() {
+		return this._id;
 	}
 
 	get messages() {
@@ -26,8 +32,12 @@ class DMs {
 		this._messages = messages;
 	}
 
+	set id(id: string) {
+		this._id = id;
+	}
+
 	static fromJson(json: any) {
-		return new DMs(User.fromJson(json.user), json.messages.map(DMsMsg.fromJson));
+		return new DMs(User.fromJson(json.user), json.messages.map(DMsMsg.fromJson), json.id);
 	}
 
 	static fromJsonArray(json: any[]) {

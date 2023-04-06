@@ -20,19 +20,16 @@ interface DMsListStore {
 	  activeDMs: DMs | null;
 }
 
-interface ChatListStore {
-	items: (Channel | DMs)[];
-	add: (item: Channel | DMs) => void;
-	remove: (itemId: string) => void;
-	activeItem: Channel | DMs | null;
-}
 
-const useChannelList = create<ChatListStore>(
-	// combine({items:[], activeItem: null}, (set) => ({
-	// 	add: (item: Channel | DMs) => set((state) => ({items: [...state.items, item]})),
-	// 	remove: (itemId: string) => set((state) => ({items: state.items.filter((i) => i !== item)})),
-	// }))
-	);
+const useChannelList = create(
+	combine({items: [] as Array<Channel | DMs> , activeItem: null}, (set) => ({
+		add: (item: Channel | DMs) => set((state) => ({items: [...state.items, item] as Array<Channel | DMs>})),
+		remove: (itemId: string) => set((state) => ({items: state.items.filter((i : Channel | DMs) => {
+			if (i.id !== itemId)
+			return  i as Channel | DMs;
+		}) as Array<Channel | DMs> })),
+	}))
+);
 
 
 export default useChannelList;

@@ -44,9 +44,9 @@ class Channel {
 		this._name = name;
 	}
 
-	// set owner_id(owner_id: string) {
-	// 	this._owner_id = owner_id;
-	// }
+	set owner_id(owner_id: string) {
+		this._owner_id = owner_id;
+	}
 
 	set type(type: ChannelType) {
 		this._type = type;

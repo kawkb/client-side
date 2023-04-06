@@ -33,25 +33,25 @@ class ChannelMsg {
 		return this._timestamp;
 	}
 
-	// set id(id: string) {
-	// 	this._id = id;
-	// }
+	set id(id: string) {
+		this._id = id;
+	}
 
-	// set channel_id(channel_id: string) {
-	// 	this._channel_id = channel_id;
-	// }
+	set channel_id(channel_id: string) {
+		this._channel_id = channel_id;
+	}
 
-	// set sender_id(sender_id: string) {
-	// 	this._sender_id = sender_id;
-	// }
+	set sender_id(sender_id: string) {
+		this._sender_id = sender_id;
+	}
 
-	// set content(content: string) {
-	// 	this._content = content;
-	// }
+	set content(content: string) {
+		this._content = content;
+	}
 
-	// set timestamp(timestamp: Date) {
-	// 	this._timestamp = timestamp;
-	// }
+	set timestamp(timestamp: Date) {
+		this._timestamp = timestamp;
+	}
 
 	static fromJson(json: any) {
 		return new ChannelMsg(json.id, json.channel_id, json.sender_id, json.content, json.timestamp);
