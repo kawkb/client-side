@@ -2,11 +2,11 @@ import React from 'react'
 import TabBox from './TabBox'
 import Settings from './Settings';
 import squares from '../assets/img/squares.png'
+import Profil from './Profil';
 
 function ProfilComp() {
 	const options = [
-		{ name: "Profil", content: <Settings />},
-		{ name: "Friends", content: <Settings />},
+		{ name: "Profil", content: <Profil />},
 		{ name: "Settings", content: <Settings />}
 	];
 

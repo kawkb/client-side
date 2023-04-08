@@ -329,6 +329,10 @@
 	display: flex;
 }
 
+.blurb-container-owner {
+	justify-content: flex-end;
+}
+
 .message-blurb {
 	position: relative;
 	/* width: 80%; */
@@ -340,7 +344,7 @@
 	background-color: var(--peach);
 	border: 4px solid var(--dark);
 	border-radius: 60px;
-	padding: 10px 15px;
+	padding: 10px 20px;
 	font-size: 2rem;
 
 	
@@ -386,7 +390,7 @@
   }
 
   .blurb-owner:before {
-	left: calc(90% - 48px);
+	left: calc(88% - 48px);
 	bottom: -30px;
 	border: 15px solid;
 	border-color: #333 blue  green  orange;
@@ -395,7 +399,7 @@
   }
 
   .blurb-owner:after {
-	left: calc(90% - 42px);
+	left: calc(88% - 42px);
 	bottom: -20px;
 	border: 10px solid;
 	border-color: yellow red  purple  pink;
