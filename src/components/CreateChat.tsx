@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import ClassButton from './ClassButton'
+import useChatList from '../hooks/useChatList';
 
 function CreateChat({onClose}: {onClose: () => void}) {
 
@@ -12,12 +13,13 @@ function CreateChat({onClose}: {onClose: () => void}) {
 	const handleCreatePrivate = () => { const newBtnState = !privateBtnState; setPrivateBtnState(newBtnState); if (newBtnState) {setPublicBtnState(false); setProtectedBtnState(false);}}
 	const handleCreateProtected = () => { const newBtnState = !protectedBtnState; setProtectedBtnState(newBtnState); if (newBtnState) {setPrivateBtnState(false); setPublicBtnState(false);}}
 
-	const handleCreateNewRoom = () => {}
-
+	
 	const publicClasses = "new-room-option-btn new-room-option-first-btn " + (publicBtnState? "green-bg" : "unclicked-new-room-option coral-bg"); 
 	const privateClasses = "new-room-option-btn " + (privateBtnState? "green-bg" : "unclicked-new-room-option coral-bg"); 
 	const protectedClasses = "new-room-option-btn " + (protectedBtnState? "green-bg" : "unclicked-new-room-option coral-bg"); 
-
+	
+	// const add = useChatList(state => state.add);
+	const handleCreateNewRoom = () => {}
 
   return (
 	<div className='create-room-popup copy-book-background retro-border-box trans-orange-box'>

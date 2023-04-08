@@ -25,9 +25,11 @@ interface TabBoxProps {
 	imgbtn: boolean;
 	options: TabBoxObj[];
 	tabcolor: string;
+	title: string;
+	avatar: string;
 }
 
-function TabBox({ imgbtn, options, tabcolor }:TabBoxProps) {
+function TabBox({ imgbtn, options, tabcolor, title, avatar}:TabBoxProps) {
 	
 	const [activeTab, setActiveTab] = useState(0);
 
@@ -52,10 +54,10 @@ function TabBox({ imgbtn, options, tabcolor }:TabBoxProps) {
 			})}
 			</div>
 			<div className='tab-box-title'>
-				<h1>Mike Wazowski</h1>
+				<h1>{title}</h1>
 			</div>
 			<div className='tab-box-avatar-container'>
-				<img src={squares} className="tab-box-avatar" alt='avatar' />
+				<img src={avatar} className="tab-box-avatar" alt='avatar' />
 			</div>
 		</div>
 		

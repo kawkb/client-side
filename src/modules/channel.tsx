@@ -1,3 +1,7 @@
+import User from "./user";
+import { Status } from "./user";
+import ChannelMsg from "./channelmsg";
+
 enum ChannelType {
 	PUBLIC = "public",
 	PROTECTED = "protected",
@@ -9,14 +13,18 @@ class Channel {
 	private _name: string;
 	private _owner_id : string;
 	private _type: ChannelType;
+	private _avatar: string;
 	private _password: string;
+	private _messages: ChannelMsg[];
 
-	constructor(id: string, name: string, owner_id: string, type: ChannelType, password: string) {
+	constructor(id: string, name: string, owner_id: string, type: ChannelType = ChannelType.PUBLIC, avatar: string, password: string, messages: ChannelMsg[] = []) {
 		this._id = id;
 		this._name = name;
 		this._owner_id = owner_id;
 		this._type = type;
+		this._avatar = avatar;
 		this._password = password;
+		this._messages = messages;
 	}
 
 	get id() {
@@ -35,8 +43,16 @@ class Channel {
 		return this._type;
 	}
 
+	get avatar() {
+		return this._avatar;
+	}
+
 	get password() {
 		return this._password;
+	}
+
+	get messages() {
+		return this._messages;
 	}
 
 	set name(name: string) {
@@ -52,12 +68,20 @@ class Channel {
 		this._type = type;
 	}
 
+	set avatar(avatar: string) {
+		this._avatar = avatar;
+	}
+
 	set password(password: string) {
 		this._password = password;
 	}
 
+	set messages(messages: ChannelMsg[]) {
+		this._messages = messages;
+	}
+
 	static fromJson(json: any) {
-		return new Channel(json.id, json.name, json.owner_id, json.type, json.password);
+		return new Channel(json.id, json.name, json.owner_id, json.type, json.password, json.messages.map(ChannelMsg.fromJson));
 	}
 
 	static fromJsonArray(json: any[]) {
@@ -70,7 +94,8 @@ class Channel {
 			name: this._name,
 			owner_id: this._owner_id,
 			type: this._type,
-			password: this._password
+			password: this._password,
+			messages: this._messages.map((msg) => msg.toJson())
 		};
 	}
 

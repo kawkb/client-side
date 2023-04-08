@@ -7,7 +7,8 @@ import useChatList from '../../hooks/useChatList';
 import Channel from '../../modules/channel';
 import User from '../../modules/user';
 import DMs from '../../modules/dms';
-
+import { createRandomChannel } from '../../hooks/useChatList';
+import { createRandonChannelList } from '../../hooks/useChatList';
 
 // type ChatListProps = {
 // 	  chats: ChatModel[];
@@ -33,6 +34,10 @@ function ChatsList() {
 	const items = useChatList(state => state.items);
 	// const activeItem = useChatList(state => state.activeItem);
 	const setActiveItem = useChatList(state => state.setActiveItem);
+	const setItems = useChatList(state => state.setItems);
+
+
+	useEffect(() => { setItems(createRandonChannelList()) }, []);
 
   return (
 	<div className='chat-list scrollable'>
@@ -51,15 +56,11 @@ function ChatsList() {
 
 
 			items.map((item, index) => {
+				const itemName = item instanceof Channel ? item.name : item.user.name;
 				return (
 					<div className='chat-list-item' key={item.id} onClick={
-						() => {setActiveItem(item.id)}}>
-						<span>
-							 	if (item instanceof Channel)
-									item.name;
-								else if (item instanceof DMs)
-									item.user.name;
-						</span>
+						() => {console.log(item.id); setActiveItem(item.id)}}>
+						<span> {itemName} </span>
 					</div>
 				)
 			})
