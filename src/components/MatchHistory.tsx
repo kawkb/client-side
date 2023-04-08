@@ -2,7 +2,7 @@ import React from 'react'
 
 function MatchHistory() {
   return (
-	<div>MatchHistory</div>
+	<div className='match-history-box retro-border-box trans-pink-box'>MatchHistory</div>
   )
 }
 

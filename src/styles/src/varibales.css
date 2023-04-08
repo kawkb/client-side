@@ -14,7 +14,7 @@
 	--sunny: #FECD1A;
 	--hotpink: #DF7495;
 	--transpink: #fce9e9;
-	--lightpink: #ffb1af;
+	--lightpink: #EDAEBE;
 	--hotorange: #ff8443;
 	--transorange: #fae9e0;
 	--lightorange: #fc985b;
@@ -24,6 +24,8 @@
 	--hotgreen: #CDE223;
 	--transgreen: #FDFBE4;
 	--lightgreen: #DDED80;
+	--candy: #ffb1af;
+	--lemon: #FDE1AF;
     --font: 'League Gothic', sans-serif;
 }
 
