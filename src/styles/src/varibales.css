@@ -2,7 +2,9 @@
     --dark: #333231;
 	--shadow: #272324;
 	--light: #fff6eb;
-	--line: #e3dbd1;
+	--line: #B7A9A9;
+	--darkline: #9F9393;
+	--oldline: #e3dbd1;
     --orange: #fbbe86;
 	--apricot: #f68d4d;
 	--coral: #f7d7ba;
@@ -26,6 +28,7 @@
 	--lightgreen: #DDED80;
 	--candy: #ffb1af;
 	--lemon: #FDE1AF;
+	--tomato: #ea9685;
     --font: 'League Gothic', sans-serif;
 }
 
