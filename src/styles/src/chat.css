@@ -282,9 +282,9 @@
 	gap: 10px;
 }
 
-/* .owner {
+.owner {
 	flex-direction: row-reverse;
-} */
+}
 
 .chat-msg-info {
 	display: flex;
@@ -385,6 +385,23 @@
 	border-color: var(--peach) transparent  transparent  var(--peach);
   }
 
+  .blurb-owner:before {
+	left: calc(90% - 48px);
+	bottom: -30px;
+	border: 15px solid;
+	border-color: #333 blue  green  orange;
+	/* border-color: var(--dark) transparent  transparent  var(--dark); */
+	border-color: var(--dark) var(--dark) transparent  transparent;
+  }
+
+  .blurb-owner:after {
+	left: calc(90% - 42px);
+	bottom: -20px;
+	border: 10px solid;
+	border-color: yellow red  purple  pink;
+	border-color: var(--peach) var(--peach) transparent  transparent;
+  }
+
   /* .message-blurb:before {
 	left: 48px;
 	bottom: -50px;
@@ -400,4 +417,6 @@
 	border-color: yellow red  purple  pink;
 	border-color: var(--peach) transparent  transparent  var(--peach);
   } */
+
+
   

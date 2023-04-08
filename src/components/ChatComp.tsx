@@ -15,7 +15,7 @@ import DMs from '../modules/dms';
 
 function ChatComp() {
 	const options = [
-		{ name: le_chat, content: <ChatDisplay sideheader={<ChatSearch />} />},
+		// { name: le_chat, content: <ChatDisplay sideheader={<ChatSearch />} />},
 		{ name: les_chats, content: <ChatDisplay sideheader={<ChatSearchPlus />} />},
 	];
 	const color:string = "orange";
@@ -24,7 +24,7 @@ function ChatComp() {
 
 	return (
 	<div className='chat-tab-container pattern-background orange-pattern'>
-		<TabBox options={options} tabcolor={color} imgbtn={true} title={activeItem instanceof Channel ? activeItem.name ?? "Welcome to chat !" : activeItem?.user.name ?? "Welcome to chat !"} avatar={activeItem instanceof Channel ? activeItem?.avatar ?? squares: activeItem?.user.avatar ?? squares}/>		
+		<TabBox options={options} tabcolor={color} imgbtn={true} title={activeItem instanceof Channel ? activeItem.name as string ?? "Welcome to chat !" : activeItem?.user.name as string ?? "Welcome to chat !"} avatar={activeItem instanceof Channel ? activeItem?.avatar ?? squares: activeItem?.user.avatar ?? squares}/>		
 	</div>
 	);
 }

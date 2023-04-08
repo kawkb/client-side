@@ -16,23 +16,7 @@ import { createRandonChannelList } from '../../hooks/useChatList';
 
 function ChatsList() {
 
-	// const [chats, setChats] = useState<ChatModel[]>([]);
-	// useEffect(() => {
-	//   setChats(
-	// 	  [new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),
-	// 	  new ChatModel(faker.internet.email(), faker.name.firstName()),]
-	//   );
-	// }, []);
-
 	const items = useChatList(state => state.items);
-	// const activeItem = useChatList(state => state.activeItem);
 	const setActiveItem = useChatList(state => state.setActiveItem);
 	const setItems = useChatList(state => state.setItems);
 
@@ -42,63 +26,17 @@ function ChatsList() {
   return (
 	<div className='chat-list scrollable'>
 		{
-			// chats.map((chat, index) => {
-			// 	return (
-			// 		<div className='chat-list-item' key={index} onClick={
-			// 			() => {
-			// 				//TODO : Update value of selected chat
-			// 			}
-			// 		}>
-			// 			<span>{chat.name}</span>
-			// 		</div>
-			// 	)
-			// })
-
-
 			items.map((item, index) => {
 				const itemName = item instanceof Channel ? item.name : item.user.name;
 				return (
 					<div className='chat-list-item' key={item.id} onClick={
-						() => {console.log(item.id); setActiveItem(item.id)}}>
+						() => {setActiveItem(item.id)}}>
 						<span> {itemName} </span>
 					</div>
 				)
 			})
 
 		}
-		{/* <div className='chat-list-item'>
-			<span>Radi</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Ziyad</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Sigma</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Kawkab</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Radi</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Ziyad</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Sigma</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Kawkab</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Radi</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Ziyad</span>
-		</div>
-		<div className='chat-list-item'>
-			<span>Sigma</span>
-		</div> */}
 	</div>
   )
 }
