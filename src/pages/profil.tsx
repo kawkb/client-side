@@ -1,12 +1,13 @@
 import React from 'react'
 import ProfilComp from '../components/ProfilComp'
 
-function Game() {
+
+function Profil() {
   return (
-    <div>
+	<div>
 		<ProfilComp />
 	</div>
   )
 }
 
-export default Game
+export default Profil

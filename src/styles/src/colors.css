@@ -1,0 +1,59 @@
+.light-box {
+	background-color: var(--light);
+}
+
+.trans-pink-box {
+	background-color: var(--transpink);
+}
+
+.trans-orange-box {
+	background-color: var(--transorange);
+}
+
+.trans-blue-box {
+	background-color: var(--transblue);
+}
+
+.trans-green-box {
+	background-color: var(--transgreen);
+}
+
+.pink-pattern {
+	background-image: url(/public/pinkbg.svg);
+}
+
+.orange-pattern {
+	background-image: url(/public/orangebg.svg);
+}
+
+.blue-pattern {
+	background-image: url(/public/bluebg.svg);
+}
+
+.green-pattern {
+	background-image: url(/public/greenbg.svg);
+}
+
+.pink-header {
+	background-color: var(--hotpink);
+}
+
+.orange-header {
+	background-color: var(--hotorange);
+}
+
+.blue-header {
+	background-color: var(--hotblue);
+}
+
+.green-header {
+	background-color: var(--hotgreen);
+}
+
+.coral-bg {
+	background-color: var(--coral);
+}
+
+.green-bg {
+	background-color: var(--green);
+}

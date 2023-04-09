@@ -1,0 +1,103 @@
+.popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 100;
+	/* background-color: white; */
+	/* border-radius: 5px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3); */
+	z-index: 50;
+	width: 80%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+
+	padding: 20px;
+  }
+  
+  .popup-content {
+	
+  }
+  
+  .blurred-bg {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 60;
+	background-color: rgba(157, 142, 142, 0.1);
+	backdrop-filter: blur(5px);
+	/* height: 100vh; */
+	/* height:100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;  */
+  }
+  
+  .create-room-popup {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	width: 50%;
+	height: 80%;
+  }
+
+
+
+.popup-input {
+	border: 3px solid var(--dark);
+	background-color: rgb(247, 215, 186);
+	padding: 10px;
+	font-size: 2rem;
+	width: 65%;
+	height: 12%;
+	font-family: var(--font);
+	outline: none;
+	color: var(--dark);
+	margin: 2%;
+}
+
+.create-room-title {
+	font-size: 4rem;
+}
+
+.create-chat-options {	
+	width: 65%;
+	height: 12%;
+	display: flex;
+}
+
+.new-room-option-btn {
+	flex: 1;
+	font-family: var(--font);
+	/* background-color: rgb(247, 215, 186); */
+	outline: none;
+	color: var(--dark);
+	font-size: 2rem;
+	border: 3px solid var(--dark);
+	border-left: transparent;
+	cursor: pointer;
+}
+
+.new-room-option-first-btn {
+	border-left: 3px solid var(--dark);
+}
+
+.unclicked-new-room-option:hover {
+	/* background-color: rgb(0, 170, 124, 0.8); */
+	background-color: rgb(69, 136, 88, 0.5);
+}
+
+.create-button-container {
+	width: 65%;
+	height: 18%;
+	display: flex;
+}
+
+.confirm-new-chat-btn {
+	margin: 0 4%;
+}
