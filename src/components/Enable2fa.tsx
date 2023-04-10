@@ -6,9 +6,10 @@ import { useEnable2fa } from '../hooks/useEnable2fa';
 
 interface Enable2faProps {
 	onClose: () => void;
+	onSubmit: () => void;
 }
 
-function Enable2fa({onClose} : Enable2faProps) {
+function Enable2fa({onClose, onSubmit} : Enable2faProps) {
 
 	const url = 'https://www.google.com';
 
@@ -25,7 +26,7 @@ function Enable2fa({onClose} : Enable2faProps) {
 		<QRCode value={url} />
 		<input className="popup-input" type="text" placeholder='999999'/>
 		<div className='create-button-container'>
-			<ClassButton name="Enable" classes="retro-button pink-header confirm-new-chat-btn" onClick={handleEnable2fa}/>
+			<ClassButton name="Enable" classes="retro-button pink-header confirm-new-chat-btn" onClick={onSubmit}/>
 			<ClassButton name="Cancel" classes="retro-button pink-header confirm-new-chat-btn" onClick={onClose}/>
 		</div>
 	</div>

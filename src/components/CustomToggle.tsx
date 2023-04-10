@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
 
 interface Props {
-  onToggle: (isToggled: boolean) => void;
+//   onToggle: (isToggled: boolean) => void;
+isToggled: boolean;
+	toggleCLick: () => void;
   untoggledImage: string;
   toggledImage: string;
 }
 
-const CustomToggleButton = ({ onToggle, untoggledImage, toggledImage }: Props) => {
-  const [isToggled, setIsToggled] = useState(false);
+const CustomToggleButton = ({ isToggled, toggleCLick, untoggledImage, toggledImage }: Props) => {
+//   const [isToggled, setIsToggled] = useState(false);
 
-  const handleClick = () => {
-    setIsToggled(!isToggled);
-    onToggle(!isToggled);
-  };
+//   const handleClick = () => {
+//     setIsToggled(!isToggled);
+//     onToggle(!isToggled);
+//   };
 
   return (
     <div
 	  className='toggle-slider'
-      onClick={handleClick}
+      onClick={toggleCLick}
       style={{
 		
         width: '40%',

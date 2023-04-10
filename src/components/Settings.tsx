@@ -26,6 +26,7 @@ function Settings() {
 
 	const handleSubmitQR = () => {
 		console.log('Submit QR!');
+		setShowOptions(false);
 	};
 
 	const handleToggle = (isToggled: boolean) => {
@@ -36,6 +37,11 @@ function Settings() {
 	// const handleToggle = (isToggled: boolean) => {
 	// 	console.log(`Toggle button is ${isToggled ? 'on' : 'off'}`);
 	// };
+
+	const handleToggleClick = () => {
+		setEnable2fa(!enable2fa);
+		setShowOptions(true);
+	}
 
 	const [showOptions, setShowOptions] = useState(false);
 
@@ -65,12 +71,13 @@ function Settings() {
 				<img className="svg-text" src={enable2fasvg} alt="" />
 				<div className='toggle-container'>
 					<CustomToggleButton 
-						onToggle={handleToggle} 
+						isToggled={enable2fa}
+						toggleCLick={handleToggleClick}
 						untoggledImage={redflower}
 						toggledImage={greenflower}
 					/>
 				</div>
-				{ showOptions && enable2fa && <Popup onClose={handleClosePopup} content={<Enable2fa onClose={handleClosePopup}/>} />}
+				{ showOptions && enable2fa && <Popup onClose={handleClosePopup} content={<Enable2fa onClose={handleClosePopup} onSubmit={handleSubmitQR}/>} />}
 
 			</div>
 		</div>
