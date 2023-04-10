@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import enable2fa from './../assets/svg/enable2fa.svg'
+import enable2fasvg from './../assets/svg/enable2fa.svg'
 import nickname from './../assets/svg/nickname.svg'
 import editpic from './../assets/svg/editpic.svg'
 import heart from './../assets/svg/heart.svg'
@@ -9,21 +9,50 @@ import ImgUpload from './ImgUpload'
 import ImgButton from './ImgButton'
 import ToggleButton from './ToggleButton'
 import CustomToggleButton from './CustomToggle'
+import Popup from './Popup'
+import CreateChat from './CreateChat'
+import Enable2fa from './Enable2fa'
+import { useEnable2fa } from '../hooks/useEnable2fa';
 
 function Settings() {
 	// const [enable2FA, setEnable2FA] = useState(false);
+
+	const enable2fa = useEnable2fa((state) => state.enable2fa);
+	const setEnable2fa = useEnable2fa((state) => state.setEnable2fa);
 	
 	const handleNewNickname = () => {
 		console.log('Change Nickname!');
 	};
 
-	// const handleToggle = (isToggled: boolean) => {
-	// 	setEnable2FA(isToggled);
-	// };
+	const handleSubmitQR = () => {
+		console.log('Submit QR!');
+		setShowOptions(false);
+	};
 
 	const handleToggle = (isToggled: boolean) => {
-		console.log(`Toggle button is ${isToggled ? 'on' : 'off'}`);
+		setEnable2fa(isToggled);
+		setShowOptions(true);
 	};
+
+	// const handleToggle = (isToggled: boolean) => {
+	// 	console.log(`Toggle button is ${isToggled ? 'on' : 'off'}`);
+	// };
+
+	const handleToggleClick = () => {
+		setEnable2fa(!enable2fa);
+		setShowOptions(true);
+	}
+
+	const [showOptions, setShowOptions] = useState(false);
+
+	const handlePlusNewChat = () => {
+		
+	}
+
+	const handleClosePopup = () => {
+		setShowOptions(false);
+		setEnable2fa(!enable2fa);
+	}
 
 	return (
 		<div className='settings-container'>
@@ -39,14 +68,17 @@ function Settings() {
 				</div>
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-				<img className="svg-text" src={enable2fa} alt="" />
+				<img className="svg-text" src={enable2fasvg} alt="" />
 				<div className='toggle-container'>
 					<CustomToggleButton 
-						onToggle={handleToggle} 
+						isToggled={enable2fa}
+						toggleCLick={handleToggleClick}
 						untoggledImage={redflower}
 						toggledImage={greenflower}
 					/>
 				</div>
+				{ showOptions && enable2fa && <Popup onClose={handleClosePopup} content={<Enable2fa onClose={handleClosePopup} onSubmit={handleSubmitQR}/>} />}
+
 			</div>
 		</div>
 	);

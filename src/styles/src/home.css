@@ -1,85 +1,17 @@
 .home-page {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(180deg, var(--orange) 0%, var(--red) 100%);
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.main-page {
-    position: relative;
-    width: 90%;
-    height: 92vh;
-    background-color: var(--dark);
-    border-radius: 50px;
+.home-container {
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
-.animation-element {
-    position: absolute;
+.game-modes-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
-#rainbow {
-    left: 50%;
-    top: -50px;
-    transform: translateX(-45%);
-    height: 105%;
-}
-
-#couple {
-    left: 50%;
-    bottom: 15%;
-    height: 300px;
-    transform: translateX(-45%);
-}
-
-#houssna {
-    right: 26%;
-    bottom: 0;
-    height: 260px;
-}
-
-#ziyad {
-    left: 32%;
-    bottom: 5%;
-    height: 220px;
-}
-
-#cloud2 {
-    left: -5%;
-    top: 22%;
-    height: 400px;
-    z-index: 20;
-}
-
-#cloud4 {
-    left: 8%;
-    top: 18%;
-    height: 330px;
-}
-
-#cloud3 {
-    right: -2%;
-    top: 35%;
-    height: 400px;
-    z-index: 20;
-}
-
-#cloud1 {
-    right: -5%;
-    top: 30%;
-    height: 330px;
-}
-
-#stars1 {
-    left: 20%;
-    top: 42%;
-    height: 300px;
-}
-
-#stars2 {
-    right: 18%;
-    top: 20%;
-    height: 300px;
-}
