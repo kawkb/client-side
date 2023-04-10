@@ -6,11 +6,11 @@ function Navbar() {
     return (
         <div className='nav-container'>
             <nav>
-                <Link to="/chat" className='nav-links'>Chat</Link>
+                <Link to="/menu" className='nav-links'>Menu</Link>
                 <Link to='/' className="logo">
                     <img src={logo} alt="logo" />
                 </Link>
-                <Link to="/game" className='nav-links'>Play</Link>
+                <Link to="/Bell" className='nav-links'>Bell</Link>
             </nav>
         </div>
     )

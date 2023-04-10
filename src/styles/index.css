@@ -12,6 +12,7 @@
 @import url('./src/home.css');
 
 
+@import url('./src/menu.css');
 body {
   font-family: var(--font);
   color: var(--dark);
@@ -19,4 +20,8 @@ body {
 
 .debug {
   border: 1px solid red;
+}
+a:visited {
+  color: inherit;
+  text-decoration: none;
 }
