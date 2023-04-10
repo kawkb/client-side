@@ -7,7 +7,7 @@ interface Props {
 }
 
 const CustomToggleButton = ({ onToggle, untoggledImage, toggledImage }: Props) => {
-  const [isToggled, setIsToggled] = useState(true);
+  const [isToggled, setIsToggled] = useState(false);
 
   const handleClick = () => {
     setIsToggled(!isToggled);
