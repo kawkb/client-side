@@ -1,8 +1,12 @@
 import React from 'react'
+import HomeComp from '../components/HomeComp'
+
 
 function home() {
   return (
-	<div>home</div>
+	<div>
+		<HomeComp />
+	</div>
   )
 }
 

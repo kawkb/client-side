@@ -9,6 +9,9 @@
 @import url('./src/toggle.css');
 @import url('./src/colors.css');
 @import url('./src/popup.css');
+@import url('./src/home.css');
+
+
 body {
   font-family: var(--font);
   color: var(--dark);
