@@ -18,6 +18,14 @@
 	background-color: var(--transgreen);
 }
 
+.trans-purple-box {
+	background-color: var(--transpurple);
+}
+
+.purple-pattern {
+	background-image: url(/public/purplebg.svg);
+}
+
 .pink-pattern {
 	background-image: url(/public/pinkbg.svg);
 }

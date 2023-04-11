@@ -3,8 +3,8 @@ import { create } from "zustand";
 
 interface BellStore {
     bellClose: boolean;
-    bellName: string;
     bellNbr: number;
+    bellName: string;
     setBellClose: (check: boolean) => void;
     setBellName: (name: string) => void;
     setBellNbr: (nbr: number) => void;
@@ -12,8 +12,8 @@ interface BellStore {
 
 export const useBell = create<BellStore>((set) => ({
     bellClose: true,
-    bellName: "",
     bellNbr: 5,
+    bellName: "Bell",
     setBellClose: (check: boolean) => set((state) => ({bellClose: check})),
     setBellName: (name: string) => set((state) => ({bellName: name})),
     setBellNbr: (nbr: number) => set((state) => ({bellNbr: nbr})),
