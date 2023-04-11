@@ -13,9 +13,11 @@ import Popup from './Popup'
 import CreateChat from './CreateChat'
 import Enable2fa from './Enable2fa'
 import { useEnable2fa } from '../hooks/useEnable2fa';
+import zustand from "zustand";
+import { create } from "zustand";
+import { useProfileImage } from '../hooks/useProfileImage';
 
 function Settings() {
-	
 	// const [enable2FA, setEnable2FA] = useState(false);
 
 	const enable2fa = useEnable2fa((state) => state.enable2fa);
@@ -52,7 +54,7 @@ function Settings() {
 
 	const handleClosePopup = () => {
 		setShowOptions(false);
-		setEnable2fa(!enable2fa);
+		setEnable2fa(!enable2fa);  
 	}
 
 	return (

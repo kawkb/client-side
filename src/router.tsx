@@ -12,6 +12,7 @@ import { useAuth } from './useAuth';
 import Cookies from 'js-cookie';
 import api from './api/api';
 import { AxiosError } from 'axios';
+import Bell from './pages/bell';
 
 function Router() {
 const auth = useAuth();
@@ -45,6 +46,7 @@ useEffect(() => {
             <Route path="/chat" element={<Chat />} />
 			<Route path="/profil/:login" element={<ProtectedRoute component={Profil} />} />
             <Route path="/profil" element={<ProtectedRoute component={Profil} />} />
+            <Route path="/bell" element={<Bell/>} />
             <Route path="/*" element={
                 <div>
                     404

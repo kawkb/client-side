@@ -7,13 +7,16 @@ import api from "../api/api";
 import { useAuth } from "../useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
+import { useProfileImage } from "../hooks/useProfileImage";
 
 function ProfilComp() {
   const { login } = useParams();
   const nav = useNavigate();
   const { user, loading } = useAuth();
   const [name, setName] = React.useState<string>("");
-  const [avatari, setAvatari] = React.useState<string>("");
+  // const [avatari, setAvatari] = React.useState<string>("");
+  const setProfilImage = useProfileImage((state) => state.setImage);
+  const profileImage = useProfileImage((state) => state.image);
   const [options, setOptions] = React.useState<any>([]);
   const[xp, setXp] = React.useState<number>(0);
   useEffect(() => {
@@ -31,7 +34,7 @@ function ProfilComp() {
       .then((res) => {
         console.log(res.data);
         setName(res.data.login);
-        setAvatari(res.data.avatar_url)
+        setProfilImage(res.data.avatar_url)
         setXp(res.data.exp)
       })
       .catch((err: AxiosError) => {
@@ -66,7 +69,7 @@ function ProfilComp() {
         tabcolor={color}
         imgbtn={false}
         title={name}
-        avatar={avatari}
+        avatar={profileImage}
       />
     </div>
   );
