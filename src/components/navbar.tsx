@@ -22,6 +22,10 @@ function Navbar() {
       nav(-1);
     }
   }
+  function toggleMenuOther() {
+    setMenuClose(true);
+    setMenuName("Menu");
+  }
 
   return (
     <div className="nav-container">
@@ -30,10 +34,10 @@ function Navbar() {
           {" "}
           {menuName}
         </Link>
-        <Link to="/" className="logo">
+        <Link to="/" className="logo" onClick={() => toggleMenuOther()}>
           <img src={logo} alt="logo" />
         </Link>
-        <Link to="/Bell" className="nav-links">
+        <Link to="/Bell" className="nav-links" onClick={() => toggleMenuOther()}>
           Bell
         </Link>
       </nav>
