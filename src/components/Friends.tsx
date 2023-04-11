@@ -2,7 +2,7 @@ import React from 'react'
 
 function Friends() {
   return (
-	<div className='friends-list-box retro-border-box trans-pink-box'>
+	<div className='friends-list-box retro-border-box trans-pink-box copy-book-background'>
 		<h1>Friends:</h1>
 		<div className='frinds-search-form'>
 			<input type="text" placeholder='Search'/>
