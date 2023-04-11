@@ -49,22 +49,25 @@
 }
 
 .tab-box-avatar-container {
+	height: 100;
 	flex: 1;
 	z-index: 50;
 	display: flex;
 	justify-content: end;
-	overflow: visible;
-	/* position: relative; */
+ 	overflow: visible;
+	position: relative;
 	margin-right: -5%;
 	margin-bottom: 5%;
 }
 
+
 .tab-box-avatar {
-	height: 60%;
-	width: 70%;
-	border-radius: 50%;
-	border: 8px solid var(--dark);
 	
+	/* border: 10px solid var(--dark); */
+	/* display: block; */
+	clip-path: circle();
+  /* outline: 3px solid #000; */
+  /* outline-offset: -3px; */
 }
 
 .tab {

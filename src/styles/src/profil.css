@@ -146,7 +146,7 @@
 
 .flower-number-span {
 	font-family: var(--font);
-	font-size: 3rem;
+	font-size: 3vw;
 	color: var(--dark);
 }
 

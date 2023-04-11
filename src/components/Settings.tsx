@@ -15,6 +15,7 @@ import Enable2fa from './Enable2fa'
 import { useEnable2fa } from '../hooks/useEnable2fa';
 
 function Settings() {
+	
 	// const [enable2FA, setEnable2FA] = useState(false);
 
 	const enable2fa = useEnable2fa((state) => state.enable2fa);

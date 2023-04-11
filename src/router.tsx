@@ -43,7 +43,8 @@ useEffect(() => {
             <Route path="/menu" element={<Menu />} />
             <Route path="/game" element={<Game />} />
             <Route path="/chat" element={<Chat />} />
-			<Route path="/profil" element={<ProtectedRoute component={Profil} />} />
+			<Route path="/profil/:login" element={<ProtectedRoute component={Profil} />} />
+            <Route path="/profil" element={<ProtectedRoute component={Profil} />} />
             <Route path="/*" element={
                 <div>
                     404
