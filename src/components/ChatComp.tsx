@@ -12,11 +12,12 @@ import squares from '../assets/img/squares.png'
 import useChatList from '../hooks/useChatList';
 import Channel from '../modules/channel';
 import DMs from '../modules/dms';
+import DMsDisplay from './DMsDisplay';
 
 function ChatComp() {
 	const options = [
-		// { name: le_chat, content: <ChatDisplay sideheader={<ChatSearch />} />},
-		{ name: les_chats, content: <ChatDisplay sideheader={<ChatSearchPlus />} />},
+		{ name: le_chat, content: <DMsDisplay />},
+		{ name: les_chats, content: <ChatDisplay />},
 	];
 	const color:string = "orange";
 

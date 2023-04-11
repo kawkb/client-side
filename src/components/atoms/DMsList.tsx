@@ -11,24 +11,26 @@ import { createRandomChannel } from '../../hooks/useChatList';
 import { createRandonChannelList } from '../../hooks/useChatList';
 import ThreeDotMenu from './ThreeDotMenu';
 import useChatParams from '../../hooks/useChatParams';
+import { createRandomDM } from '../../hooks/useChatList';
+import { createRandomDMList } from '../../hooks/useChatList';
+
 
 // type ChatListProps = {
 // 	  chats: ChatModel[];
 // }
 
-function ChatsList() {
+function DMsList() {
 
-	const channelList = useChatParams(state => state.channelList);
-	const setChannelList = useChatParams(state => state.setChannelList);
-	const activeChannel = useChatParams(state => state.activeChannel);
-	const activeChannelOptions = useChatParams(state => state.activeChannelOptions);
-	const setActiveChannel = useChatParams(state => state.setActiveChannel);
-	const setActiveChannelOptions = useChatParams(state => state.setActiveChannelOptions);
-	const removeChannel = useChatParams(state => state.removeChannel);
-
+	const dmsList = useChatParams(state => state.dmsList);
+	const setDMsList = useChatParams(state => state.setDMsList);
+	const activeDMs = useChatParams(state => state.activeDMs);
+	const activeDMsOptions = useChatParams(state => state.activeDMsOptions);
+	const setActiveDMs = useChatParams(state => state.setActiveDMs);
+	const setActiveDMsOptions = useChatParams(state => state.setActiveDMsOptions);
 
 
-	useEffect(() => { setChannelList(createRandonChannelList()) }, []);
+
+	useEffect(() => { setDMsList(createRandomDMList()) }, []);
 
 	const handleMenuClick = (menuItem: string) => {
 		console.log(menuItem);
@@ -36,33 +38,32 @@ function ChatsList() {
 
 	const handleButtonClick = (itemId: string, itemName: string) => {
 		console.log(`item id: ${itemId} ${itemName}`);
-		setActiveChannelOptions(itemId);
+		setActiveDMsOptions(itemId);
 	}
 
 	const handleCloseOptions = () => {
-		setActiveChannelOptions('');
+		setActiveDMsOptions('');
 	}
 
-	const handleLeaveChannel = () => {
+	const handleLeaveDM = () => {
 		console.log('leave channel');
-		if (activeChannelOptions)
+		if (activeDMsOptions)
 		{
-			removeChannel(activeChannelOptions.id);
-			setActiveChannelOptions('');
+			setActiveDMsOptions('');
 		}
 	}
 
   return (
 	<div className='chat-list scrollable'>
 		{
-			channelList.map((item, index) => {
-				const itemName = item.name;
+			dmsList.map((item, index) => {
+				const itemName = item.user.name;
 				return (
 					<div key={item.id}>
-					{ (activeChannelOptions === null || (activeChannelOptions?.id !== item.id)) &&
+					{ (activeDMsOptions === null || (activeDMsOptions?.id !== item.id)) &&
 					<div className='chat-list-item'>
 						<span className='chat-list-item-name' onClick={
-						() => {setActiveChannel(item.id)}}> {itemName} </span>
+						() => {setActiveDMs(item.id)}}> {itemName} </span>
 						<button className="three-dot-menu-button" onClick={() => handleButtonClick(item.id, itemName)}>
 							<div className="three-dot-menu-dot" ></div>
 							<div className="three-dot-menu-dot" ></div>
@@ -70,10 +71,10 @@ function ChatsList() {
 						</button>
 					</div>
 					}
-						{ activeChannelOptions && (activeChannelOptions.id === item.id) && 
+						{ activeDMsOptions && (activeDMsOptions.id === item.id) && 
 						<div className='chat-list-item-options'>
 							<span className='chat-list-option'>Settings</span>
-							<span className='chat-list-option chat-list-option-last' onClick={handleLeaveChannel}>Leave</span>
+							<span className='chat-list-option chat-list-option-last' onClick={handleLeaveDM}>Leave</span>
 							<button className='chat-list-options-close' onClick={handleCloseOptions}>x</button>
 						</div> 
 						}
@@ -85,4 +86,4 @@ function ChatsList() {
   )
 }
 
-export default ChatsList
+export default DMsList

@@ -38,6 +38,19 @@ function createRandonChannelList(): Array<Channel> {
 	return channels;
 }
 
+function createRandomDM(): DMs {
+	let user: User = new User(faker.datatype.uuid(), faker.name.fullName(), faker.image.avatar(), faker.helpers.arrayElement([Status.ONLINE, Status.OFFLINE, Status.INGAME,]), faker.datatype.number(), faker.datatype.number());
+	return new DMs(faker.datatype.uuid(), user, []);
+}
+
+function createRandomDMList(): Array<DMs> {
+	let channels: Array<DMs> = [];
+	for (let i = 0; i < 10; i++) {
+		channels.push(createRandomDM());
+	}
+	return channels;
+}
+
 const useChatList = create(
 	combine({items: [] as Array<Channel | DMs> , activeItem: null as (Channel | DMs | null)}, (set) => ({
 		add: (item: Channel | DMs) => set((state) => ({items: [...state.items, item] as Array<Channel | DMs>})),
@@ -54,3 +67,4 @@ const useChatList = create(
 
 export default useChatList;
 export { createRandonChannelList, createRandomChannel };
+export { createRandomDMList, createRandomDM };
