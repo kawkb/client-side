@@ -231,6 +231,10 @@
 	text-align: center;
 }
 
+.dm-option {
+	font-size: 1.5rem;
+}
+
 .chat-list-option-last {
 	border: none;
 	color: var(--brightred);

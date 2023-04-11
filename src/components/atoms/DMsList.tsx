@@ -45,8 +45,34 @@ function DMsList() {
 		setActiveDMsOptions('');
 	}
 
-	const handleLeaveDM = () => {
+	const handleMuteUser = () => {
+		console.log('mute user');
+		if (activeDMsOptions)
+		{
+			setActiveDMsOptions('');
+		}
+	}
+
+	const handleBlockUser = () => {
 		console.log('leave channel');
+		if (activeDMsOptions)
+		{
+			setActiveDMsOptions('');
+		}
+	}
+
+	const handleInviteToPlay = () => {
+		console.log('invite to play');
+		if (activeDMsOptions)
+		{
+			setActiveDMsOptions('');
+		}
+	}
+
+
+	const handleGotoProfile = () => {
+		console.log('goto profile');
+		// activeDMsOptions.id is the user id of the user we want to go to
 		if (activeDMsOptions)
 		{
 			setActiveDMsOptions('');
@@ -73,8 +99,10 @@ function DMsList() {
 					}
 						{ activeDMsOptions && (activeDMsOptions.id === item.id) && 
 						<div className='chat-list-item-options'>
-							<span className='chat-list-option'>Settings</span>
-							<span className='chat-list-option chat-list-option-last' onClick={handleLeaveDM}>Leave</span>
+							<span className='chat-list-option dm-option' onClick={handleGotoProfile}>Profile</span>
+							<span className='chat-list-option dm-option' onClick={handleInviteToPlay}>Play</span>
+							<span className='chat-list-option dm-option' onClick={handleMuteUser}>Mute</span>
+							<span className='chat-list-option dm-option chat-list-option-last' onClick={handleBlockUser}>Block</span>
 							<button className='chat-list-options-close' onClick={handleCloseOptions}>x</button>
 						</div> 
 						}
