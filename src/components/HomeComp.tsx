@@ -24,7 +24,7 @@ function HomeComp() {
 			</div>
 			<div className='game-info-container'>
 				<div className='game-info copy-book-background retro-border-box light-box'>
-					<h1>Live Matches</h1>
+					<h1>Live Matches:</h1>
 					<div className='live-matches-list scrollable'>
 							<div className='live-matches-list-item' >
 								<img className="live-matches-player-avatar" src={squares} alt="" />
@@ -61,14 +61,46 @@ function HomeComp() {
 					
 				</div>
 				<div className='game-info copy-book-background retro-border-box light-box'>
-					<h1>Top Players</h1>
+					<h1>Top Players:</h1>
 					<div className='top-players-list-items'>
-					<img className="top-players-player-avatar" src={squares} alt="" />
+						<div className='top-players-box1'>
+							<img className="top-players-player-avatar" src={squares} alt="" />
+							<h3>Moe Erradi</h3>
+						</div>
+
+						<div className='top-players-box2'>
+							<div className='top-players-box1'>
+								<img className="top-players-player-avatar" src={squares} alt="" />
+								<h3>kawkab</h3>
+							</div>
+							<div className='top-players-box1'>
+								<img className="top-players-player-avatar" src={squares} alt="" />
+								<h3>Sigma houssna</h3>
+							</div>
+						</div>
+
+						<div className='top-players-box3'>
+							<div className='top-players-box1'>
+								<img className="top-players-player-avatar" src={squares} alt="" />
+								<h3></h3>
+							</div>
+
+							<div className='top-players-box1'>
+								<img className="top-players-player-avatar" src={squares} alt="" />
+								<h3>Moe Erradi</h3>
+							</div>
+
+							<div className='top-players-box1'>
+								<img className="top-players-player-avatar" src={squares} alt="" />
+								<h3>Moe Erradi</h3>
+							</div>
+						
+						</div>
 					</div>
 
 				</div>
 				<div className='game-info copy-book-background retro-border-box light-box'>
-					<h1>Popular Chat</h1>
+					<h1>Popular Chats:</h1>
 				</div>
 			</div>
 		</div>
