@@ -13,6 +13,7 @@ import { createRandomMsg } from "./useCurrentChat";
 import { createRandomMsgList } from "./useCurrentChat";
 
 interface ChatParamsStore {
+	channelTab: boolean;
 	channelList: Channel[];
 	dmsList: DMs[];
 	activeChannel: Channel | null;
@@ -28,9 +29,11 @@ interface ChatParamsStore {
 	setChannelMessages: (messages: Array<ChannelMsg>) => void;
 	setDMsMessages: (messages: Array<DMsMsg>) => void;
 	removeChannel: (channelId: string) => void;
+	setChannelTab: (channelTab: boolean) => void;
 }
 
 const useChatParams = create<ChatParamsStore>() ((set) => ({
+	channelTab: false,
 	channelList: [],
 	dmsList: [],
 	activeChannel: null,
@@ -46,6 +49,7 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 	setChannelMessages: (messages: Array<ChannelMsg>) => set((state) => ({activeChannel: {...state.activeChannel, messages: messages} as Channel})),
 	setDMsMessages: (messages: Array<DMsMsg>) => set((state) => ({activeDMs: {...state.activeDMs, messages: messages} as DMs})),
 	removeChannel: (channelId: string) => set((state) => ({channelList: state.channelList.filter((channel) => channel.id !== channelId)})),
+	setChannelTab: (channelTab: boolean) => set((state) => ({channelTab: channelTab})),
 }));
 
 export default useChatParams;
