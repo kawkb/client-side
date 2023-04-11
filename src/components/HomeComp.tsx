@@ -82,17 +82,17 @@ function HomeComp() {
 						<div className='top-players-box3'>
 							<div className='top-players-box1'>
 								<img className="top-players-player-avatar" src={squares} alt="" />
-								<h3></h3>
+								<h3>Zmerribaa</h3>
 							</div>
 
 							<div className='top-players-box1'>
 								<img className="top-players-player-avatar" src={squares} alt="" />
-								<h3>Moe Erradi</h3>
+								<h3>Hoyam Aicha</h3>
 							</div>
 
 							<div className='top-players-box1'>
 								<img className="top-players-player-avatar" src={squares} alt="" />
-								<h3>Moe Erradi</h3>
+								<h3>aelfadil</h3>
 							</div>
 						
 						</div>
@@ -100,7 +100,37 @@ function HomeComp() {
 
 				</div>
 				<div className='game-info copy-book-background retro-border-box light-box'>
-					<h1>Popular Chats:</h1>
+					<h1>Popular Chat Rooms:</h1>
+					<div className='chat-room-list scrollable'>
+						<div className='popular-chat-rooms-list-item' >
+							<img className="chat-rooms-img" src={squares} alt="" />
+							<span className='chat-rooms-name'>Chat Room 1</span>
+						</div>
+						<div className='popular-chat-rooms-list-item' >
+							<img className="chat-rooms-img" src={squares} alt="" />
+							<span className='chat-rooms-name'>Chat Room 1</span>
+						</div>
+						<div className='popular-chat-rooms-list-item' >
+							<img className="chat-rooms-img" src={squares} alt="" />
+							<span className='chat-rooms-name'>Chat Room 1</span>
+						</div>
+						<div className='popular-chat-rooms-list-item' >
+							<img className="chat-rooms-img" src={squares} alt="" />
+							<span className='chat-rooms-name'>Chat Room 1</span>
+						</div>
+						<div className='popular-chat-rooms-list-item' >
+							<img className="chat-rooms-img" src={squares} alt="" />
+							<span className='chat-rooms-name'>Chat Room 1</span>
+						</div>
+						<div className='popular-chat-rooms-list-item' >
+							<img className="chat-rooms-img" src={squares} alt="" />
+							<span className='chat-rooms-name'>Chat Room 1</span>
+						</div>
+						<div className='popular-chat-rooms-list-item' >
+							<img className="chat-rooms-img" src={squares} alt="" />
+							<span className='chat-rooms-name'>Chat Room 1</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
