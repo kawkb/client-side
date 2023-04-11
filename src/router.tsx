@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Game from './pages/game'
 import Chat from './pages/chat'
 import Profil from './pages/profil'
 import Login from './pages/login';
@@ -13,6 +12,7 @@ import Cookies from 'js-cookie';
 import api from './api/api';
 import { AxiosError } from 'axios';
 import Bell from './pages/bell';
+import Game from './game/Game';
 
 function Router() {
 const auth = useAuth();

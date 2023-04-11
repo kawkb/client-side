@@ -1,23 +1,34 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import frisky from '../assets/svg/frisky.svg'
 import fast from '../assets/svg/fast.svg'
 import fierce from '../assets/svg/fierce.svg'
 import squares from '../assets/img/squares.png'
+import { useNavigate } from 'react-router-dom'
+import GameSocketContext from '../game/GameContext'
 
 function HomeComp() {
+	
+	const navigate = useNavigate();
+	const socket = useContext(GameSocketContext);
+
+	const joinQueue = (gameMode: string) => {
+	  socket.emit("join_queue", { gameMode });
+	  navigate("/game");
+	};
+	
   return (
 	<div className='home-page pattern-background blue-pattern'>
 		<div className='home-container'>
 			<div className='game-modes-container'>
-				<div className='game-play-mode frisky-mode retro-border-box light-box'>
+				<div className='game-play-mode frisky-mode retro-border-box light-box' onClick={() => joinQueue('frisky')}>
 					<img className="game-mode-img" src={frisky} alt="" />
 					<h1>Frisky?</h1>
 				</div>
-				<div className='game-play-mode fast-mode retro-border-box light-box'>
+				<div className='game-play-mode fast-mode retro-border-box light-box' onClick={() => joinQueue('fast')}>
 					<img className="game-mode-img" src={fast} alt="" />
 					<h1>Fast?</h1>
 				</div>
-				<div className='game-play-mode fierce-mode retro-border-box light-box'>
+				<div className='game-play-mode fierce-mode retro-border-box light-box' onClick={() => joinQueue('fierce')}>
 					<img className="game-mode-img" src={fierce} alt="" />
 					<h1>Fierce?</h1>
 				</div>
