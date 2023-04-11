@@ -6,15 +6,19 @@ function Bell() {
   const setBellClose = useBell((state) => state.setBellClose);
   const setBellName = useBell((state) => state.setBellName);
 
+
   function toggleBell() {
     setBellClose(true);
-    setBellName("BEll");
+    setBellName("Close");
   }
+
+  const notifNumber = 5;
+
   return (
     <div className="menu-container pattern-background green-pattern">
       <div className="retro-border-box light-box menu-box copy-book-background">
         <Link to="/" className="bell-links" onClick={() => toggleBell()}>
-          Link to notification
+          {/* <Notif /> */}
         </Link>
       </div>
     </div>

@@ -35,15 +35,14 @@ function MatchHistory() {
 			matches.map((match: any, index: number) => {
 				return (
 					<div className='match-history-list-item match-history-draw' key={index}>
-						<div className='match-history-mode'>Frisky</div>
+						<div className='match-history-mode'>{match.game_mode}</div>
 						<div className='match-history-details'>
-							<span className='match-history-owner'>Sigma Houssna</span>
-							<span className='match-history-owner-score'>5</span>
+							<span className='match-history-owner'>{match.player_one.login}</span>
+							<span className='match-history-owner-score'>{match.player_one_score}</span>
 							<span className='match-history-dash'>-</span>
-							<span className='match-history-opponent-score'>5</span>
-							<span className='match-history-opponent'>Kawkab kawtar</span>
+							<span className='match-history-opponent-score'>{match.player_two_score}</span>
+							<span className='match-history-opponent'>{match.player_two.login}</span>
 						</div>
-						<div className='match-history-xp'>+4XP</div>
 					</div>
 				)
 			})

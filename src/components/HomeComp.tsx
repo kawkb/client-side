@@ -6,6 +6,9 @@ import squares from '../assets/img/squares.png'
 
 function HomeComp() {
   return (
+
+
+	
 	<div className='home-page pattern-background blue-pattern'>
 		<div className='home-container'>
 			<div className='game-modes-container'>
@@ -22,6 +25,12 @@ function HomeComp() {
 					<h1>Fierce?</h1>
 				</div>
 			</div>
+
+
+
+
+
+
 			<div className='game-info-container'>
 				<div className='game-info copy-book-background retro-border-box light-box'>
 					<h1>Live Matches:</h1>

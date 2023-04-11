@@ -16,17 +16,33 @@ import { useEnable2fa } from '../hooks/useEnable2fa';
 import zustand from "zustand";
 import { create } from "zustand";
 import { useProfileImage } from '../hooks/useProfileImage';
+import { useAuth } from '../useAuth'
+import { useNickname } from '../hooks/useNickname';
+import api from '../api/api'
 
 function Settings() {
-	// const [enable2FA, setEnable2FA] = useState(false);
 
+	const { user, setUserState } = useAuth();
 	const enable2fa = useEnable2fa((state) => state.enable2fa);
 	const setEnable2fa = useEnable2fa((state) => state.setEnable2fa);
-	
+
+//nickname logic:	
+	const [newNickname, setNickname] = useState('');
 	const handleNewNickname = () => {
-		console.log('Change Nickname!');
+		api.post('/profile/update/login', { login: newNickname })
+		  .then(response => {
+			console.log(response);
+			setUserState({ ...user, login: newNickname });
+		  })
+		  .catch(error => {
+			// Handle error
+		  });
+	  };
+	const handleNicknameInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setNickname(event.target.value);
 	};
 
+//2fa logic:
 	const handleSubmitQR = () => {
 		console.log('Submit QR!');
 		setShowOptions(false);
@@ -41,7 +57,9 @@ function Settings() {
 	// 	console.log(`Toggle button is ${isToggled ? 'on' : 'off'}`);
 	// };
 
-	const handleToggleClick = () => {
+	const handleToggleClick = async () => {
+		if (enable2fa)
+			await api.post('/auth/disable2fa')
 		setEnable2fa(!enable2fa);
 		setShowOptions(true);
 	}
@@ -65,10 +83,14 @@ function Settings() {
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
 				<img className="svg-text svg-text-margin" src={nickname} alt="" />
+
 				<div className='nickname-input'>
-					<input type="text" placeholder='New Nickname' />
+					<input type="text" placeholder='New Nickname' value={newNickname}  onChange={handleNicknameInputChange}/>
 					<ImgButton classes="backgroundless-image-button" src={heart} alt="confirm" onClick={handleNewNickname} />
 				</div>
+
+
+
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
 				<img className="svg-text" src={enable2fasvg} alt="" />
