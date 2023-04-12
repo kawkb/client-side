@@ -13,8 +13,7 @@ function HomeComp() {
   const socket = useContext(GameSocketContext);
   
   const joinQueue = (gameMode: string) => {
-    socket.emit("join_queue", { gameMode });
-    navigate("/waiting");
+    navigate(`/game/${gameMode}`)
   };
 
   return (
