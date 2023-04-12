@@ -3,6 +3,7 @@ import logo from "../assets/svg/logo.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMenuClose } from "../hooks/useMenuClose";
 import { useBell } from "../hooks/useBell";
+import api from "../api/api";
 
 function Navbar() {
   // const [menu, setMenu] = React.useState({ name: "Menu", isOpen: false });
@@ -10,6 +11,8 @@ function Navbar() {
   const menuName = useMenuClose((state) => state.menuName);
   const setMenuClose = useMenuClose((state) => state.setMenuClose);
   const setMenuName = useMenuClose((state) => state.setMenuName);
+  const setBellNbr = useBell((state) => state.setBellNbr);
+  const bellNbr = useBell((state) => state.bellNbr);
 
   const bellClose = useBell((state) => state.bellClose);
   const bellName = useBell((state) => state.bellName);
@@ -27,6 +30,7 @@ function Navbar() {
       nav(-1);
     }
   }
+
   function toggleMenuOther() {
     setMenuClose(true);
     setMenuName("Menu");
@@ -38,7 +42,7 @@ function Navbar() {
       setBellName("Close");
     } else {
       setBellClose(true);
-      setBellName("Bell");
+      setBellName(`Bell(${bellNbr})`);
       nav(-1);
     }
   }

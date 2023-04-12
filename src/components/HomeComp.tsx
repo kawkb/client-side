@@ -8,10 +8,10 @@ import GameSocketContext from "../game/GameContext";
 
 
 function HomeComp() {
+
   const navigate = useNavigate();
   const socket = useContext(GameSocketContext);
-
-
+  
   const joinQueue = (gameMode: string) => {
     socket.emit("join_queue", { gameMode });
     navigate("/waiting");

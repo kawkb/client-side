@@ -14,13 +14,16 @@ function ProfilComp() {
   const nav = useNavigate();
   const { user, loading } = useAuth();
   const [name, setName] = React.useState<string>("");
-  // const [avatari, setAvatari] = React.useState<string>("");
   const setProfilImage = useProfileImage((state) => state.setImage);
   const profileImage = useProfileImage((state) => state.image);
   const [options, setOptions] = React.useState<any>([]);
   const[xp, setXp] = React.useState<number>(0);
+  const[level, setLevel] = React.useState<number>(0);
+
+
   useEffect(() => {
     if (loading) return;
+    if (!user) return;
     setOptions([
       { name: "Profil", content: <Profil /> },
     ]);
@@ -34,7 +37,11 @@ function ProfilComp() {
       .then((res) => {
         console.log(res.data);
         setName(res.data.login);
-        setProfilImage(res.data.avatar_url)
+        if (res.data.avatar_url.startsWith("http")) {
+          setProfilImage(res.data.avatar_url);
+        } else {
+          setProfilImage(process.env.REACT_APP_API_URL as string + 'static' + res.data.avatar_url);
+        }
         setXp(res.data.exp)
       })
       .catch((err: AxiosError) => {
@@ -42,13 +49,13 @@ function ProfilComp() {
           if (err.response.status === 404) nav("/404", { replace: true });
         }
       });
-    // api.post('/profile/update/login', {
-    //   login: user.login,
-    // });
-  }, [loading]);
+  }, [loading, user]);
+
+
 
   useEffect(() => {
     if (loading) return;
+    if(!user) return;
     console.log(user.login, name)
     if (user.login === name) {
 
@@ -57,7 +64,13 @@ function ProfilComp() {
         { name: "Settings", content: <Settings /> },
       ]);
     }
-  }, [name, login, loading]);
+    else {
+      setOptions([
+        { name: "Profil", content: <Profil /> },
+        { name: "Options", content: <Options />}
+      ]);
+    }
+  }, [name, login, loading, user]);
 
 
 
