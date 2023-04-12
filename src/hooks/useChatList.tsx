@@ -51,6 +51,8 @@ function createRandomDMList(): Array<DMs> {
 	return channels;
 }
 
+
+
 const useChatList = create(
 	combine({items: [] as Array<Channel | DMs> , activeItem: null as (Channel | DMs | null)}, (set) => ({
 		add: (item: Channel | DMs) => set((state) => ({items: [...state.items, item] as Array<Channel | DMs>})),

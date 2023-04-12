@@ -3,6 +3,7 @@ import ChatSearch from './atoms/ChatSearch'
 import ChatsList from './atoms/ChatsList'
 import ChatBox from './atoms/ChatBox'
 import DMsList from './atoms/DMsList'
+import DMsBox from './atoms/DMsBox'
 
 function DMsDisplay() {
   return (
@@ -11,7 +12,7 @@ function DMsDisplay() {
 				<ChatSearch/>
 				<DMsList />
 			</div>
-			<ChatBox />
+			<DMsBox />
 		</div>
   )
 }

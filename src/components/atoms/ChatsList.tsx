@@ -34,6 +34,8 @@ function ChatsList() {
 
 	useEffect(() => { setChannelList(createRandonChannelList()) }, []);
 
+	const [showAdminOptions, setShowAdminOptions] = React.useState<boolean>(true);
+
 	const handleMenuClick = (menuItem: string) => {
 		console.log(menuItem);
 	}
@@ -94,8 +96,8 @@ function ChatsList() {
 					}
 						{ activeChannelOptions && (activeChannelOptions.id === item.id) && 
 						<div className='chat-list-item-options'>
-							{ false && <span className='chat-list-option' onClick={handleShowSettings}>Settings</span>}
-							{showSettings && <Popup onClose={handleCloseSettingsPopup} content={<ChannelSettings onClose={handleCloseSettingsPopup}/>} />}
+							{ showAdminOptions && <span className='chat-list-option' onClick={handleShowSettings}>Settings</span>}
+							{ showSettings && <Popup onClose={handleCloseSettingsPopup} content={<ChannelSettings onClose={handleCloseSettingsPopup}/>} />}
 							<span className='chat-list-option' onClick={handleShowMembers}>Members</span>
 							{ showMembers && <Popup onClose={handleCloseMembers} content={<ChannelMembers onClose={handleCloseMembers}/>} />}
 							<span className='chat-list-option chat-list-option-last' onClick={handleLeaveChannel}>Leave</span>
