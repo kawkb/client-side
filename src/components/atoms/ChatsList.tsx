@@ -13,6 +13,7 @@ import ThreeDotMenu from './ThreeDotMenu';
 import useChatParams from '../../hooks/useChatParams';
 import Popup from '../Popup';
 import ChannelSettings from './ChannelSettings';
+import ChannelMembers from './ChannelMembers';
 
 // type ChatListProps = {
 // 	  chats: ChatModel[];
@@ -29,6 +30,7 @@ function ChatsList() {
 	const removeChannel = useChatParams(state => state.removeChannel);
 	const setActiveChannelOptionsNull = useChatParams(state => state.setActiveChannelOptionsNull);
 	const [showSettings, setShowSettings] = useState(false);
+	const [showMembers, setShowMembers] = useState(false);
 
 	useEffect(() => { setChannelList(createRandonChannelList()) }, []);
 
@@ -63,6 +65,14 @@ function ChatsList() {
 		setActiveChannelOptionsNull();
 	}
 
+	const handleShowMembers = () => {
+		setShowMembers(true);
+	}
+
+	const handleCloseMembers = () => {
+		setShowMembers(false);
+		setActiveChannelOptionsNull();
+	}
 
   return (
 	<div className='chat-list scrollable'>
@@ -84,8 +94,10 @@ function ChatsList() {
 					}
 						{ activeChannelOptions && (activeChannelOptions.id === item.id) && 
 						<div className='chat-list-item-options'>
-							<span className='chat-list-option' onClick={handleShowSettings}>Settings</span>
+							{ false && <span className='chat-list-option' onClick={handleShowSettings}>Settings</span>}
 							{showSettings && <Popup onClose={handleCloseSettingsPopup} content={<ChannelSettings onClose={handleCloseSettingsPopup}/>} />}
+							<span className='chat-list-option' onClick={handleShowMembers}>Members</span>
+							{ showMembers && <Popup onClose={handleCloseMembers} content={<ChannelMembers onClose={handleCloseMembers}/>} />}
 							<span className='chat-list-option chat-list-option-last' onClick={handleLeaveChannel}>Leave</span>
 							<button className='chat-list-options-close' onClick={handleCloseOptions}>x</button>
 						</div> 

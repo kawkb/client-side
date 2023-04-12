@@ -221,6 +221,7 @@
 	cursor: pointer;
 	position: relative;
 	overflow: visible;
+	/* padding: 10px 0px; */
 }
 
 .chat-list-option {
@@ -229,6 +230,7 @@
 	padding: 10px 0px;
 	border-right: 2px solid var(--shadow);
 	text-align: center;
+	font-size: 1.5rem;
 }
 
 .dm-option {
