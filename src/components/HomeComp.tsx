@@ -13,22 +13,22 @@ function HomeComp() {
 
 	const joinQueue = (gameMode: string) => {
 	  socket.emit("join_queue", { gameMode });
-	  navigate("/game");
+	  navigate("/waiting");
 	};
 	
   return (
 	<div className='home-page pattern-background blue-pattern'>
 		<div className='home-container'>
 			<div className='game-modes-container'>
-				<div className='game-play-mode frisky-mode retro-border-box light-box' onClick={() => joinQueue('frisky')}>
+				<div className='game-play-mode frisky-mode retro-border-box light-box' onClick={() => joinQueue('Frisky')}>
 					<img className="game-mode-img" src={frisky} alt="" />
 					<h1>Frisky?</h1>
 				</div>
-				<div className='game-play-mode fast-mode retro-border-box light-box' onClick={() => joinQueue('fast')}>
+				<div className='game-play-mode fast-mode retro-border-box light-box' onClick={() => joinQueue('Fast')}>
 					<img className="game-mode-img" src={fast} alt="" />
 					<h1>Fast?</h1>
 				</div>
-				<div className='game-play-mode fierce-mode retro-border-box light-box' onClick={() => joinQueue('fierce')}>
+				<div className='game-play-mode fierce-mode retro-border-box light-box' onClick={() => joinQueue('Fierce')}>
 					<img className="game-mode-img" src={fierce} alt="" />
 					<h1>Fierce?</h1>
 				</div>

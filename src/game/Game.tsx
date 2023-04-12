@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Sketch from "react-p5";
 import p5Types from "p5";
 import GameSocketContext from "./GameContext";
-import { tab } from "@testing-library/user-event/dist/tab";
 
 interface GameStateProps {
   gameStatus: "waiting" | "playing" | "break" | "gameover";
@@ -12,8 +11,8 @@ interface GameStateProps {
   player2Y: number;
   player1H: number;
   player2H: number;
+  gameMode: "Frisky" | "Fast" | "Fierce";
 }
-
 const Game: React.FC = () => {
   const FACTOR = 2;
   const path = window.location.pathname.split("/").at(-1);
@@ -30,6 +29,7 @@ const Game: React.FC = () => {
     player2Y: tableHeight / 2,
     player1H: 120,
     player2H: 120,
+    gameMode: "Frisky",
   } as GameStateProps;
 
   //   useEffect(() => {
@@ -40,18 +40,9 @@ const Game: React.FC = () => {
 
   useEffect(() => {
     socket.emit("startGame", { gameID: path });
-    socket?.on("spectate_game", (state: GameStateProps) => {
-      // Update game state with spectated game's state
-      gameState.gameStatus = state.gameStatus;
-      gameState.ballX = state.ballX;
-      gameState.ballY = state.ballY;
-      gameState.player1Y = state.player1Y;
-      gameState.player2Y = state.player2Y;
-      gameState.player1H = state.player1H;
-      gameState.player2H = state.player2H;
-    });
   }, [socket]);
 
+  let bgs: any = null;
   socket.on("gameState", (state: GameStateProps) => {
     // console.log(state);
     gameState.gameStatus = state.gameStatus;
@@ -61,6 +52,7 @@ const Game: React.FC = () => {
     gameState.player2Y = state.player2Y;
     gameState.player1H = state.player1H;
     gameState.player2H = state.player2H;
+    gameState.gameMode = state.gameMode;
   });
   socket.on("gameOver", (state: GameStateProps) => {
     console.log("game over");
@@ -71,6 +63,11 @@ const Game: React.FC = () => {
     p5.createCanvas(tableWidth, tableHeight).parent(canvasParentRef);
     p5.ellipseMode(p5.CENTER);
     p5.rectMode(p5.CENTER);
+    bgs = {
+      Fast: p5.loadImage("/fast.svg"),
+      Fierce: p5.loadImage("/fierce.svg"),
+      Frisky: p5.loadImage("/frisky.svg"),
+    };
   };
 
   const Draw: any = (p5: p5Types) => {
@@ -81,7 +78,9 @@ const Game: React.FC = () => {
       });
     }
     // update();
-    p5.background(0);
+
+    if (bgs) p5.background(bgs[gameState.gameMode]);
+    else p5.background(0);
     p5.noStroke();
 
     // Draw paddle A

@@ -13,6 +13,8 @@ import api from './api/api';
 import { AxiosError } from 'axios';
 import Bell from './pages/bell';
 import Game from './game/Game';
+import WaitingRoom from './game/WaitingRoom';
+
 
 function Router() {
 const auth = useAuth();
@@ -40,6 +42,7 @@ useEffect(() => {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
+			<Route path="/waiting" element={<WaitingRoom />} />
             <Route path="/login" element={<Login />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/game" element={<Game />} />
