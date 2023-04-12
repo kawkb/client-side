@@ -101,3 +101,42 @@
 .confirm-new-chat-btn {
 	margin: 0 4%;
 }
+
+.channel-settings-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 90%;
+}
+
+.channel-settings-title {
+	font-size: 3rem;
+}
+
+.channel-name-img-container {
+	width: 80%;
+	height: 60%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.channel-img-upload-btn {
+	width: 30%;
+}
+
+.channel-settings-btns-container {
+	width: 80%;
+	height: 20%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	position: relative;
+}
+
+.confirm-channel-settings-btn {
+	width: 30%;
+}

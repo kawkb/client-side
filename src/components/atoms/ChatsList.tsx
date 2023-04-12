@@ -27,7 +27,7 @@ function ChatsList() {
 	const setActiveChannel = useChatParams(state => state.setActiveChannel);
 	const setActiveChannelOptions = useChatParams(state => state.setActiveChannelOptions);
 	const removeChannel = useChatParams(state => state.removeChannel);
-
+	const setActiveChannelOptionsNull = useChatParams(state => state.setActiveChannelOptionsNull);
 	const [showSettings, setShowSettings] = useState(false);
 
 	useEffect(() => { setChannelList(createRandonChannelList()) }, []);
@@ -60,7 +60,7 @@ function ChatsList() {
 
 	const handleCloseSettingsPopup	= () => {
 		setShowSettings(false);
-		setActiveChannelOptions('');
+		setActiveChannelOptionsNull();
 	}
 
 
@@ -70,7 +70,7 @@ function ChatsList() {
 			channelList.map((item, index) => {
 				const itemName = item.name;
 				return (
-					<div key={item.id}>
+					<div key={index}>
 					{ (activeChannelOptions === null || (activeChannelOptions?.id !== item.id)) &&
 					<div className='chat-list-item'>
 						<span className='chat-list-item-name' onClick={
