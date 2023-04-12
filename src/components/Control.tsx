@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import enable2fasvg from './../assets/svg/enable2fa.svg'
 import nickname from './../assets/svg/nickname.svg'
 import editpic from './../assets/svg/editpic.svg'
@@ -19,12 +19,15 @@ import { useProfileImage } from '../hooks/useProfileImage';
 import { useAuth } from '../useAuth'
 import { useNickname } from '../hooks/useNickname';
 import api from '../api/api'
+import { useParams } from 'react-router-dom'
 
-function Options() {
-
-	const { user, setUserState } = useAuth();
+function Control() {
+	const { login } = useParams();
+	let param = login;
+	const { user, setUserState, loading } = useAuth();
 	const enable2fa = useEnable2fa((state) => state.enable2fa);
 	const setEnable2fa = useEnable2fa((state) => state.setEnable2fa);
+	const [friendButton, setFriendButton] = useState('');
 
 //nickname logic:	
 	const [newNickname, setNickname] = useState('');
@@ -75,11 +78,46 @@ function Options() {
 		setEnable2fa(!enable2fa);  
 	}
 
+	// add friend logic:
+	useEffect(() => {
+		if(loading) return;
+		if(!user) return;
+		api.get("/profile/" + user.login + "/info")
+		.then(response => {
+			console.log("control", response.data);
+			if(response.data.friends.includes(param)) {
+				setFriendButton('Friend');
+			}
+			// } else if(response.data.friendRequests.includes(param)) {
+			// 	setFriendButton('Friend Request Sent');
+			// }
+			 else {
+				setFriendButton('Add Friend');
+			}
+		})
+		.catch(error => {
+			console.log(error);
+		});
+	}, [user, loading, param]);
+
+	const addFriendhandleCLick = () => {
+		api.post("/friend/add/" + param)
+		.then(response => {
+			console.log(response);
+			setFriendButton('Friend Request Sent');
+		})
+		.catch(error => {
+			console.log(error);
+		});
+	}
 	return (
 		<div className='settings-container'>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-				<img className="svg-text" src={editpic} alt="" />
-				<ImgUpload classes="retro-button pink-header"/>
+				<h1> SEND A FRIEND REQUEST </h1>
+				{/* <img className="svg-text" src={editpic} alt="" /> */}
+				<div className='retro-button-container'>
+					<button className="retro-button pink-header" onClick={addFriendhandleCLick}>{friendButton}</button>
+				</div>
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
 				<img className="svg-text svg-text-margin" src={nickname} alt="" />
@@ -109,4 +147,4 @@ function Options() {
 	);
 }
 
-export default Options;
+export default Control;

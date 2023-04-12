@@ -8,6 +8,9 @@ import { useAuth } from "../useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useProfileImage } from "../hooks/useProfileImage";
+import Control from "./Control";
+
+
 
 function ProfilComp() {
   const { login } = useParams();
@@ -67,7 +70,7 @@ function ProfilComp() {
     else {
       setOptions([
         { name: "Profil", content: <Profil /> },
-        { name: "Options", content: <Options />}
+        { name: "Control", content: <Control />}
       ]);
     }
   }, [name, login, loading, user]);
