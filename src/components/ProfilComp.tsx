@@ -18,6 +18,9 @@ function ProfilComp() {
   const profileImage = useProfileImage((state) => state.image);
   const [options, setOptions] = React.useState<any>([]);
   const[xp, setXp] = React.useState<number>(0);
+  const[level, setLevel] = React.useState<number>(0);
+
+
   useEffect(() => {
     if (loading) return;
     if (!user) return;
@@ -48,6 +51,8 @@ function ProfilComp() {
       });
   }, [loading, user]);
 
+
+
   useEffect(() => {
     if (loading) return;
     if(!user) return;
@@ -57,6 +62,12 @@ function ProfilComp() {
       setOptions([
         { name: "Profil", content: <Profil /> },
         { name: "Settings", content: <Settings /> },
+      ]);
+    }
+    else {
+      setOptions([
+        { name: "Profil", content: <Profil /> },
+        { name: "Options", content: <Options />}
       ]);
     }
   }, [name, login, loading, user]);

@@ -10,6 +10,7 @@ import { AxiosError } from 'axios';
 function PlayerStats() {
 	const { login } = useParams();
 	const [xp, setXp] = React.useState<number>(0);
+	const [level, setLevel] = React.useState<number>(0);
 	const { user, loading } = useAuth();
 
 	useEffect(() => {
@@ -23,6 +24,7 @@ function PlayerStats() {
 		  .then((res) => {
 			console.log(res.data);
 			setXp(res.data.exp)
+			setLevel(res.data.level)
 		  })
 		//   });
 		// api.post('/profile/update/login', {
@@ -51,7 +53,7 @@ function PlayerStats() {
 			</div>
 		</div>
 		<div className='xp-level-bar-container'>
-			<span>LEVEL 1 - {xp}XP</span>
+			<span> LEVEL {level} - {xp}XP</span>
 			<div className='xp-level-bar'>
 				<div className='xp-level-bar-fill'></div>
 			</div>

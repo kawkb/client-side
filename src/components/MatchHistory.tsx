@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../useAuth';
 import api from '../api/api';
+import { AxiosError } from 'axios';
 
 
 function MatchHistory() {
 	const [matches, setMatches] = React.useState<any>([])
 	const { login } = useParams();
 	const { user, loading } = useAuth();
+	const nav = useNavigate();
 
 	useEffect(() => {
 		if (loading) return;
@@ -21,10 +23,12 @@ function MatchHistory() {
 			console.log(res.data);
 			setMatches(res.data.matchHistory)
 		  })
-		//   });
-		// api.post('/profile/update/login', {
-		//   login: user.login,
-		// });
+		  .catch((err: AxiosError) => {
+			if (err.response) {
+			  if (err.response.status === 404) nav("/404", { replace: true });
+			}
+		  });
+
 	  }, [loading]);
   return (
 	<div className='match-history-box retro-border-box trans-pink-box copy-book-background'>
