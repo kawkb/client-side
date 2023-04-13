@@ -1,6 +1,12 @@
 .light-box {
 	background-color: var(--light);
 }
+.light-box-home {
+	background-color: var(--transblue);
+}
+.white-box {
+	background-color: white;
+}
 
 .trans-pink-box {
 	background-color: var(--transpink);
@@ -37,6 +43,9 @@
 .blue-pattern {
 	background-image: url(/public/bluebg.svg);
 }
+.black-pattern {
+	background-image: url(/public/404background.svg);
+}
 
 .green-pattern {
 	background-image: url(/public/greenbg.svg);
@@ -46,6 +55,13 @@
 	background-color: var(--hotpink);
 }
 
+.red-header {
+	background-color: var(--hotred);
+}
+.gray-header
+{
+	background-color: var(--gray);
+}
 .orange-header {
 	background-color: var(--hotorange);
 }
@@ -56,6 +72,10 @@
 
 .green-header {
 	background-color: var(--hotgreen);
+}
+
+.flower-green {
+	background-color: var(--green);
 }
 
 .coral-bg {

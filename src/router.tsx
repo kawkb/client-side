@@ -4,7 +4,6 @@ import Chat from './pages/chat'
 import Profil from './pages/profil'
 import Login from './pages/login';
 import Home from './pages/home';
-
 import Menu from './pages/menu'
 import ProtectedRoute from './ProtectedRoute';
 import { useAuth } from './useAuth';
@@ -15,6 +14,8 @@ import Bell from './pages/bell';
 import Game from './game/Game';
 import WaitingRoom from './game/WaitingRoom';
 
+
+import Error from './pages/error';
 
 function Router() {
 const auth = useAuth();
@@ -49,11 +50,7 @@ useEffect(() => {
 			<Route path="/profil/:login" element={<ProtectedRoute component={Profil} />} />
             <Route path="/profil" element={<ProtectedRoute component={Profil} />} />
             <Route path="/bell" element={<Bell/>} />
-            <Route path="/*" element={
-                <div>
-                    404
-                </div>
-            } />
+            <Route path="/*" element={<Error/>} />
         </Routes>
     )
 }

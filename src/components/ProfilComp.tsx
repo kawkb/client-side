@@ -8,6 +8,7 @@ import { useAuth } from "../useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useProfileImage } from "../hooks/useProfileImage";
+import Control from "./Control";
 import Options from "./Options";
 
 function ProfilComp() {
@@ -57,9 +58,7 @@ function ProfilComp() {
   useEffect(() => {
     if (loading) return;
     if(!user) return;
-    console.log(user.login, name)
-    if (user.login === name) {
-
+    if (login == null) {
       setOptions([
         { name: "Profil", content: <Profil /> },
         { name: "Settings", content: <Settings /> },
@@ -68,7 +67,7 @@ function ProfilComp() {
     else {
       setOptions([
         { name: "Profil", content: <Profil /> },
-        { name: "Options", content: <Options />}
+        { name: "Control", content: <Control />}
       ]);
     }
   }, [name, login, loading, user]);

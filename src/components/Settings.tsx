@@ -78,7 +78,7 @@ function Settings() {
 	return (
 		<div className='settings-container'>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-				<img className="svg-text" src={editpic} alt="" />
+				<img className="svg-text-edit" src={editpic} alt="" />
 				<ImgUpload classes="retro-button pink-header"/>
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
