@@ -12,15 +12,23 @@ import squares from '../assets/img/squares.png'
 import useChatList from '../hooks/useChatList';
 import Channel from '../modules/channel';
 import DMs from '../modules/dms';
+import DMsDisplay from './DMsDisplay';
+import useChatParams from '../hooks/useChatParams';
 
 function ChatComp() {
 	const options = [
-		// { name: le_chat, content: <ChatDisplay sideheader={<ChatSearch />} />},
-		{ name: les_chats, content: <ChatDisplay sideheader={<ChatSearchPlus />} />},
+		{ name: le_chat, content: <DMsDisplay />},
+		{ name: les_chats, content: <ChatDisplay />},
 	];
 	const color:string = "orange";
 
-	const activeItem = useChatList(state => state.activeItem);
+	const activeChannel = useChatParams(state => state.activeChannel);
+	const activeDMs = useChatParams(state => state.activeDMs);
+	const activeItem = useChatParams(state => state.activeItem);
+
+	activeChannel && console.log(`${activeChannel.id}`);
+	activeDMs && console.log(`${activeDMs.id}`);
+	activeItem && console.log(`${activeItem.id}`);
 
 	return (
 	<div className='chat-tab-container pattern-background orange-pattern'>

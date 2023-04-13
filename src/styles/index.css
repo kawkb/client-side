@@ -10,9 +10,12 @@
 @import url('./src/colors.css');
 @import url('./src/popup.css');
 @import url('./src/home.css');
-
-
+@import url('./src/dotmenu.css');
 @import url('./src/menu.css');
+@import url('react-tooltip/dist/react-tooltip.css');
+
+
+
 body {
   font-family: var(--font);
   color: var(--dark);

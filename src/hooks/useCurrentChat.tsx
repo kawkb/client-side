@@ -23,6 +23,17 @@ const createRandomMsgList = (): Array<ChannelMsg> => {
 	return msgs;
 }
 
+const createRandomDMsMsg = (): DMsMsg => {
+	return new DMsMsg(faker.datatype.uuid(), faker.datatype.uuid(), faker.datatype.uuid(), faker.lorem.sentence(), faker.date.past(), faker.date.past(), faker.datatype.boolean());
+}
+
+const createRandomDMsMsgList = (): Array<DMsMsg> => {
+	let msgs: Array<DMsMsg> = [];
+	for (let i = 0; i < 10; i++) {
+		msgs.push(createRandomDMsMsg());
+	}
+	return msgs;
+}
 
 const useCurrentChat = create(
 	combine({item: null as (Channel | DMs | null)}, (set) => ({
@@ -32,3 +43,4 @@ const useCurrentChat = create(
 
 export default useCurrentChat;
 export { createRandomMsg, createRandomMsgList };
+export { createRandomDMsMsg, createRandomDMsMsgList };

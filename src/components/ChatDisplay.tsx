@@ -4,17 +4,18 @@ import ChatSideBar from './atoms/ChatSideBar'
 import ChatBox from './atoms/ChatBox'
 import ChatSearch from './atoms/ChatSearch'
 import ChatSearchPlus from './atoms/ChatSearchPlus'
+import ChatsList from './atoms/ChatsList'
 
-function ChatDisplay({sideheader} : {sideheader: React.ReactNode;}) {
+function ChatDisplay() {
 
   return (
-	// <div className='chat-page'>
-
-		<div className='chat-container'>
-			<ChatSideBar header={sideheader} />
+	<div className='chat-container'>
+			<div className='chat-side-bar copy-book-background retro-border-box trans-orange-box'>
+				<ChatSearchPlus/>
+				<ChatsList />
+			</div>
 			<ChatBox />
 		</div>
-	// </div>
   )
 }
 

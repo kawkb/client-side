@@ -6,7 +6,7 @@ class DMs {
 	private _user : User;
 	private _messages: DMsMsg[];
 
-	constructor(user: User, messages: DMsMsg[] = [], id: string) {
+	constructor(id: string, user: User, messages: DMsMsg[] = [] ) {
 		this._id = id;
 		this._user = user;
 		this._messages = messages;
@@ -37,7 +37,7 @@ class DMs {
 	}
 
 	static fromJson(json: any) {
-		return new DMs(User.fromJson(json.user), json.messages.map(DMsMsg.fromJson), json.id);
+		return new DMs(json.id, User.fromJson(json.user), json.messages.map(DMsMsg.fromJson));
 	}
 
 	static fromJsonArray(json: any[]) {
