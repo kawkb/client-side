@@ -12,7 +12,7 @@ function ChannelSettings({onClose}: {onClose: () => void}) {
 	const setActiveChannelOptionsName = useChatParams(state => state.setActiveChannelOptionsName);
 	const setActiveChannelOptionsAvatar = useChatParams(state => state.setActiveChannelOptionsAvatar);
 	const [tmpChannelName, setTmpChannelName] = React.useState<string>(activeChannelOptions?.name ?? "");
-	const [tmpChannelAvatar, setTmpChannelAvatar] = React.useState<string>(activeChannelOptions?.avatar ?? "");
+	const [tmpChannelAvatar, setTmpChannelAvatar] = React.useState<string>(imgupload);
 	if (activeChannelOptions === null)
 			console.log('activeChannelOptions is null first time');
 	const fileInputRef = useRef<HTMLInputElement>(null);
@@ -21,7 +21,8 @@ function ChannelSettings({onClose}: {onClose: () => void}) {
 		const file = event.target.files && event.target.files[0];
 		if (file) {
 			setTmpChannelAvatar(file.name);
-			console.log(file);
+			setTmpChannelAvatar(URL.createObjectURL(file));
+			console.log(URL.createObjectURL(file)); 
 		}
 	};
 	
@@ -56,7 +57,7 @@ function ChannelSettings({onClose}: {onClose: () => void}) {
 		<div className='channel-settings-container'>
 			<h1 className='channel-settings-title'>Channel Settings</h1>
 			<div className='channel-name-img-container'>
-				<img className="channel-img-upload-btn" src={imgupload} alt="Upload channel avatar" onClick={handleCLickImageButton}/>
+				<img className="channel-img-upload-btn" src={tmpChannelAvatar} alt="Upload channel avatar" onClick={handleCLickImageButton}/>
 				<input type="file" accept="image/*" ref={fileInputRef} style={{display: 'none'}} onChange={handleUploadChannelAvatar} />
 				<input className="channel-new-name-input" type="text" placeholder='New Channel Name' value={tmpChannelName} onChange={handleChannelNameInput}/>
 			</div>
