@@ -28,28 +28,15 @@ function ChannelMembers({onClose}: {onClose: () => void}) {
 	const setActiveChannelOptionsMembers = useChatParams().setActiveChannelOptionsMembers;
 
 
-	const activeChannelMemberOptions = useChatParams().activeChannelMemberOptions;
-	const setActiveChannelMemberOptions = useChatParams().setActiveChannelMemberOptions;
-	const setActiveChannelMemberOptionsNull = useChatParams().setActiveChannelMemberOptionsNull;
-
 	// fetch members from channel with id activeChannelOptions.id
 	useEffect(() => { setActiveChannelOptionsMembers(createRandomChannelUserList()) }, [activeChannelOptions]);
 
-	const handleButtonClick = (member: ChannelUser) => {
-		setActiveChannelMemberOptions(member);
-	}
-	
 	const handleBanMember = () => {
 		console.log('Ban Member');
 	}
 
 	const handleKickMember = () => {
 		console.log('Kick Member');
-	}
-
-	const handleModMember = () => {
-		console.log('Mod Member');
-		
 	}
 
 	const handleTimeoutMember = () => {
@@ -70,45 +57,28 @@ function ChannelMembers({onClose}: {onClose: () => void}) {
 		setPromoteToAdmin(false);
 	}
 
-	const handleCloseOptions = () => {
-		setActiveChannelMemberOptionsNull();
-	}
-	
 	return (
 		<div className='channel-members-popup copy-book-background retro-border-box trans-orange-box'>
 			<div className='channel-members-container'>
 				<h1 className='channel-members-title'>{activeChannelOptions?.name} Members</h1>
 				<div className='channel-members-list scrollable'>
 					
-					{ 
-					
-					activeChannelOptionsMembers.map((member, index) => {
+					{ activeChannelOptionsMembers.map((member, index) => {
 
 						return (
-							<div key={index}>
-								{ (activeChannelMemberOptions === null || activeChannelMemberOptions.id !== member.id) &&
-									<div className='channel-member-box' >
-										<div className='channel-member-info-container'>
-											<img className="channel-member-avatar" src={member.avatar} alt="channel member avatar" />
-											<span className='channel-member-name'>{member.name}</span>
-										</div>
-										<button className="three-dot-menu-button" onClick={() => handleButtonClick(member)}>
-											<div className="three-dot-menu-dot" ></div>
-											<div className="three-dot-menu-dot" ></div>
-											<div className="three-dot-menu-dot" ></div>
-										</button>
-									</div>
-								}
-
-								{ activeChannelMemberOptions && activeChannelMemberOptions.id === member.id &&
-									<div className='chat-list-item-options'>
-										<span className='chat-list-option' onClick={handleModMember}>Mod</span>
-										<span className='chat-list-option' onClick={handleTimeoutMember}>Timeout</span>
-										<span className='chat-list-option' onClick={handleBanMember}>Ban</span> 
-										<span className='chat-list-option chat-list-option-last' onClick={handleKickMember}>Kick</span>
-										<button className='chat-list-options-close' onClick={handleCloseOptions}>x</button>
-									</div>
-								}
+							<div className='channel-member-box' key={index}>
+								<div className='channel-member-info-container'>
+									<img className="channel-member-avatar" src={member.avatar} alt="channel member avatar" />
+									<span className='channel-member-name'>{member.name}</span>
+								</div>
+								<div className='channel-member-btns-container'>
+									{ (activeChannelOptions?.owner_id === member.id) && (member.role === ChannelUserRole.REGULAR) && <ImgButton src={admin} alt="promote to admin" classes="channel-member-btn" onClick={handlePromoteToAdmin}/> }
+									{ (activeChannelOptions?.owner_id === member.id) && (member.role === ChannelUserRole.ADMIN) && <ImgButton src={demote} alt="demote admin" classes="channel-member-btn" onClick={handleDemoteToMember}/> }
+									{ (member.role === ChannelUserRole.ADMIN) && <ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/> }
+									{ (member.role === ChannelUserRole.ADMIN) && <ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/> }
+									{ (member.role === ChannelUserRole.ADMIN) && <ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/> }
+									<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
+								</div>
 							</div>
 						)})
 					

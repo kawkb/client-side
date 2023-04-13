@@ -101,7 +101,7 @@ function DMsList() {
 						<div className='chat-list-item-options'>
 							<span className='chat-list-option dm-option' onClick={handleGotoProfile}>Profile</span>
 							<span className='chat-list-option dm-option' onClick={handleInviteToPlay}>Play</span>
-							<span className='chat-list-option dm-option' onClick={handleMuteUser}>Mute</span>
+							{/* <span className='chat-list-option dm-option' onClick={handleMuteUser}>Mute</span> */}
 							<span className='chat-list-option dm-option chat-list-option-last' onClick={handleBlockUser}>Block</span>
 							<button className='chat-list-options-close' onClick={handleCloseOptions}>x</button>
 						</div> 

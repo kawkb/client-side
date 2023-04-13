@@ -25,6 +25,7 @@ interface ChatParamsStore {
 	activeChannelOptionsName: string;
 	activeChannelOptionsAvatar: string;
 	activeChannelOptionsMembers: ChannelUser[];
+	activeChannelMemberOptions: ChannelUser | null;
 	setActiveChannel: (channelId: string) => void;
 	setActiveDMs: (dmsId: string) => void;
 	setActiveChannelOptions: (channelId: string) => void;
@@ -39,6 +40,8 @@ interface ChatParamsStore {
 	setActiveChannelOptionsAvatar: (channelId: string, channelAvatar: string) => void;
 	setActiveChannelOptionsNull: () => void;
 	setActiveChannelOptionsMembers: (members: ChannelUser[]) => void;
+	setActiveChannelMemberOptions: (member: ChannelUser) => void;
+	setActiveChannelMemberOptionsNull: () => void;
 }
 
 const useChatParams = create<ChatParamsStore>() ((set) => ({
@@ -53,6 +56,7 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 	activeChannelOptionsName: "",
 	activeChannelOptionsAvatar: "",
 	activeChannelOptionsMembers: [],
+	activeChannelMemberOptions: null,
 	setActiveChannel: (channelId: string) => set((state) => {
 		const match = state.channelList.find((channel) => channel.id === channelId) as Channel;
 		return {activeChannel: match || null, activeItem: match || null};
@@ -89,6 +93,8 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 	setActiveChannelOptionsNull: () => set((state) => ({activeChannelOptions: null})),
 
 	setActiveChannelOptionsMembers: (members: ChannelUser[]) => set((state) => ({activeChannelOptionsMembers: members})),
+	setActiveChannelMemberOptions: (member: ChannelUser) => set((state) => ({activeChannelMemberOptions: member})),
+	setActiveChannelMemberOptionsNull: () => set((state) => ({activeChannelMemberOptions: null})),
 }));
 
 export default useChatParams;
