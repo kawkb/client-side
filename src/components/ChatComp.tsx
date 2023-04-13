@@ -14,6 +14,7 @@ import Channel from '../modules/channel';
 import DMs from '../modules/dms';
 import DMsDisplay from './DMsDisplay';
 import useChatParams from '../hooks/useChatParams';
+import ChatTabBox from './ChatTabBox';
 
 function ChatComp() {
 	const options = [
@@ -32,7 +33,8 @@ function ChatComp() {
 
 	return (
 	<div className='chat-tab-container pattern-background orange-pattern'>
-		<TabBox options={options} tabcolor={color} imgbtn={true} title={activeItem instanceof Channel ? activeItem.name as string ?? "Welcome to chat !" : activeItem?.user.name as string ?? "Welcome to chat !"} avatar={activeItem instanceof Channel ? activeItem?.avatar ?? squares: activeItem?.user.avatar ?? squares}/>		
+		{/* <TabBox options={options} tabcolor={color} imgbtn={true} title={activeItem instanceof Channel ? activeItem.name as string ?? "Welcome to chat !" : activeItem?.user.name as string ?? "Welcome to chat !"} avatar={activeItem instanceof Channel ? activeItem?.avatar ?? squares: activeItem?.user.avatar ?? squares}/>		 */}
+		<ChatTabBox />
 	</div>
 	);
 }

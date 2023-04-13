@@ -31,7 +31,6 @@ function ChannelInvite({onClose}: {onClose: () => void}) {
 					<input className="invite-search-input" type="text" placeholder='Seach...'/>
 					
 					<div className='invite-search-list scrollable'>
-						
 						{ 
 							activeChannelOptionsInviteUsers?.map((user: ChannelUser, index) => {
 							
@@ -50,7 +49,6 @@ function ChannelInvite({onClose}: {onClose: () => void}) {
 								)
 							})
 						}
-
 					</div>	
 				</div>
 			<ClassButton name="Close" classes="retro-button orange-header close-channel-members-btn" onClick={onClose}/>
