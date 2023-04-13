@@ -65,7 +65,7 @@ function HomeComp() {
 
 //handle top player click:
 	const handleTopPlayerClick = () => {
-	nav(`/profile/${login}`, { replace: true });
+	// nav(`/profile/${login}`, { replace: true });
   };
   return (
 

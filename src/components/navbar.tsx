@@ -11,8 +11,7 @@ function Navbar() {
   const menuName = useMenuClose((state) => state.menuName);
   const setMenuClose = useMenuClose((state) => state.setMenuClose);
   const setMenuName = useMenuClose((state) => state.setMenuName);
-  const setBellNbr = useBell((state) => state.setBellNbr);
-  const bellNbr = useBell((state) => state.bellNbr);
+
 
   const bellClose = useBell((state) => state.bellClose);
   const bellName = useBell((state) => state.bellName);
@@ -29,11 +28,17 @@ function Navbar() {
       setMenuName("Menu");
       nav(-1);
     }
+    if (!bellClose) {
+      setBellClose(true);
+      setBellName("Bell");
+    }
   }
 
-  function toggleMenuOther() {
+  function toggleOther() {
     setMenuClose(true);
     setMenuName("Menu");
+    setBellClose(true);
+    setBellName(`Bell`);
   }
 
   function toggleBell() {
@@ -42,8 +47,12 @@ function Navbar() {
       setBellName("Close");
     } else {
       setBellClose(true);
-      setBellName(`Bell(${bellNbr})`);
+      setBellName(`Bell`);
       nav(-1);
+    }
+    if (!menuClose) {
+      setMenuClose(true);
+      setMenuName("Menu");
     }
   }
 
@@ -54,7 +63,7 @@ function Navbar() {
           {" "}
           {menuName}
         </Link>
-        <Link to="/" className="logo" onClick={() => toggleMenuOther()}>
+        <Link to="/" className="logo" onClick={() => toggleOther()}>
           <img src={logo} alt="logo" />
         </Link>
         <Link to="/Bell" className="nav-links" onClick={() => toggleBell()}>
