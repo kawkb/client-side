@@ -10,16 +10,16 @@
 @import url('./src/colors.css');
 @import url('./src/popup.css');
 @import url('./src/home.css');
+@import url('./src/topPlayers.css');
 
 
 @import url('./src/menu.css');
+@import url('./src/error.css');
+
 body {
   font-family: var(--font);
   color: var(--dark);
-}
-
-.debug {
-  border: 1px solid red;
+  cursor: url("../assets/svg/cursor.svg"), auto;
 }
 
 a:visited {

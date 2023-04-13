@@ -59,9 +59,7 @@ function ProfilComp() {
   useEffect(() => {
     if (loading) return;
     if(!user) return;
-    console.log(user.login, name)
-    if (user.login === name) {
-
+    if (login == null) {
       setOptions([
         { name: "Profil", content: <Profil /> },
         { name: "Settings", content: <Settings /> },

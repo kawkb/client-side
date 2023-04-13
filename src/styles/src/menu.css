@@ -12,15 +12,16 @@
     align-items: center;
 }
 .menu-links {
+    color: env(--dark); 
     display: flex;
     font-size: 100px;
     text-transform: uppercase;
 }
 
 .menu-links:hover {
+    cursor: url("../../assets/svg/hover.svg"), auto;
     opacity: 0.8;
     scale: 1.2;
-    cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
@@ -56,6 +57,7 @@
 }
 
 .notif-list::-webkit-scrollbar-thumb:hover {
+    cursor: url("../../assets/svg/hover.svg"), auto;
     background-color: rgba(221, 237, 128, 0.8);
 }
 

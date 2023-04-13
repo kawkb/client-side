@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import logo from "../assets/svg/logo.svg";
+import logo from "../assets/img/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMenuClose } from "../hooks/useMenuClose";
 import { useBell } from "../hooks/useBell";
