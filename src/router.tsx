@@ -42,10 +42,9 @@ useEffect(() => {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-			<Route path="/waiting" element={<WaitingRoom />} />
             <Route path="/login" element={<Login />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="/game" element={<Game />} />
+            <Route path="/game/:mode" element={<Game />} />
             <Route path="/chat" element={<Chat />} />
 			<Route path="/profil/:login" element={<ProtectedRoute component={Profil} />} />
             <Route path="/profil" element={<ProtectedRoute component={Profil} />} />
