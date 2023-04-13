@@ -16,27 +16,18 @@ import ChannelUser from "../modules/channeluser";
 interface ChatParamsStore {
 	channelTab: boolean;
 	channelList: Channel[];
-	dmsList: DMs[];
-	activeItem: Channel | DMs | null;
 	activeChannel: Channel | null;
 	activeChannelMessages: ChannelMsg[];
 	activeChannelOptions: Channel | null;
-	activeDMsOptions: DMs | null;
-	activeDMs: DMs | null;
 	activeChannelOptionsName: string;
 	activeChannelOptionsAvatar: string;
 	activeChannelOptionsMembers: ChannelUser[];
 	activeChannelMemberOptions: ChannelUser | null
 	activeChannelOptionsInviteUsers: ChannelUser[];
 	setActiveChannel: (channelId: string) => void;
-	setActiveDMs: (dmsId: string) => void;
 	setActiveChannelOptions: (channelId: string) => void;
-	setActiveDMsOptions: (dmsId: string) => void;
 	setChannelList: (channelList: Array<Channel>) => void;
-	setDMsList: (dmsList: Array<DMs>) => void;
-	// setChannelMessages: (messages: Array<ChannelMsg>) => void;
 	setActiveChannelMessages: (messages: Array<ChannelMsg>) => void;
-	setDMsMessages: (messages: Array<DMsMsg>) => void;
 	removeChannel: (channelId: string) => void;
 	setChannelTab: (channelTab: boolean) => void;
 	setActiveChannelOptionsName: (channelId: string, channelName: string) => void;
@@ -51,13 +42,10 @@ interface ChatParamsStore {
 const useChatParams = create<ChatParamsStore>() ((set) => ({
 	channelTab: false,
 	channelList: [],
-	dmsList: [],
 	activeItem: null,
 	activeChannel: null,
 	activeChannelMessages: [],
-	activeDMs: null,
 	activeChannelOptions: null,
-	activeDMsOptions: null,
 	activeChannelOptionsName: "",
 	activeChannelOptionsAvatar: "",
 	activeChannelOptionsMembers: [],
@@ -67,21 +55,11 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 		const match = state.channelList.find((channel) => channel.id === channelId) as Channel;
 		return {activeChannel: match || null, activeItem: match || null};
 	}),
-	setActiveDMs: (dmsId: string) => set((state) => {
-		const match = state.dmsList.find((dms) => dms.id === dmsId) as DMs;
-		return {activeDMs: match, activeItem: match};
-	}),
-	// setActiveChannel: (channelId: string) => set((state) => ({activeChannel: state.channelList.find((channel) => channel.id === channelId) as Channel, activeItem: state.activeChannel})),
-	// setActiveDMs: (dmsId: string) => set((state) => ({activeDMs: state.dmsList.find((dms) => dms.id === dmsId) as DMs, activeItem: state.activeDMs})),
 	
 	
 	setActiveChannelOptions: (channelId: string) => set((state) => ({activeChannelOptions: state.channelList.find((channel) => channel.id === channelId) as Channel || null})),
-	setActiveDMsOptions: (dmsId: string) => set((state) => ({activeDMsOptions: state.dmsList.find((dms) => dms.id === dmsId) as DMs || null})),
 	setChannelList: (channelList: Array<Channel>) => set((state) => ({channelList: channelList})),
-	setDMsList: (dmsList: Array<DMs>) => set((state) => ({dmsList: dmsList})),
-	// setChannelMessages: (messages: Array<ChannelMsg>) => set((state) => ({activeChannel: {...state.activeChannel, messages: messages} as Channel})),
 	setActiveChannelMessages: (messages: Array<ChannelMsg>) => set((state) => ({activeChannelMessages: messages})),
-	setDMsMessages: (messages: Array<DMsMsg>) => set((state) => ({activeDMs: {...state.activeDMs, messages: messages} as DMs})),
 	removeChannel: (channelId: string) => set((state) => ({channelList: state.channelList.filter((channel) => channel.id !== channelId)})),
 	setChannelTab: (channelTab: boolean) => set((state) => ({channelTab: channelTab})),
 	setActiveChannelOptionsName: (channelId: string, channelName: string) => set((state) => ({channelList: state.channelList.map((c) => {

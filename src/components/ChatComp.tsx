@@ -23,13 +23,13 @@ function ChatComp() {
 	];
 	const color:string = "orange";
 
-	const activeChannel = useChatParams(state => state.activeChannel);
-	const activeDMs = useChatParams(state => state.activeDMs);
-	const activeItem = useChatParams(state => state.activeItem);
+	// const activeChannel = useChatParams(state => state.activeChannel);
+	// const activeDMs = useChatParams(state => state.activeDMs);
+	// const activeItem = useChatParams(state => state.activeItem);
 
-	activeChannel && console.log(`${activeChannel.id}`);
-	activeDMs && console.log(`${activeDMs.id}`);
-	activeItem && console.log(`${activeItem.id}`);
+	// activeChannel && console.log(`${activeChannel.id}`);
+	// activeDMs && console.log(`${activeDMs.id}`);
+	// activeItem && console.log(`${activeItem.id}`);
 
 	return (
 	<div className='chat-tab-container pattern-background orange-pattern'>
