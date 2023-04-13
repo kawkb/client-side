@@ -1,13 +1,42 @@
 import React, {useRef} from 'react'
+import zustand from "zustand";
+import { create } from "zustand";
+import { useProfileImage } from '../hooks/useProfileImage';
+import { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
+import api from '../api/api';
+import { useAuth } from '../useAuth';
 
 function ImgUpload({classes}: {classes: string}) {
-	
+	const nav = useNavigate();
+	const setProfilImage = useProfileImage((state) => state.setImage);
+
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files && event.target.files[0];
 		if (file) {
-			// Do something with the selected file
+			const formData = new FormData();
+			formData.append('avatar', file);
+			api
+      		.post("/profile/update/avatar", formData, {
+				headers: {
+					"Content-Type": "multipart/form-data"
+				}
+			})
+      		.then((res) => {
+      		  console.log(res.data);
+			if (res.data.avatar_url.startsWith("http")) {
+				setProfilImage(res.data.avatar_url);
+			  } else {
+				setProfilImage(process.env.REACT_APP_API_URL as string + 'static' + res.data.avatar_url);
+			  }
+      		})
+      		.catch((err: AxiosError) => {
+      		  if (err.response) {
+      		    if (err.response.status === 404) nav("/404", { replace: true });
+      		  }
+      		});
 			console.log(file);
 		}
 	};

@@ -27,7 +27,7 @@ nav {
 }
 
 .nav-links {
-    font-size: 28px;
+    font-size: 1vw;
     text-transform: uppercase;
 }
 
@@ -37,3 +37,4 @@ nav {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
+
