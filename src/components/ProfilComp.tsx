@@ -8,6 +8,7 @@ import { useAuth } from "../useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useProfileImage } from "../hooks/useProfileImage";
+import Options from "./Options";
 
 function ProfilComp() {
   const { login } = useParams();
