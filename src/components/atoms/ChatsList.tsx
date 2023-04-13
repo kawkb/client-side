@@ -14,6 +14,7 @@ import useChatParams from '../../hooks/useChatParams';
 import Popup from '../Popup';
 import ChannelSettings from './ChannelSettings';
 import ChannelMembers from './ChannelMembers';
+import ChannelInvite from './ChannelInvite';
 
 // type ChatListProps = {
 // 	  chats: ChatModel[];
@@ -31,6 +32,7 @@ function ChatsList() {
 	const setActiveChannelOptionsNull = useChatParams(state => state.setActiveChannelOptionsNull);
 	const [showSettings, setShowSettings] = useState(false);
 	const [showMembers, setShowMembers] = useState(false);
+	const [showInviteToChannel, setShowInviteToChannel] = useState(false);
 
 	useEffect(() => { setChannelList(createRandonChannelList()) }, []);
 
@@ -76,6 +78,17 @@ function ChatsList() {
 		setActiveChannelOptionsNull();
 	}
 
+	const handleShowInviteToChannel = () => {
+		console.log('invite to channel');
+		setShowInviteToChannel(true);
+	}
+
+	const handleCloseInviteToChannel = () => {
+		setShowInviteToChannel(false);
+		setActiveChannelOptionsNull();
+	}
+
+
   return (
 	<div className='chat-list scrollable'>
 		{
@@ -100,6 +113,8 @@ function ChatsList() {
 							{ showSettings && <Popup onClose={handleCloseSettingsPopup} content={<ChannelSettings onClose={handleCloseSettingsPopup}/>} />}
 							<span className='chat-list-option' onClick={handleShowMembers}>Members</span>
 							{ showMembers && <Popup onClose={handleCloseMembers} content={<ChannelMembers onClose={handleCloseMembers}/>} />}
+							<span className='chat-list-option' onClick={handleShowInviteToChannel}>Invite</span>
+							{showInviteToChannel && <Popup onClose={handleCloseInviteToChannel} content={<ChannelInvite onClose={handleCloseInviteToChannel}/>} /> }
 							<span className='chat-list-option chat-list-option-last' onClick={handleLeaveChannel}>Leave</span>
 							<button className='chat-list-options-close' onClick={handleCloseOptions}>x</button>
 						</div> 
