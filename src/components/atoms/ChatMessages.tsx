@@ -14,19 +14,20 @@ import { act } from '@testing-library/react'
 function ChatMessages() {
 
 	const activeChannel = useChatParams(state => state.activeChannel);
-	const setChannelMessages = useChatParams(state => state.setChannelMessages);
+	const activeChannelMessages = useChatParams(state => state.activeChannelMessages);
+	const setActiveChannelMessages = useChatParams(state => state.setActiveChannelMessages);
 
-	useEffect(() => { setChannelMessages(createRandomMsgList()) }, [activeChannel?.id]);
+	useEffect(() => { setActiveChannelMessages(createRandomMsgList()) }, [activeChannel?.id]);
 
   return (
 	<div className='chat-messages-list scrollable'>
 		{
-			activeChannel?.messages.map((msg, index) => {
+			activeChannelMessages.map((msg, index) => {
 				return (
+					// should pass weither the message is from the current user or not but just for testing it's a random boolean
 					<ChatMsg content={msg.content} owner={msg.sender_id > faker.datatype.uuid()} key={index}/>
 				)
 			})
-
 		}
 	</div>
   )

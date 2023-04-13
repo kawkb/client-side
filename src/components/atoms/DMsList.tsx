@@ -13,6 +13,7 @@ import ThreeDotMenu from './ThreeDotMenu';
 import useChatParams from '../../hooks/useChatParams';
 import { createRandomDM } from '../../hooks/useChatList';
 import { createRandomDMList } from '../../hooks/useChatList';
+import useDMsParams from '../../hooks/useDMsParams';
 
 
 // type ChatListProps = {
@@ -21,12 +22,12 @@ import { createRandomDMList } from '../../hooks/useChatList';
 
 function DMsList() {
 
-	const dmsList = useChatParams(state => state.dmsList);
-	const setDMsList = useChatParams(state => state.setDMsList);
-	const activeDMs = useChatParams(state => state.activeDMs);
-	const activeDMsOptions = useChatParams(state => state.activeDMsOptions);
-	const setActiveDMs = useChatParams(state => state.setActiveDMs);
-	const setActiveDMsOptions = useChatParams(state => state.setActiveDMsOptions);
+	const dmsList = useDMsParams(state => state.dmsList);
+	const setDMsList = useDMsParams(state => state.setDMsList);
+	const activeDMs = useDMsParams(state => state.activeDMs);
+	const activeDMsOptions = useDMsParams(state => state.activeDMsOptions);
+	const setActiveDMs = useDMsParams(state => state.setActiveDMs);
+	const setActiveDMsOptions = useDMsParams(state => state.setActiveDMsOptions);
 
 
 

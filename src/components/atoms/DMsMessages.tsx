@@ -3,24 +3,26 @@ import ChatMsg from './ChatMsg'
 import { faker } from '@faker-js/faker'
 import useChatParams from '../../hooks/useChatParams'
 import { createRandomDMsMsg, createRandomDMsMsgList } from '../../hooks/useCurrentChat'
+import useDMsParams from '../../hooks/useDMsParams'
+
 
 function DMsMessages() {
 
-	const activeDMs = useChatParams(state => state.activeDMs);
-	const setActiveDMs = useChatParams(state => state.setActiveDMs);
-	const setDMsMessages = useChatParams(state => state.setDMsMessages);
+	const activeDMs = useDMsParams(state => state.activeDMs);
+	const setActiveDMs = useDMsParams(state => state.setActiveDMs);
+	const activeDMsMessages = useDMsParams(state => state.activeDMsMessages);
+	const setActiveDMsMessages = useDMsParams(state => state.setActiveDMsMessages);
 
-	useEffect(() => { setDMsMessages(createRandomDMsMsgList()) }, [activeDMs?.id]);
+	useEffect(() => { setActiveDMsMessages(createRandomDMsMsgList()) }, [activeDMs?.id]);
 
 	return (
 		<div className='chat-messages-list scrollable'>
 			{
-				activeDMs?.messages.map((msg, index) => {
+				activeDMsMessages.map((msg, index) => {
 					return (
 						<ChatMsg content={msg.content} owner={msg.sender_id > faker.datatype.uuid()} key={index}/>
 					)
 				})
-
 			}
 		</div>
 	)
