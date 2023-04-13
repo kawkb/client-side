@@ -60,7 +60,6 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     gameState.player2Score = state.player2Score;
   });
   socket.on("gameOver", (state: GameStateProps) => {
-    console.log("game over");
     gameState.gameStatus = state.gameStatus;
   });
 
@@ -72,12 +71,12 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
       Fast: p5.loadImage("/maldives-island.jpg"),
       Fierce: p5.loadImage("/fierce.svg"),
       Frisky: p5.loadImage("/frisky.svg"),
+	  Custom: p5.loadImage("/frisky.svg"),
     }[mode]!;
   };
 
   const Draw: any = (p5: p5Types) => {
-    if (gameState.gameStatus === "playing" && !spectating) {
-      console.log(p5.mouseY);
+    if (gameState.gameStatus === "playing") {
       socket.emit("movePlayer", {
         playerY: p5.mouseY,
       });
@@ -142,8 +141,6 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     p5.text(gameState.player2Score, tableWidth / 2 + 100, 50);
   };
 
-  console.log("actual hball x", gameState.ballX * tableWidth);
-  console.log("actual hball y", gameState.ballY * tableHeight);
   const windowResized: any = (p5: p5Types) => {
     setResized((prev) => !prev);
     tableWidth = Math.min(window.innerWidth - 40, 1500);
@@ -159,7 +156,7 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
 
   return (
     <div
-      className="pattern-background blue-pattern"
+      className="pattern-background green-pattern"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -178,13 +175,17 @@ const Waiting = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  console.log();
 
   useEffect(() => {
-    if (!["Fast", "Frisky", "Fierce"].includes(params["mode"]!))
+    if (!["Fast", "Frisky", "Fierce", "Custom"].includes(params["mode"]!))
       navigate("/404");
-    socket.emit("join_queue", { gameMode: params.mode });
+    if (params["mode"] !== "Custom") {
+      socket.emit("join_queue", { gameMode: params.mode });
+    }
     socket.on("gameReady", () => {
+		// print socketid
+		console.log("Socket ID:", socket.id);
+		console.log("game ready");
       setGameReady(true);
     });
 
@@ -196,20 +197,22 @@ const Waiting = () => {
   if (gameReady) return <Game mode={params["mode"]!} />;
 
   return (
-    <div style={{ 
+    <div
+      style={{
         justifyContent: "center",
-		background: "#25252b",
+        background: "#25252b",
         minHeight: "100vh",
         alignItems: "center",
-		display: "flex",
-		flexDirection: "column",
-		}}>
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <div className="pong-wrapper">
         <div className="pong-strich strich1"></div>
         <div className="pong-strich strich2"></div>
         <div className="pong-ball"></div>
       </div>
-	  <h1 style={{ color: "white" }}>Waiting for opponent...</h1>
+      <h1 style={{ color: "white" }}>Waiting for opponent...</h1>
     </div>
   );
 };
