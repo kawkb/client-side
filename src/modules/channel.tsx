@@ -17,9 +17,9 @@ class Channel {
 	private _avatar: string;
 	private _password: string;
 	private _messages: ChannelMsg[];
-	private _members: ChannelUser[];
+	// private _members: ChannelUser[];
 
-	constructor(id: string, name: string, owner_id: string, type: ChannelType = ChannelType.PUBLIC, avatar: string, password: string, messages: ChannelMsg[] = [], members: ChannelUser[] = []) {
+	constructor(id: string, name: string, owner_id: string, type: ChannelType = ChannelType.PUBLIC, avatar: string, password: string, messages: ChannelMsg[] = []) {
 		this._id = id;
 		this._name = name;
 		this._owner_id = owner_id;
@@ -27,7 +27,7 @@ class Channel {
 		this._avatar = avatar;
 		this._password = password;
 		this._messages = messages;
-		this._members = members;
+		// this._members = members;
 	}
 
 	get id() {
@@ -63,9 +63,9 @@ class Channel {
 		this._name = name;
 	}
 
-	get members() {
-		return this._members;
-	}
+	// get members() {
+	// 	return this._members;
+	// }
 
 	set owner_id(owner_id: string) {
 		this._owner_id = owner_id;
@@ -87,12 +87,12 @@ class Channel {
 		this._messages = messages;
 	}
 
-	set members(members: ChannelUser[]) {
-		this._members = members;
-	}
+	// set members(members: ChannelUser[]) {
+	// 	this._members = members;
+	// }
 
 	static fromJson(json: any) {
-		return new Channel(json.id, json.name, json.owner_id, json.type, json.password, json.messages.map(ChannelMsg.fromJson), json.members.map(ChannelUser.fromJson));
+		return new Channel(json.id, json.name, json.owner_id, json.type, json.password, json.messages.map(ChannelMsg.fromJson));
 	}
 
 	static fromJsonArray(json: any[]) {
@@ -107,7 +107,7 @@ class Channel {
 			type: this._type,
 			password: this._password,
 			messages: this._messages.map((msg) => msg.toJson()),
-			members: this._members.map((member) => member.toJson()),
+			// members: this._members.map((member) => member.toJson()),
 		};
 	}
 

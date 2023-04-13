@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ImgButton from '../ImgButton'
 import ban from '../../assets/img/thinban.png'
 import mute from '../../assets/img/mute-user.png'
@@ -7,11 +7,29 @@ import timeout from '../../assets/img/clock.png'
 import ClassButton from '../ClassButton'
 import squares from '../../assets/img/squares.png'
 import { Tooltip } from 'react-tooltip'
+import admin from '../../assets/img/adminuser.png'
+import demote from '../../assets/img/down-arrow.png'
+import { createRandomChannelUser, createRandomChannelUserList } from '../../hooks/useCurrentChat'
+import useChatParams from '../../hooks/useChatParams'
+import ChannelUser from '../../modules/channeluser'
+import { ChannelUserStatus, ChannelUserRole } from '../../modules/channeluser'
+
+
 
 function ChannelMembers({onClose}: {onClose: () => void}) {
 
 
 	const [showAdminOptions, setShowAdminOptions] = React.useState<boolean>(false);
+	const [showOwnerOptions, setShowOwnerOptions] = React.useState<boolean>(false);
+	const [promoteToAdmin, setPromoteToAdmin] = React.useState<boolean>(false);
+
+	const activeChannelOptions = useChatParams().activeChannelOptions;
+	const activeChannelOptionsMembers = useChatParams().activeChannelOptionsMembers;
+	const setActiveChannelOptionsMembers = useChatParams().setActiveChannelOptionsMembers;
+
+
+	// fetch members from channel with id activeChannelOptions.id
+	useEffect(() => { setActiveChannelOptionsMembers(createRandomChannelUserList()) }, [activeChannelOptions]);
 
 	const handleBanMember = () => {
 		console.log('Ban Member');
@@ -29,91 +47,42 @@ function ChannelMembers({onClose}: {onClose: () => void}) {
 		console.log('Mute Member');
 	}
 
+	const handlePromoteToAdmin = () => {
+		console.log('Promote to Admin');
+		setPromoteToAdmin(true);
+	}
+
+	const handleDemoteToMember = () => {
+		console.log('Demote to Member');
+		setPromoteToAdmin(false);
+	}
+
 	return (
-		<div className='create-room-popup copy-book-background retro-border-box trans-orange-box'>
-			{/* ChannelSettings */}
+		<div className='channel-members-popup copy-book-background retro-border-box trans-orange-box'>
 			<div className='channel-members-container'>
-				<h1 className='channel-members-title'>Channel Members</h1>
+				<h1 className='channel-members-title'>{activeChannelOptions?.name} Members</h1>
 				<div className='channel-members-list scrollable'>
 					
-					<div className='channel-member-box'>
-						<div className='channel-member-info-container'>
-							<img className="channel-member-avatar" src={squares} alt="channel member avatar" />
-							<span className='channel-member-name'>Sigma Houssna</span>
-						</div>
-						<div className='channel-member-btns-container'>
-							{ showAdminOptions && <ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/> }
-							{ showAdminOptions && <ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/> }
-							{ showAdminOptions && <ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/> }
-							<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
-						</div>
-					</div>
+					{ activeChannelOptionsMembers.map((member, index) => {
 
-					<div className='channel-member-box'>
-						<div className='channel-member-info-container'>
-							<img className="channel-member-avatar" src={squares} alt="channel member avatar" />
-							<span className='channel-member-name'>Sigma Houssna</span>
-						</div>
-						<div className='channel-member-btns-container'>
-							<ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/>
-							<ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/>
-							<ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/>
-							<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
-						</div>
-					</div>
-
-					<div className='channel-member-box'>
-						<div className='channel-member-info-container'>
-							<img className="channel-member-avatar" src={squares} alt="channel member avatar" />
-							<span className='channel-member-name'>Sigma Houssna</span>
-						</div>
-						<div className='channel-member-btns-container'>
-							<ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/>
-							<ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/>
-							<ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/>
-							<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
-						</div>
-					</div>
-
-					<div className='channel-member-box'>
-						<div className='channel-member-info-container'>
-							<img className="channel-member-avatar" src={squares} alt="channel member avatar" />
-							<span className='channel-member-name'>Sigma Houssna</span>
-						</div>
-						<div className='channel-member-btns-container'>
-							<ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/>
-							<ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/>
-							<ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/>
-							<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
-						</div>
-					</div>
-
-					<div className='channel-member-box'>
-						<div className='channel-member-info-container'>
-							<img className="channel-member-avatar" src={squares} alt="channel member avatar" />
-							<span className='channel-member-name'>Sigma Houssna</span>
-						</div>
-						<div className='channel-member-btns-container'>
-							<ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/>
-							<ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/>
-							<ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/>
-							<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
-						</div>
-					</div>
-
-					<div className='channel-member-box'>
-						<div className='channel-member-info-container'>
-							<img className="channel-member-avatar" src={squares} alt="channel member avatar" />
-							<span className='channel-member-name'>Sigma Houssna</span>
-						</div>
-						<div className='channel-member-btns-container'>
-							<ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/>
-							<ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/>
-							<ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/>
-							<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
-						</div>
-					</div>
-
+						return (
+							<div className='channel-member-box' key={index}>
+								<div className='channel-member-info-container'>
+									<img className="channel-member-avatar" src={member.avatar} alt="channel member avatar" />
+									<span className='channel-member-name'>{member.name}</span>
+								</div>
+								<div className='channel-member-btns-container'>
+									{ (activeChannelOptions?.owner_id === member.id) && (member.role === ChannelUserRole.REGULAR) && <ImgButton src={admin} alt="promote to admin" classes="channel-member-btn" onClick={handlePromoteToAdmin}/> }
+									{ (activeChannelOptions?.owner_id === member.id) && (member.role === ChannelUserRole.ADMIN) && <ImgButton src={demote} alt="demote admin" classes="channel-member-btn" onClick={handleDemoteToMember}/> }
+									{ (member.role === ChannelUserRole.ADMIN) && <ImgButton src={kick} alt="kick user" classes="channel-member-btn" onClick={handleKickMember}/> }
+									{ (member.role === ChannelUserRole.ADMIN) && <ImgButton src={ban} alt="ban user" classes="channel-member-btn" onClick={handleBanMember}/> }
+									{ (member.role === ChannelUserRole.ADMIN) && <ImgButton src={timeout} alt="give user a timeout" classes="channel-member-btn" onClick={handleTimeoutMember}/> }
+									<ImgButton src={mute} alt="mute user" classes="channel-member-btn" onClick={handleMuteMember}/>
+								</div>
+							</div>
+						)})
+					
+					}
 				</div>	
 				<ClassButton name="Close" classes="retro-button orange-header close-channel-members-btn" onClick={onClose}/>
 			</div>

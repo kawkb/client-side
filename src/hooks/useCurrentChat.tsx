@@ -9,6 +9,9 @@ import { faker } from '@faker-js/faker';
 import { ChannelType } from "../modules/channel";
 import ChannelMsg from "../modules/channelmsg";
 import DMsMsg from "../modules/dmsmsg";
+import ChannelUser from "../modules/channeluser";
+import { ChannelUserStatus } from "../modules/channeluser";
+import { ChannelUserRole } from "../modules/channeluser";
 
 
 const createRandomMsg = (): ChannelMsg => {
@@ -35,6 +38,18 @@ const createRandomDMsMsgList = (): Array<DMsMsg> => {
 	return msgs;
 }
 
+const createRandomChannelUser = (): ChannelUser => {
+	return new ChannelUser(faker.datatype.uuid(), faker.name.fullName(), faker.image.avatar(), faker.datatype.uuid(), faker.helpers.arrayElement([ChannelUserStatus.REQUESTED, ChannelUserStatus.MEMBER, ChannelUserStatus.ADMIN, ChannelUserStatus.DECLINED, ChannelUserStatus.BANNED,]), faker.helpers.arrayElement([ChannelUserRole.ADMIN, ChannelUserRole.REGULAR,]), faker.date.past());
+}
+
+const createRandomChannelUserList = (): Array<ChannelUser> => {
+	let users: Array<ChannelUser> = [];
+	for (let i = 0; i < 10; i++) {
+		users.push(createRandomChannelUser());
+	}
+	return users;
+}
+
 const useCurrentChat = create(
 	combine({item: null as (Channel | DMs | null)}, (set) => ({
 	setCurrentChat: (item: Channel | DMs) => set((state) => ({item: item as Channel | DMs})),
@@ -44,3 +59,4 @@ const useCurrentChat = create(
 export default useCurrentChat;
 export { createRandomMsg, createRandomMsgList };
 export { createRandomDMsMsg, createRandomDMsMsgList };
+export { createRandomChannelUser, createRandomChannelUserList };

@@ -11,6 +11,7 @@ import ChannelMsg from "../modules/channelmsg";
 import DMsMsg from "../modules/dmsmsg";
 import { createRandomMsg } from "./useCurrentChat";
 import { createRandomMsgList } from "./useCurrentChat";
+import ChannelUser from "../modules/channeluser";
 
 interface ChatParamsStore {
 	channelTab: boolean;
@@ -23,6 +24,7 @@ interface ChatParamsStore {
 	activeDMs: DMs | null;
 	activeChannelOptionsName: string;
 	activeChannelOptionsAvatar: string;
+	activeChannelOptionsMembers: ChannelUser[];
 	setActiveChannel: (channelId: string) => void;
 	setActiveDMs: (dmsId: string) => void;
 	setActiveChannelOptions: (channelId: string) => void;
@@ -36,6 +38,7 @@ interface ChatParamsStore {
 	setActiveChannelOptionsName: (channelId: string, channelName: string) => void;
 	setActiveChannelOptionsAvatar: (channelId: string, channelAvatar: string) => void;
 	setActiveChannelOptionsNull: () => void;
+	setActiveChannelOptionsMembers: (members: ChannelUser[]) => void;
 }
 
 const useChatParams = create<ChatParamsStore>() ((set) => ({
@@ -49,6 +52,7 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 	activeDMsOptions: null,
 	activeChannelOptionsName: "",
 	activeChannelOptionsAvatar: "",
+	activeChannelOptionsMembers: [],
 	setActiveChannel: (channelId: string) => set((state) => {
 		const match = state.channelList.find((channel) => channel.id === channelId) as Channel;
 		return {activeChannel: match || null, activeItem: match || null};
@@ -83,6 +87,8 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 		return c;
 	})})),
 	setActiveChannelOptionsNull: () => set((state) => ({activeChannelOptions: null})),
+
+	setActiveChannelOptionsMembers: (members: ChannelUser[]) => set((state) => ({activeChannelOptionsMembers: members})),
 }));
 
 export default useChatParams;
