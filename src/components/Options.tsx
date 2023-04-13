@@ -20,7 +20,7 @@ import { useAuth } from '../useAuth'
 import { useNickname } from '../hooks/useNickname';
 import api from '../api/api'
 
-function Settings() {
+function Options() {
 
 	const { user, setUserState } = useAuth();
 	const enable2fa = useEnable2fa((state) => state.enable2fa);
@@ -109,4 +109,4 @@ function Settings() {
 	);
 }
 
-export default Settings
+export default Options;

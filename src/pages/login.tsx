@@ -32,8 +32,6 @@ function Login() {
                 <img className='animation-element' src="https://ucarecdn.com/6f9e24dc-6a90-41ee-ae19-f6da2d8b89c3/cloud1.svg" id="cloud2" alt="" />
                 <img className='animation-element' src="https://ucarecdn.com/6f9e24dc-6a90-41ee-ae19-f6da2d8b89c3/cloud1.svg" id="cloud3" alt="" />
                 <img className='animation-element' src="https://ucarecdn.com/dbeef34c-8020-4eb0-a419-e6d2f4e8491f/cloud2.svg" id="cloud4" alt="" />
-
-
 			</main>
 			{/* <ClassButton name={"Click to start"} classes={"login-button"} onClick={handleClick}/> */}
 			<button className='login-button' onClick={handleClick

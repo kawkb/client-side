@@ -146,7 +146,7 @@
 
 .flower-number-span {
 	font-family: var(--font);
-	font-size: 3rem;
+	font-size: 3vw;
 	color: var(--dark);
 }
 
@@ -256,7 +256,7 @@
 	padding: 0 10px;
 	padding-top: 5px;
 	font-family: var(--font);
-	font-size: 2rem;
+	font-size: 1vw;
 	color: var(--dark);
 	border-right: 2px solid var(--dark);
 	text-align: center;
@@ -266,7 +266,7 @@
 	height: 100%;
 	width: 60%;
 	display: flex;
-	font-size: 1rem;
+	font-size: 1vw;
 	justify-content: space-between;
 	align-items: center;
 }
@@ -275,7 +275,7 @@
 	height: 100%;
 	width: 15%;
 	font-family: var(--font);
-	font-size: 1.5rem;
+	font-size: 1vw;
 	color: var(--dark);
 	border-left: 2px solid var(--dark);
 	text-align: center;
