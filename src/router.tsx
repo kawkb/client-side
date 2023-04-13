@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Game from './pages/game'
 import Chat from './pages/chat'
 import Profil from './pages/profil'
 import Login from './pages/login';
@@ -12,6 +11,9 @@ import Cookies from 'js-cookie';
 import api from './api/api';
 import { AxiosError } from 'axios';
 import Bell from './pages/bell';
+import Game from './game/Game';
+import WaitingRoom from './game/WaitingRoom';
+
 
 import Error from './pages/error';
 
@@ -43,7 +45,7 @@ useEffect(() => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="/game" element={<Game />} />
+            <Route path="/game/:mode" element={<Game />} />
             <Route path="/chat" element={<Chat />} />
 			<Route path="/profil/:login" element={<ProtectedRoute component={Profil} />} />
             <Route path="/profil" element={<ProtectedRoute component={Profil} />} />

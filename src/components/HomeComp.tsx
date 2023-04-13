@@ -198,4 +198,4 @@ function HomeComp() {
   )
 }
 
-export default HomeComp
+export default HomeComp;

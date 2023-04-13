@@ -1,0 +1,217 @@
+import React, { useContext, useEffect, useRef, useState } from "react";
+import Sketch from "react-p5";
+import p5Types from "p5";
+import GameSocketContext from "./GameContext";
+import { useNavigate, useParams } from "react-router-dom";
+import "p5/lib/addons/p5.sound";
+import "../styles/src/loader.css";
+interface GameStateProps {
+  gameStatus: "waiting" | "playing" | "break" | "gameover";
+  ballX: number;
+  ballY: number;
+  player1Y: number;
+  player2Y: number;
+  player1H: number;
+  player2H: number;
+  gameMode: "Frisky" | "Fast" | "Fierce";
+  player1Score: number;
+  player2Score: number;
+}
+const Game: React.FC<{ mode: string }> = ({ mode }) => {
+  const FACTOR = 2;
+  const path = window.location.pathname.split("/").at(-1);
+  const [spectating, setSpectating] = useState(false);
+  const socket = useContext(GameSocketContext);
+  const [resized, setResized] = useState(false);
+  let tableWidth = Math.min(window.innerWidth - 40, 1500);
+  const soundFile = useRef<p5Types.SoundFile>();
+  let tableHeight = tableWidth / FACTOR;
+  const gameState = {
+    gameStatus: "waiting",
+    ballX: tableWidth / 2,
+    ballY: tableHeight / 2,
+    player1Y: tableHeight / 2,
+    player2Y: tableHeight / 2,
+    player1H: 120,
+    player2H: 120,
+    gameMode: "Frisky",
+    player1Score: 0,
+    player2Score: 0,
+  } as GameStateProps;
+  const bg = useRef<any>(0);
+
+  //   useEffect(() => {
+  //     socket?.current?.on("gameState", (state: GameStateProps) => {
+  //       console.log(state);
+  //     });
+  //   }, []);
+
+  socket.on("gameState", (state: GameStateProps) => {
+    // console.log(state);
+    gameState.gameStatus = state.gameStatus;
+    gameState.ballX = state.ballX;
+    gameState.ballY = state.ballY;
+    gameState.player1Y = state.player1Y;
+    gameState.player2Y = state.player2Y;
+    gameState.player1H = state.player1H;
+    gameState.player2H = state.player2H;
+    gameState.gameMode = state.gameMode;
+    gameState.player1Score = state.player1Score;
+    gameState.player2Score = state.player2Score;
+  });
+  socket.on("gameOver", (state: GameStateProps) => {
+    console.log("game over");
+    gameState.gameStatus = state.gameStatus;
+  });
+
+  const setup: any = (p5: p5Types, canvasParentRef: Element) => {
+    p5.createCanvas(tableWidth, tableHeight).parent(canvasParentRef);
+    p5.ellipseMode(p5.CENTER);
+    p5.rectMode(p5.CENTER);
+    bg.current = {
+      Fast: p5.loadImage("/maldives-island.jpg"),
+      Fierce: p5.loadImage("/fierce.svg"),
+      Frisky: p5.loadImage("/frisky.svg"),
+    }[mode]!;
+  };
+
+  const Draw: any = (p5: p5Types) => {
+    if (gameState.gameStatus === "playing" && !spectating) {
+      console.log(p5.mouseY);
+      socket.emit("movePlayer", {
+        playerY: p5.mouseY,
+      });
+    }
+    // update();
+    // soundFile.current && soundFile.current.play();
+    p5.background(bg.current);
+
+    p5.noStroke();
+
+    // Draw paddle A
+    p5.fill("black");
+    p5.stroke("white");
+    p5.rect(
+      20 * (tableWidth / 1000),
+      gameState.player1Y * tableHeight,
+      20 * (tableWidth / 1000),
+      gameState.player1H * tableHeight
+    );
+
+    // Draw paddle B
+    p5.fill("black");
+    p5.stroke("white");
+    p5.rect(
+      tableWidth - 20 * (tableWidth / 1000),
+      gameState.player2Y * tableHeight,
+      20 * (tableWidth / 1000),
+      gameState.player2H * tableHeight
+    );
+
+    for (let i = 0; i < tableHeight; i += 20) {
+      p5.stroke(255);
+      p5.strokeWeight(2);
+      p5.line(tableHeight, i, tableHeight, i + 10);
+    }
+    // Draw the ball
+
+    p5.fill("black");
+    p5.stroke("white");
+    // console.log(gameState.ballX, gameState.ballY);
+    p5.ellipse(
+      gameState.ballX * tableWidth,
+      gameState.ballY * tableHeight,
+      15,
+      15
+    );
+    // console.log(gameState);
+    // drawGameOver
+    if (gameState.gameStatus === "gameover") {
+      p5.fill("black");
+      p5.textSize(32);
+      p5.textFont("Helvetica");
+      p5.textAlign(p5.CENTER, p5.CENTER);
+      p5.text("Game Over", tableWidth / 2, tableHeight / 2);
+    }
+    // drawScore
+    p5.fill("black");
+    p5.textFont("Helvetica");
+    p5.textSize(32);
+    p5.textAlign(p5.CENTER, p5.CENTER);
+    p5.text(gameState.player1Score, tableWidth / 2 - 100, 50);
+    p5.text(gameState.player2Score, tableWidth / 2 + 100, 50);
+  };
+
+  console.log("actual hball x", gameState.ballX * tableWidth);
+  console.log("actual hball y", gameState.ballY * tableHeight);
+  const windowResized: any = (p5: p5Types) => {
+    setResized((prev) => !prev);
+    tableWidth = Math.min(window.innerWidth - 40, 1500);
+    tableHeight = tableWidth / FACTOR;
+    p5.resizeCanvas(tableWidth, tableHeight);
+  };
+
+  useEffect(() => {
+    return () => {
+      socket.emit("leave_queue");
+    };
+  }, []);
+
+  return (
+    <div
+      className="pattern-background blue-pattern"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        minHeight: "100vh",
+        alignItems: "center",
+      }}
+    >
+      <Sketch setup={setup} draw={Draw} windowResized={windowResized} />
+    </div>
+  );
+};
+
+const Waiting = () => {
+  const socket = useContext(GameSocketContext);
+  const [gameReady, setGameReady] = useState(false);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  console.log();
+
+  useEffect(() => {
+    if (!["Fast", "Frisky", "Fierce"].includes(params["mode"]!))
+      navigate("/404");
+    socket.emit("join_queue", { gameMode: params.mode });
+    socket.on("gameReady", () => {
+      setGameReady(true);
+    });
+
+    return () => {
+      socket.off("gameReady");
+    };
+  }, [socket]);
+
+  if (gameReady) return <Game mode={params["mode"]!} />;
+
+  return (
+    <div style={{ 
+        justifyContent: "center",
+		background: "#25252b",
+        minHeight: "100vh",
+        alignItems: "center",
+		display: "flex",
+		flexDirection: "column",
+		}}>
+      <div className="pong-wrapper">
+        <div className="pong-strich strich1"></div>
+        <div className="pong-strich strich2"></div>
+        <div className="pong-ball"></div>
+      </div>
+	  <h1 style={{ color: "white" }}>Waiting for opponent...</h1>
+    </div>
+  );
+};
+
+export default Waiting;
