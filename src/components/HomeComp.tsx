@@ -63,9 +63,9 @@ function HomeComp() {
             <button
               className="toast-button"
               onClick={() => {
-				console.log('gameId', data.gameId);
+				console.log('inviteId', data.inviteId);
 				nav(`/game/Custom`, { replace: true });
-                socket.emit("accept_invite", { gameId: data.gameId });
+                socket.emit("accept_invite", { inviteId: data.inviteId });
                 toast.dismiss(toastId);
               }}
             >
