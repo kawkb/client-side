@@ -26,6 +26,7 @@ interface ChatParamsStore {
 	setActiveChannelOptions: (channelId: string) => void;
 	setChannelList: (channelList: Array<Channel>) => void;
 	setActiveChannelMessages: (messages: Array<ChannelMsg>) => void;
+    updateActiveChannelMessages: (message: ChannelMsg) => void;
 	removeChannel: (channelId: string) => void;
 	setChannelTab: (channelTab: boolean) => void;
 	setActiveChannelOptionsName: (channelId: string, channelName: string) => void;
@@ -54,6 +55,7 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 		return {activeChannel: match || null, activeItem: match || null};
 	}),
 	
+    updateActiveChannelMessages: (message: ChannelMsg) => set((state) => ({activeChannelMessages: [...state.activeChannelMessages, message]})),
 	
 	setActiveChannelOptions: (channelId: string) => set((state) => ({activeChannelOptions: state.channelList.find((channel) => channel.id === channelId) as Channel || null})),
 	setChannelList: (channelList: Array<Channel>) => set((state) => ({channelList: channelList})),

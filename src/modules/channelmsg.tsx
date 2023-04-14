@@ -1,5 +1,5 @@
 type ChannelMsg = {
-  id: string;
+  id?: string;
   channel_id: string;
   author_id: string;
   content: string;

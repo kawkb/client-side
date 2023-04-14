@@ -62,6 +62,16 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
       .catch((err) => {
         console.log(err);
       });
+    // also get my role in this channel
+    api.get(`/channels/${activeChannelOptions?.id}/me`).then((res) => {
+      console.log('res data me', res.data);
+      if (res.data.isAdmin) {
+        setShowAdminOptions(true);
+      } else if (res.data.isOwner) {
+        setShowAdminOptions(true);
+        setShowOwnerOptions(true);
+      }
+    });
   }, [activeChannelOptions]);
 
   const handleButtonClick = (member: ChannelUser) => {
@@ -70,6 +80,7 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
 
   const handleBanMember = () => {
     console.log('Ban Member');
+    // banactiveChannelMemberOptions.id
   };
 
   const handleKickMember = () => {
@@ -123,26 +134,30 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
                       />
                       <span className="channel-member-name">{member.name}</span>
                     </div>
-                    <button
-                      className="three-dot-menu-button"
-                      onClick={() => handleButtonClick(member)}
-                    >
-                      <div className="three-dot-menu-dot"></div>
-                      <div className="three-dot-menu-dot"></div>
-                      <div className="three-dot-menu-dot"></div>
-                    </button>
+                    {showAdminOptions && (
+                      <button
+                        className="three-dot-menu-button"
+                        onClick={() => handleButtonClick(member)}
+                      >
+                        <div className="three-dot-menu-dot"></div>
+                        <div className="three-dot-menu-dot"></div>
+                        <div className="three-dot-menu-dot"></div>
+                      </button>
+                    )}
                   </div>
                 )}
 
                 {activeChannelMemberOptions &&
                   activeChannelMemberOptions.id === member.id && (
                     <div className="chat-list-item-options">
-                      <span
-                        className="chat-list-option"
-                        onClick={handleModMember}
-                      >
-                        Mod
-                      </span>
+                      {showOwnerOptions && (
+                        <span
+                          className="chat-list-option"
+                          onClick={handleModMember}
+                        >
+                          Mod
+                        </span>
+                      )}
                       <span
                         className="chat-list-option"
                         onClick={handleTimeoutMember}

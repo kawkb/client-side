@@ -1,32 +1,68 @@
-import React from 'react'
-import { useState } from 'react'
-import ChatSearch from './ChatSearch'
-import ClassButton from '../ClassButton'
-import Popup from '../Popup'
-import BlurredBackground from '../BlurredBackground'
-import CreateChat from '../CreateChat'
-
+import React from 'react';
+import { useState } from 'react';
+import ChatSearch from './ChatSearch';
+import ClassButton from '../ClassButton';
+import Popup from '../Popup';
+import BlurredBackground from '../BlurredBackground';
+import CreateChat from '../CreateChat';
+import useChatParams from '../../hooks/useChatParams';
+import api from '../../api/api';
+import Channel from '../../modules/channel';
 
 function ChatSearchPlus() {
+  const [showOptions, setShowOptions] = useState(false);
+  const setChannelList = useChatParams((state) => state.setChannelList);
 
-	const [showOptions, setShowOptions] = useState(false);
+  const handlePlusNewChat = () => {
+    setShowOptions(true);
+  };
 
-	const handlePlusNewChat = () => {
-		setShowOptions(true);
-	}
+  const handleClosePopup = () => {
+    setShowOptions(false);
+  };
 
-	const handleClosePopup = () => {
-		setShowOptions(false);
-	}
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    api.get(`/channels/search?q=${e.target.value}`).then((response) => {
+      const channelList: Channel[] = response.data.map(
+        (channel: any) =>
+          new Channel(
+            channel.id,
+            channel.name,
+            channel.owner_id,
+            channel.type,
+            channel.icon_url,
+            channel.password,
+            channel.isAdmin || channel.isOwner
+          )
+      );
+        console.log(channelList);
+      setChannelList(channelList);
+    });
+  };
 
   return (
-	<div className='chat-search-plus'>
-		<input className="chat-search-plus-input" type="text" placeholder="Search" />
-		<ClassButton name="+" classes="chat-plus-button" onClick={handlePlusNewChat}/>
-		{/* {showOptions && <BlurredBackground />} */}
-		{showOptions && <Popup onClose={handleClosePopup} content={<CreateChat onClose={handleClosePopup}/>} />}
-	</div>
-  )
+    <div className="chat-search-plus">
+      <input
+        className="chat-search-plus-input"
+        type="text"
+        placeholder="Search"
+        onChange={handleSearch}
+      />
+      <ClassButton
+        name="+"
+        classes="chat-plus-button"
+        onClick={handlePlusNewChat}
+      />
+      {/* {showOptions && <BlurredBackground />} */}
+      {showOptions && (
+        <Popup
+          onClose={handleClosePopup}
+          content={<CreateChat onClose={handleClosePopup} />}
+        />
+      )}
+    </div>
+  );
 }
 
-export default ChatSearchPlus
+export default ChatSearchPlus;

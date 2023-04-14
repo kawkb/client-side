@@ -56,7 +56,8 @@ function ChatsList() {
               channel.owner_id,
               channel.type,
               channel.icon_url,
-              channel.password
+              channel.password,
+              channel.isAdmin || channel.isOwner
             )
         );
         setChannelList(channelList);
@@ -67,7 +68,8 @@ function ChatsList() {
       });
   }, [auth.user]);
 
-  const [showAdminOptions, setShowAdminOptions] = React.useState<boolean>(true);
+//   const [showAdminOptions, setShowAdminOptions] =
+//     React.useState<boolean>(false);
 
   const handleMenuClick = (menuItem: string) => {
     console.log(menuItem);
@@ -157,7 +159,7 @@ function ChatsList() {
             )}
             {activeChannelOptions && activeChannelOptions.id === item.id && (
               <div className="chat-list-item-options">
-                {showAdminOptions && (
+                {item.isAdmin && (
                   <span
                     className="chat-list-option"
                     onClick={handleShowSettings}

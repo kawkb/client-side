@@ -10,6 +10,7 @@ import { act } from '@testing-library/react';
 import api from '../../api/api';
 import ChatSocketContext from '../ChatContext';
 import { useAuth } from '../../useAuth';
+import ChannelMsg from '../../modules/channelmsg';
 
 function ChatMessages() {
   const activeChannel = useChatParams((state) => state.activeChannel);
@@ -19,10 +20,14 @@ function ChatMessages() {
   const setActiveChannelMessages = useChatParams(
     (state) => state.setActiveChannelMessages
   );
+  const updateActiveChannelMessages = useChatParams(
+    (state) => state.updateActiveChannelMessages
+  );
   const socket = useContext(ChatSocketContext);
   const ref = useRef<HTMLDivElement>(null);
   const auth = useAuth();
-
+    // check if message author is the current user
+    
   useEffect(() => {
     if (ref.current)
       ref.current.scrollTo({
@@ -43,7 +48,8 @@ function ChatMessages() {
     load();
     socket.emit('join', activeChannel?.id);
     socket.on('message', (data) => {
-      load();
+      updateActiveChannelMessages(data);
+      // safely update zustand state
     });
     return () => {
       socket.emit('leave', activeChannel?.id);

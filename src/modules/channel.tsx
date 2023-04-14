@@ -15,16 +15,18 @@ class Channel {
 	private _type: ChannelType;
 	private _avatar: string;
 	private _password: string;
+    private _isAdmin: boolean;
 	// private _messages: ChannelMsg[];
 	// private _members: ChannelUser[];
 
-	constructor(id: string, name: string, owner_id: string, type: ChannelType = ChannelType.PUBLIC, avatar: string, password: string) {
+	constructor(id: string, name: string, owner_id: string, type: ChannelType = ChannelType.PUBLIC, avatar: string, password: string, isAdmin: boolean = false) {
 		this._id = id;
 		this._name = name;
 		this._owner_id = owner_id;
 		this._type = type;
 		this._avatar = avatar;
 		this._password = password;
+        this._isAdmin = isAdmin;
 		// this._messages = messages;
 		// this._members = members;
 	}
@@ -52,6 +54,10 @@ class Channel {
 	get password() {
 		return this._password;
 	}
+
+    get isAdmin() {
+        return this._isAdmin;
+    }
 
 	// get messages() {
 	// 	return this._messages;
@@ -82,6 +88,9 @@ class Channel {
 		this._password = password;
 	}
 
+    set isAdmin(isAdmin: boolean) {
+        this._isAdmin = isAdmin;
+    }
 	// set messages(messages: ChannelMsg[]) {
 	// 	this._messages = messages;
 	// }
@@ -105,6 +114,8 @@ class Channel {
 			owner_id: this._owner_id,
 			type: this._type,
 			password: this._password,
+            avatar: this._avatar,
+            isAdmin: this._isAdmin,
 			// messages: this._messages.map((msg) => msg.toJson()),
 			// members: this._members.map((member) => member.toJson()),
 		};
