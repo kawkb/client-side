@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  app:
+    build: ./ft_transcendence_backend
+    command: npm run start:prod
+    ports:
+      - "4242:4242"
+    environment:
+      DATABASE_URL: "postgresql://test:test@db:5432/db?schema=public"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  frontend:
+    build: ./client-side
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  prisma-migrate:
+    build: ./ft_transcendence_backend
+    command: npx prisma migrate deploy
+    environment:
+      DATABASE_URL: "postgresql://test:test@db:5432/db?schema=public"
+    depends_on:
+      - db
+    networks:
+      - app-network
+    restart: on-failure
+
+networks:
+  app-network:
