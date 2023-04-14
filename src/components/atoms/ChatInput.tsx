@@ -7,8 +7,11 @@ function ChatInput() {
 	const [message, setMessage] = useState<string>("");
 	
 	const handleSend = () => {
-		console.log("Send :" + message);
-		setMessage("");
+		if (message !== "") {
+			// post message
+			console.log("Send :" + message);
+			setMessage("");
+		}
 	}
 
   return (

@@ -53,8 +53,8 @@ const createRandomChannelUserList = (): Array<ChannelUser> => {
 const useCurrentChat = create(
 	combine({item: null as (Channel | DMs | null)}, (set) => ({
 	setCurrentChat: (item: Channel | DMs) => set((state) => ({item: item as Channel | DMs})),
-	setMessages: (messages: Array<ChannelMsg | DMsMsg>) => set((state) => ({item: {...state.item, messages: messages} as Channel | DMs})),})),		
-);
+	// setMessages: (messages: Array<ChannelMsg | DMsMsg>) => set((state) => ({item: {...state.item, messages: messages} as Channel | DMs})),
+})),);
 
 export default useCurrentChat;
 export { createRandomMsg, createRandomMsgList };
