@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import Sketch from "react-p5";
 import p5Types from "p5";
 import GameSocketContext from "./GameContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import "p5/lib/addons/p5.sound";
 import "../styles/src/loader.css";
 interface GameStateProps {
@@ -17,7 +17,7 @@ interface GameStateProps {
   player1Score: number;
   player2Score: number;
 }
-const Game: React.FC<{ mode: string }> = ({ mode }) => {
+const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
   const FACTOR = 2;
   const path = window.location.pathname.split("/").at(-1);
   const [spectating, setSpectating] = useState(false);
@@ -39,6 +39,7 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     player2Score: 0,
   } as GameStateProps;
   const bg = useRef<any>(0);
+  const navigate = useNavigate();
 
   //   useEffect(() => {
   //     socket?.current?.on("gameState", (state: GameStateProps) => {
@@ -60,7 +61,12 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     gameState.player2Score = state.player2Score;
   });
   socket.on("gameOver", (state: GameStateProps) => {
-    gameState.gameStatus = state.gameStatus;
+	console.log('gameOver', state);
+    gameState.gameStatus = "gameover";
+	// sleep for 1 second
+	setTimeout(() => {
+		navigate('/', { replace: true });
+	}, 1000);
   });
 
   const setup: any = (p5: p5Types, canvasParentRef: Element) => {
@@ -68,7 +74,7 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     p5.ellipseMode(p5.CENTER);
     p5.rectMode(p5.CENTER);
     bg.current = {
-      Fast: p5.loadImage("/maldives-island.jpg"),
+      Fast: p5.loadImage("/notebook.jpg"),
       Fierce: p5.loadImage("/fierce.svg"),
       Frisky: p5.loadImage("/frisky.svg"),
 	  Custom: p5.loadImage("/frisky.svg"),
@@ -79,6 +85,7 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     if (gameState.gameStatus === "playing") {
       socket.emit("movePlayer", {
         playerY: p5.mouseY,
+		gameId: gameId,
       });
     }
     // update();
@@ -149,11 +156,16 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
   };
 
   useEffect(() => {
+	console.log("gameId", gameId);	
+
+	console.log("socket", socket);
     return () => {
-      socket.emit("leave_queue");
+      socket.emit("leaveGame", {gameId: gameId});
     };
   }, []);
-
+  socket.on('disconnect', () => {
+	socket.emit('leaveGame', {gameId: gameId});
+  });
   return (
     <div
       className="pattern-background green-pattern"
@@ -174,27 +186,35 @@ const Waiting = () => {
   const [gameReady, setGameReady] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
-
+  const [gameId, setGameId] = useState("");
+	// get query params
+	const [query] = useSearchParams();
 
   useEffect(() => {
+	// const tmpGameId = query.get("gameId")
+	// if (tmpGameId) {
+	// 	setGameId(tmpGameId);
+	// }
     if (!["Fast", "Frisky", "Fierce", "Custom"].includes(params["mode"]!))
       navigate("/404");
     if (params["mode"] !== "Custom") {
+		console.log("join_queue", params.mode)
       socket.emit("join_queue", { gameMode: params.mode });
     }
-    socket.on("gameReady", () => {
+    socket.on("gameReady", (data: {gameId: string}) => {
+		console.log("gameready", data.gameId)
 		// print socketid
-		console.log("Socket ID:", socket.id);
-		console.log("game ready");
       setGameReady(true);
+	  setGameId(data.gameId);
     });
 
     return () => {
-      socket.off("gameReady");
+		socket.emit("leave_queue");
+    	socket.off("gameReady");
     };
   }, [socket]);
 
-  if (gameReady) return <Game mode={params["mode"]!} />;
+  if (gameId) return <Game mode={params["mode"]!} gameId={gameId} />;
 
   return (
     <div

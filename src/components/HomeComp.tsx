@@ -52,7 +52,8 @@ function HomeComp() {
   const socket = useContext(GameSocketContext);
   useEffect(() => {
     socket.on("invited", (data: any) => {
-      console.log("invited", data);
+	  // dont let two toasts appear at the same time
+	  toast.dismiss();
       const toastId = toast(
         <div className="toast-container">
           <div className="toast-text">
@@ -62,8 +63,9 @@ function HomeComp() {
             <button
               className="toast-button"
               onClick={() => {
+				console.log('gameId', data.gameId);
 				nav(`/game/Custom`, { replace: true });
-                socket.emit("accept_invite", { uid: data.uid });
+                socket.emit("accept_invite", { gameId: data.gameId });
                 toast.dismiss(toastId);
               }}
             >
