@@ -39,13 +39,13 @@ function ChatMessages() {
   useEffect(() => {
     if (!activeChannel) return;
     load();
-    socket.emit('join', activeChannel?.id);
+    socket.emit('channel:join', activeChannel?.id);
     socket.on('message', (data) => {
       updateActiveChannelMessages(data);
       // safely update zustand state
     });
     return () => {
-      socket.emit('leave', activeChannel?.id);
+      socket.emit('channel:leave', activeChannel?.id);
       socket.off('message');
     };
   }, [activeChannel?.id]);

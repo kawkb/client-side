@@ -11,7 +11,7 @@ function ChatInput() {
 
   const handleSend = () => {
     console.log('Send :' + message);
-    socket.emit('message', { message, id: activeChannel?.id });
+    socket.emit('channel:message', { message, id: activeChannel?.id });
     setMessage('');
   };
 
