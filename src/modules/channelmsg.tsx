@@ -1,16 +1,16 @@
 class ChannelMsg {
 	private _id: string;
 	private _channel_id: string;
-	private _sender_id: string;
+	private _author_id: string;
 	private _content: string;
-	private _timestamp: Date;
+	private _sent_at: Date;
 
-	constructor(id: string, channel_id: string, user_id: string, content: string, timestamp: Date) {
+	constructor(id: string, channel_id: string, user_id: string, content: string, sent_at: Date) {
 		this._id = id;
 		this._channel_id = channel_id;
-		this._sender_id = user_id;
+		this._author_id = user_id;
 		this._content = content;
-		this._timestamp = timestamp;
+		this._sent_at = sent_at;
 	}
 
 	get id() {
@@ -21,16 +21,16 @@ class ChannelMsg {
 		return this._channel_id;
 	}
 
-	get sender_id() {
-		return this._sender_id;
+	get author_id() {
+		return this._author_id;
 	}
 
 	get content() {
 		return this._content;
 	}
 
-	get timestamp() {
-		return this._timestamp;
+	get sent_at() {
+		return this._sent_at;
 	}
 
 	set id(id: string) {
@@ -41,20 +41,20 @@ class ChannelMsg {
 		this._channel_id = channel_id;
 	}
 
-	set sender_id(sender_id: string) {
-		this._sender_id = sender_id;
+	set author_id(author_id: string) {
+		this._author_id = author_id;
 	}
 
 	set content(content: string) {
 		this._content = content;
 	}
 
-	set timestamp(timestamp: Date) {
-		this._timestamp = timestamp;
+	set sent_at(sent_at: Date) {
+		this._sent_at = sent_at;
 	}
 
 	static fromJson(json: any) {
-		return new ChannelMsg(json.id, json.channel_id, json.sender_id, json.content, json.timestamp);
+		return new ChannelMsg(json.id, json.channel_id, json.author_id, json.content, json.sent_at);
 	}
 
 	static fromJsonArray(json: any[]) {
@@ -65,9 +65,9 @@ class ChannelMsg {
 		return {
 			id: this._id,
 			channel_id: this._channel_id,
-			sender_id: this._sender_id,
+			author_id: this._author_id,
 			content: this._content,
-			timestamp: this._timestamp
+			sent_at: this._sent_at
 		};
 	}
 
