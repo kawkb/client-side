@@ -108,6 +108,7 @@
 
 .friends-list::-webkit-scrollbar-thumb:hover {
 	background-color: var(--sunny);
+	cursor: url("../../assets/svg/hover.svg"), auto;
 }
 
 .player-stats-box {
@@ -222,6 +223,7 @@
 
 .match-history-list::-webkit-scrollbar-thumb:hover {
 	background-color: var(--sunny);
+	cursor: url("../../assets/svg/hover.svg"), auto;
 }
 
 .match-history-list-item {

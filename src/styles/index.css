@@ -15,14 +15,15 @@
 @import url('react-tooltip/dist/react-tooltip.css');
 
 
+@import url('./src/topPlayers.css');
+
+
+@import url('./src/error.css');
 
 body {
   font-family: var(--font);
   color: var(--dark);
-}
-
-.debug {
-  border: 1px solid red;
+  cursor: url("../assets/svg/cursor.svg"), auto;
 }
 
 a:visited {
