@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../useAuth";
 import api from "../api/api";
 import { AxiosError } from "axios";
-import { useFriendButton } from '../hooks/useFriendButton'
-import squares from "../assets/img/squares.png";
+import { useFriendButton } from '../hooks/useFriendButton';
 
 function Friends() {
   const [friends, setFriends] = React.useState<any>([]);

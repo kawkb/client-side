@@ -1,4 +1,3 @@
-import React from 'react'
 
 function ImgButton({ src, alt, classes, onClick }: { src: string, alt: string, classes: string, onClick: () => void }) {
   return (

@@ -1,4 +1,3 @@
-import zustand from "zustand";
 import { create } from "zustand";
 
 interface Enable2faStore {

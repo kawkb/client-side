@@ -2,14 +2,9 @@ import React, { useContext, useEffect } from "react";
 import frisky from "../assets/svg/frisky.svg";
 import fast from "../assets/svg/fast.svg";
 import fierce from "../assets/svg/fierce.svg";
-import squares from "../assets/img/squares.png";
 import { useAuth } from "../useAuth";
-import { AxiosError } from "axios";
-import api from "../api/api";
 import { faker } from "@faker-js/faker";
-import TopPlayers from "../assets/svg/TopPlayers.svg";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import GameSocketContext from "../game/GameContext";
 import { toast } from "react-hot-toast";
 

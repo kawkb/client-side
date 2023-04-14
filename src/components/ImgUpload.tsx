@@ -1,11 +1,8 @@
-import React, {useRef} from 'react'
-import zustand from "zustand";
-import { create } from "zustand";
+import React, { useRef } from 'react';
 import { useProfileImage } from '../hooks/useProfileImage';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/api';
-import { useAuth } from '../useAuth';
 
 function ImgUpload({classes}: {classes: string}) {
 	const nav = useNavigate();

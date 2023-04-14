@@ -1,7 +1,5 @@
-import React from 'react';
 import { useState } from 'react';
 import ClassButton from './ClassButton';
-import useChatList from '../hooks/useChatList';
 import api from '../api/api';
 import { toast } from 'react-hot-toast';
 import useChatParams from '../hooks/useChatParams';

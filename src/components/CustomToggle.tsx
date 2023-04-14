@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 
 interface Props {
 //   onToggle: (isToggled: boolean) => void;

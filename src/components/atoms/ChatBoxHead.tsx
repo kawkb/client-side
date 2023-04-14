@@ -1,4 +1,3 @@
-import React from 'react'
 import squares from '../assets/img/squares.png'
 
 function ChatBoxHead() {

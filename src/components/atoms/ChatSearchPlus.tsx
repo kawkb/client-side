@@ -1,9 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
-import ChatSearch from './ChatSearch';
 import ClassButton from '../ClassButton';
 import Popup from '../Popup';
-import BlurredBackground from '../BlurredBackground';
 import CreateChat from '../CreateChat';
 import useChatParams from '../../hooks/useChatParams';
 import api from '../../api/api';

@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import ImgButton from '../ImgButton'
-import le_chat from './../../assets/svg/le_chat.svg'
+import { useState } from 'react';
+import ImgButton from '../ImgButton';
+import le_chat from './../../assets/svg/le_chat.svg';
 
 function DMsInput() {
 

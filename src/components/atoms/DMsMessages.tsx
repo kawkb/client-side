@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import ChatMsg from './ChatMsg'
 import { faker } from '@faker-js/faker'
-import useChatParams from '../../hooks/useChatParams'
-import { createRandomDMsMsg, createRandomDMsMsgList } from '../../hooks/useCurrentChat'
+import { createRandomDMsMsgList } from '../../hooks/useCurrentChat'
 import useDMsParams from '../../hooks/useDMsParams'
 
 

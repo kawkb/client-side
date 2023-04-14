@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
 import logo from "../assets/img/logo.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMenuClose } from "../hooks/useMenuClose";
 import { useBell } from "../hooks/useBell";
-import api from "../api/api";
 
 function Navbar() {
   // const [menu, setMenu] = React.useState({ name: "Menu", isOpen: false });

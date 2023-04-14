@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
-import happyflower from './../assets/svg/happyflower.svg'
-import sadflower from './../assets/svg/sadflower.svg'
-import whiteflower from './../assets/svg/whiteflower.svg'
+import React, { useEffect } from 'react';
+import happyflower from './../assets/svg/happyflower.svg';
+import sadflower from './../assets/svg/sadflower.svg';
+import whiteflower from './../assets/svg/whiteflower.svg';
 import { useAuth } from '../useAuth';
 import { useParams } from 'react-router-dom';
 import api from '../api/api';
-import { AxiosError } from 'axios';
 
 function PlayerStats() {
 	const { login } = useParams();

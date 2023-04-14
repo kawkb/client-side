@@ -1,9 +1,7 @@
-import React from 'react'
-import ChatBoxHead from './ChatBoxHead'
-import ChatMessages from './ChatMessages'
-import ChatInput from './ChatInput'
-import useChatParams from '../../hooks/useChatParams'
-import bigcat from '../../assets/svg/bigcat.svg'
+import ChatMessages from './ChatMessages';
+import ChatInput from './ChatInput';
+import useChatParams from '../../hooks/useChatParams';
+import bigcat from '../../assets/svg/bigcat.svg';
 
 function ChatBox() {
 

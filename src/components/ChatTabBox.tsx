@@ -1,11 +1,8 @@
-import React from 'react'
 import { useState } from 'react';
-import baseavatar from './../assets/svg/baseavatar.svg'
-import squares from '../assets/img/squares.png'
-import ClassButton from './ClassButton';
+import squares from '../assets/img/squares.png';
 import ImgButton from './ImgButton';
-import le_chat from './../assets/svg/le_chat.svg'
-import les_chats from './../assets/svg/les_chats.svg'
+import le_chat from './../assets/svg/le_chat.svg';
+import les_chats from './../assets/svg/les_chats.svg';
 import useChatParams from '../hooks/useChatParams';
 import useDMsParams from '../hooks/useDMsParams';
 import ChatDisplay from './ChatDisplay';

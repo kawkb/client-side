@@ -1,19 +1,7 @@
-import React from 'react'
-import TabBox from './TabBox';
-import ChatBox from './atoms/ChatBox';
-import ImgButton from './ImgButton';
 import ChatDisplay from './ChatDisplay';
-import ChatContainer from './ChatContainer';
-import le_chat from './../assets/svg/le_chat.svg'
-import les_chats from './../assets/svg/les_chats.svg'
-import ChatSearch from './atoms/ChatSearch';
-import ChatSearchPlus from './atoms/ChatSearchPlus';
-import squares from '../assets/img/squares.png'
-import useChatList from '../hooks/useChatList';
-import Channel from '../modules/channel';
-import DMs from '../modules/dms';
+import le_chat from './../assets/svg/le_chat.svg';
+import les_chats from './../assets/svg/les_chats.svg';
 import DMsDisplay from './DMsDisplay';
-import useChatParams from '../hooks/useChatParams';
 import ChatTabBox from './ChatTabBox';
 
 function ChatComp() {

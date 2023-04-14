@@ -1,5 +1,5 @@
-import React from 'react'
-import ClassButton from '../ClassButton'
+import React from 'react';
+import ClassButton from '../ClassButton';
 import useChatParams from '../../hooks/useChatParams';
 import { useRef } from 'react';
 import imgupload from '../../assets/svg/imgupload.svg';

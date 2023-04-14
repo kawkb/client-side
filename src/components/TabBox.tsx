@@ -1,11 +1,6 @@
-import React from 'react'
-import { useState } from 'react';
-import baseavatar from './../assets/svg/baseavatar.svg'
-import squares from '../assets/img/squares.png'
+import React from 'react';
 import ClassButton from './ClassButton';
 import ImgButton from './ImgButton';
-import zustand from "zustand";
-import { create } from "zustand";
 import { useActiveTab } from '../hooks/useActiveTab';
 
 // interface TabBoxProps {

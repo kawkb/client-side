@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import Chat from './pages/chat'
-import Profil from './pages/profil'
+import Chat from './pages/chat';
+import Profil from './pages/profil';
 import Login from './pages/login';
 import Home from './pages/home';
-import Menu from './pages/menu'
+import Menu from './pages/menu';
 import ProtectedRoute from './ProtectedRoute';
 import { useAuth } from './useAuth';
 import Cookies from 'js-cookie';
@@ -12,7 +12,6 @@ import api from './api/api';
 import { AxiosError } from 'axios';
 import Bell from './pages/bell';
 import Game from './game/Game';
-import WaitingRoom from './game/WaitingRoom';
 
 
 import Error from './pages/error';

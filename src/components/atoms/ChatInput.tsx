@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import ImgButton from '../ImgButton';
 import le_chat from './../../assets/svg/le_chat.svg';
 import ChatSocketContext from '../ChatContext';

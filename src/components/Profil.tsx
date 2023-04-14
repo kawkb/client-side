@@ -1,4 +1,3 @@
-import React from 'react'
 import PlayerStats from './PlayerStats'
 import MatchHistory from './MatchHistory'
 import Friends from './Friends'

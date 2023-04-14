@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import QRCode from 'qrcode.react';
 import ClassButton from './ClassButton';
 import { useEnable2fa } from '../hooks/useEnable2fa';

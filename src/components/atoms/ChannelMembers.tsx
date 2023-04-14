@@ -1,21 +1,7 @@
 import React, { useEffect } from 'react';
-import ImgButton from '../ImgButton';
-import ban from '../../assets/img/thinban.png';
-import mute from '../../assets/img/mute-user.png';
-import kick from '../../assets/img/taekwondo-kick.png';
-import timeout from '../../assets/img/clock.png';
 import ClassButton from '../ClassButton';
-import squares from '../../assets/img/squares.png';
-import { Tooltip } from 'react-tooltip';
-import admin from '../../assets/img/adminuser.png';
-import demote from '../../assets/img/down-arrow.png';
-import {
-  createRandomChannelUser,
-  createRandomChannelUserList,
-} from '../../hooks/useCurrentChat';
 import useChatParams from '../../hooks/useChatParams';
 import ChannelUser from '../../modules/channeluser';
-import { ChannelUserStatus, ChannelUserRole } from '../../modules/channeluser';
 import api from '../../api/api';
 
 function ChannelMembers({ onClose }: { onClose: () => void }) {

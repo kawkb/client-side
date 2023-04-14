@@ -1,4 +1,3 @@
-import React from 'react'
 import DMsInput from './DMsInput'
 import DMsMessages from './DMsMessages'
 import useDMsParams from '../../hooks/useDMsParams'

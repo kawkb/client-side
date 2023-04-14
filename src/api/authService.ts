@@ -1,5 +1,5 @@
-import Cookies from "js-cookie"
-import api from "./api"
+import Cookies from "js-cookie";
+import api from "./api";
 
 const authService = {
     setToken: () => {

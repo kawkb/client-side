@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react';
 import ClassButton from '../ClassButton';
-import squares from '../../assets/img/squares.png';
 import ImgButton from '../ImgButton';
 import invite from '../../assets/img/invite.png';
 import invited from '../../assets/img/invited.png';
-import {
-  createRandomChannelUser,
-  createRandomChannelUserList,
-} from '../../hooks/useCurrentChat';
 import useChatParams from '../../hooks/useChatParams';
 import ChannelUser, { ChannelUserRole, ChannelUserStatus } from '../../modules/channeluser';
 import api from '../../api/api';

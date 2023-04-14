@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import TabBox from "./TabBox";
 import Settings from "./Settings";
-import squares from "../assets/img/squares.png";
 import Profil from "./Profil";
 import api from "../api/api";
 import { useAuth } from "../useAuth";

@@ -1,16 +1,9 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef } from 'react';
 import ChatMsg from './ChatMsg';
-import useCurrentChat from '../../hooks/useCurrentChat';
-import useChatList from '../../hooks/useChatList';
-import { createRandomChannel } from '../../hooks/useChatList';
-import { createRandonChannelList } from '../../hooks/useChatList';
-import { faker } from '@faker-js/faker';
 import useChatParams from '../../hooks/useChatParams';
-import { act } from '@testing-library/react';
 import api from '../../api/api';
 import ChatSocketContext from '../ChatContext';
 import { useAuth } from '../../useAuth';
-import ChannelMsg from '../../modules/channelmsg';
 
 function ChatMessages() {
   const activeChannel = useChatParams((state) => state.activeChannel);

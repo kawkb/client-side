@@ -7,17 +7,11 @@ import greenflower from './../assets/svg/greenflower.svg'
 import redflower from './../assets/svg/redflower.svg'
 import ImgUpload from './ImgUpload'
 import ImgButton from './ImgButton'
-import ToggleButton from './ToggleButton'
 import CustomToggleButton from './CustomToggle'
 import Popup from './Popup'
-import CreateChat from './CreateChat'
 import Enable2fa from './Enable2fa'
-import { useEnable2fa } from '../hooks/useEnable2fa';
-import zustand from "zustand";
-import { create } from "zustand";
-import { useProfileImage } from '../hooks/useProfileImage';
+import { useEnable2fa } from '../hooks/useEnable2fa'
 import { useAuth } from '../useAuth'
-import { useNickname } from '../hooks/useNickname';
 import api from '../api/api'
 
 function Settings() {

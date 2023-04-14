@@ -1,15 +1,6 @@
-import React from 'react';
-import ChatModel from '../../modules/chat';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { faker } from '@faker-js/faker';
-import useChatList from '../../hooks/useChatList';
 import Channel from '../../modules/channel';
-import User from '../../modules/user';
-import DMs from '../../modules/dms';
-import { createRandomChannel } from '../../hooks/useChatList';
-import { createRandonChannelList } from '../../hooks/useChatList';
-import ThreeDotMenu from './ThreeDotMenu';
 import useChatParams from '../../hooks/useChatParams';
 import Popup from '../Popup';
 import ChannelSettings from './ChannelSettings';
