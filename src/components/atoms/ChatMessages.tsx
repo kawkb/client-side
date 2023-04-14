@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ChatMsg from './ChatMsg'
 import useCurrentChat from '../../hooks/useCurrentChat'
 import useChatList from '../../hooks/useChatList'
@@ -19,6 +19,16 @@ function ChatMessages() {
 
 	useEffect(() => { setActiveChannelMessages(createRandomMsgList()) }, [activeChannel?.id]);
 
+	const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+	const scrollToBottom = () => {
+		if (messagesEndRef.current) {
+		messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
+
+	useEffect(() => { scrollToBottom(); }, [activeChannelMessages]);
+
   return (
 	<div className='chat-messages-list scrollable'>
 		{
@@ -29,6 +39,7 @@ function ChatMessages() {
 				)
 			})
 		}
+		<div ref={messagesEndRef}></div>
 	</div>
   )
 }

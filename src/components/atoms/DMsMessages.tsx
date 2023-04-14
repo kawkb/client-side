@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ChatMsg from './ChatMsg'
 import { faker } from '@faker-js/faker'
 import useChatParams from '../../hooks/useChatParams'
@@ -15,6 +15,16 @@ function DMsMessages() {
 
 	useEffect(() => { setActiveDMsMessages(createRandomDMsMsgList()) }, [activeDMs?.id]);
 
+	const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+	const scrollToBottom = () => {
+		if (messagesEndRef.current) {
+		messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
+
+	useEffect(() => { scrollToBottom(); }, [activeDMsMessages]);
+	
 	return (
 		<div className='chat-messages-list scrollable'>
 			{
@@ -24,6 +34,7 @@ function DMsMessages() {
 					)
 				})
 			}
+			<div ref={messagesEndRef}></div>
 		</div>
 	)
 }

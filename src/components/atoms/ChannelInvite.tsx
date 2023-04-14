@@ -51,7 +51,9 @@ function ChannelInvite({onClose}: {onClose: () => void}) {
 						}
 					</div>	
 				</div>
-			<ClassButton name="Close" classes="retro-button orange-header close-channel-members-btn" onClick={onClose}/>
+			<div className='close-channel-invite-btn-container'>
+				<ClassButton name="Close" classes="retro-button orange-header close-channel-invite-btn" onClick={onClose}/>
+			</div>
 		</div>
 	</div>
   )

@@ -169,17 +169,18 @@
 	justify-content: space-between;
 	position: relative;
 	width: 100%;
-	height: 95%;
+	height: 100%;
 	padding-bottom: 10px;
 }
 
 .channel-members-title {
 	font-size: 3rem;
+	margin-top: 20px;
 }
 
 .channel-members-list {
 	width: 80%;
-	height: 80%;
+	height: 90%;
 	overflow-y: scroll;
 	padding: 0 10px;
 	margin: 10px 0;
@@ -205,6 +206,7 @@
 .close-channel-members-btn {
 	height: 15%;
 	width: 25%;
+	margin-bottom: 20px;
 }
 
 .channel-member-btn {
@@ -269,12 +271,12 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	height: 90%;
+	height: 100%;
 }
 
 .invite-search-list-container {
 	width: 100%;
-	height: 80%;
+	height: 70%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -338,3 +340,15 @@
 	background-color: var(--apricot);
 }
 
+.close-channel-invite-btn-container {
+	display: flex;
+	height: 15%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+
+.close-channel-invite-btn {
+	width: 30%;
+	margin-bottom: 20px;
+}
