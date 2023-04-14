@@ -17,11 +17,12 @@ interface GameStateProps {
   player1Score: number;
   player2Score: number;
 }
-const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
+const Game: React.FC<{ mode: string; gameId: string }> = ({ mode, gameId }) => {
   const FACTOR = 2;
   const path = window.location.pathname.split("/").at(-1);
   const [spectating, setSpectating] = useState(false);
   const socket = useContext(GameSocketContext);
+  const [iswon, setIsWon] = useState(false);
   const [resized, setResized] = useState(false);
   let tableWidth = Math.min(window.innerWidth - 40, 1500);
   const soundFile = useRef<p5Types.SoundFile>();
@@ -60,13 +61,14 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     gameState.player1Score = state.player1Score;
     gameState.player2Score = state.player2Score;
   });
-  socket.on("gameOver", (state: GameStateProps) => {
-	console.log('gameOver', state);
+  socket.on("gameOver", (state: any) => {
+    console.log("gameOver", state);
     gameState.gameStatus = "gameover";
-	// sleep for 1 second
-	setTimeout(() => {
-		navigate('/', { replace: true });
-	}, 1000);
+    setIsWon(state.result);
+    // sleep for 1 second
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 1000);
   });
 
   const setup: any = (p5: p5Types, canvasParentRef: Element) => {
@@ -77,7 +79,7 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
       Fast: p5.loadImage("/notebook.jpg"),
       Fierce: p5.loadImage("/fierce.svg"),
       Frisky: p5.loadImage("/frisky.svg"),
-	  Custom: p5.loadImage("/frisky.svg"),
+      Custom: p5.loadImage("/frisky.svg"),
     }[mode]!;
   };
 
@@ -85,7 +87,7 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     if (gameState.gameStatus === "playing") {
       socket.emit("movePlayer", {
         playerY: p5.mouseY,
-		gameId: gameId,
+        gameId: gameId,
       });
     }
     // update();
@@ -115,7 +117,8 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     );
 
     for (let i = 0; i < tableHeight; i += 20) {
-      p5.stroke(255);
+      // make the lines black
+      p5.stroke("black");
       p5.strokeWeight(2);
       p5.line(tableHeight, i, tableHeight, i + 10);
     }
@@ -133,11 +136,19 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     // console.log(gameState);
     // drawGameOver
     if (gameState.gameStatus === "gameover") {
-      p5.fill("black");
-      p5.textSize(32);
-      p5.textFont("Helvetica");
-      p5.textAlign(p5.CENTER, p5.CENTER);
-      p5.text("Game Over", tableWidth / 2, tableHeight / 2);
+      if (gameState.player1Score > gameState.player2Score) {
+        p5.fill("black");
+        p5.textFont("Helvetica");
+        p5.textSize(32);
+        p5.textAlign(p5.CENTER, p5.CENTER);
+        p5.text("Player 1 Wins!", tableWidth / 2, tableHeight / 2);
+      } else {
+        p5.fill("black");
+        p5.textFont("Helvetica");
+        p5.textSize(32);
+        p5.textAlign(p5.CENTER, p5.CENTER);
+        p5.text("Player 2 Wins!", tableWidth / 2, tableHeight / 2);
+      }
     }
     // drawScore
     p5.fill("black");
@@ -156,15 +167,15 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
   };
 
   useEffect(() => {
-	console.log("gameId", gameId);	
+    console.log("gameId", gameId);
 
-	console.log("socket", socket);
+    console.log("socket", socket);
     return () => {
-      socket.emit("leaveGame", {gameId: gameId});
+      socket.emit("leaveGame", { gameId: gameId });
     };
   }, []);
-  socket.on('disconnect', () => {
-	socket.emit('leaveGame', {gameId: gameId});
+  socket.on("disconnect", () => {
+    socket.emit("leaveGame", { gameId: gameId });
   });
   return (
     <div
@@ -187,30 +198,30 @@ const Waiting = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [gameId, setGameId] = useState("");
-	// get query params
-	const [query] = useSearchParams();
+  // get query params
+  const [query] = useSearchParams();
 
   useEffect(() => {
-	// const tmpGameId = query.get("gameId")
-	// if (tmpGameId) {
-	// 	setGameId(tmpGameId);
-	// }
+    // const tmpGameId = query.get("gameId")
+    // if (tmpGameId) {
+    // 	setGameId(tmpGameId);
+    // }
     if (!["Fast", "Frisky", "Fierce", "Custom"].includes(params["mode"]!))
       navigate("/404");
     if (params["mode"] !== "Custom") {
-		console.log("join_queue", params.mode)
+      console.log("join_queue", params.mode);
       socket.emit("join_queue", { gameMode: params.mode });
     }
-    socket.on("gameReady", (data: {gameId: string}) => {
-		console.log("gameready", data.gameId)
-		// print socketid
+    socket.on("gameReady", (data: { gameId: string }) => {
+      console.log("gameready", data.gameId);
+      // print socketid
       setGameReady(true);
-	  setGameId(data.gameId);
+      setGameId(data.gameId);
     });
 
     return () => {
-		socket.emit("leave_queue");
-    	socket.off("gameReady");
+      socket.emit("leave_queue");
+      socket.off("gameReady");
     };
   }, [socket]);
 
