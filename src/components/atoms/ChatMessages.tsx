@@ -1,43 +1,83 @@
-import React, { useEffect } from 'react'
-import ChatMsg from './ChatMsg'
-import useCurrentChat from '../../hooks/useCurrentChat'
-import useChatList from '../../hooks/useChatList'
-import { createRandomMsg } from '../../hooks/useCurrentChat'
-import { createRandomMsgList } from '../../hooks/useCurrentChat'
-import { createRandomChannel } from '../../hooks/useChatList'
-import { createRandonChannelList } from '../../hooks/useChatList'
-import { faker } from '@faker-js/faker'
-import useChatParams from '../../hooks/useChatParams'
-import { act } from '@testing-library/react'
-
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
+import ChatMsg from './ChatMsg';
+import useCurrentChat from '../../hooks/useCurrentChat';
+import useChatList from '../../hooks/useChatList';
+import { createRandomChannel } from '../../hooks/useChatList';
+import { createRandonChannelList } from '../../hooks/useChatList';
+import { faker } from '@faker-js/faker';
+import useChatParams from '../../hooks/useChatParams';
+import { act } from '@testing-library/react';
+import api from '../../api/api';
+import ChatSocketContext from '../ChatContext';
+import { useAuth } from '../../useAuth';
 
 function ChatMessages() {
+  const activeChannel = useChatParams((state) => state.activeChannel);
+  const activeChannelMessages = useChatParams(
+    (state) => state.activeChannelMessages
+  );
+  const setActiveChannelMessages = useChatParams(
+    (state) => state.setActiveChannelMessages
+  );
+  const socket = useContext(ChatSocketContext);
+  const ref = useRef<HTMLDivElement>(null);
+  const auth = useAuth();
 
-	// const activeItem = useChatList(state => state.activeItem);
-	// const setMessages = useChatList(state => state.setMessages);
+  useEffect(() => {
+    if (ref.current)
+      ref.current.scrollTo({
+        left: 0,
+        top: ref.current.scrollHeight,
+        behavior: 'smooth',
+      });
+  }, [activeChannelMessages]);
 
-	// const msgs = createRandomMsgList();
+  const load = useCallback(() => {
+    api.get(`/channels/${activeChannel?.id}/messages`).then((response) => {
+      setActiveChannelMessages(response.data);
+    });
+  }, [activeChannel?.id]);
 
-	// useEffect(() => { setMessages(msgs) }, []);
+  useEffect(() => {
+    if (!activeChannel) return;
+    load();
+    socket.emit('join', activeChannel?.id);
+    socket.on('message', (data) => {
+      load();
+    });
+    return () => {
+      socket.emit('leave', activeChannel?.id);
+      socket.off('message');
+    };
+  }, [activeChannel?.id]);
 
-	const activeChannel = useChatParams(state => state.activeChannel);
-	const setChannelMessages = useChatParams(state => state.setChannelMessages);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-	useEffect(() => { setChannelMessages(createRandomMsgList()) }, []);
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [activeChannelMessages]);
 
   return (
-	<div className='chat-messages-list scrollable'>
-		{
-			activeChannel?.messages.map((msg, index) => {
-				// const itemName = item instanceof Channel ? item.name : item.user.name;
-				return (
-					<ChatMsg content={msg.content} owner={msg.sender_id > faker.datatype.uuid()} key={index}/>
-				)
-			})
-
-		}
-	</div>
-  )
+    <div className="chat-messages-list scrollable" ref={ref}>
+      {activeChannelMessages.map((msg, index) => {
+        return (
+          // should pass weither the message is from the current user or not but just for testing it's a random boolean
+          <ChatMsg
+            content={msg.content}
+            author={msg.author}
+            owner={msg.author_id === auth.user?.id}
+            key={index}
+          />
+        );
+      })}
+    </div>
+  );
 }
 
-export default ChatMessages
+export default ChatMessages;

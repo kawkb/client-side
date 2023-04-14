@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import Sketch from "react-p5";
 import p5Types from "p5";
 import GameSocketContext from "./GameContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import "p5/lib/addons/p5.sound";
 import "../styles/src/loader.css";
+import { useAuth } from "../useAuth";
 interface GameStateProps {
   gameStatus: "waiting" | "playing" | "break" | "gameover";
   ballX: number;
@@ -17,7 +18,7 @@ interface GameStateProps {
   player1Score: number;
   player2Score: number;
 }
-const Game: React.FC<{ mode: string }> = ({ mode }) => {
+const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
   const FACTOR = 2;
   const path = window.location.pathname.split("/").at(-1);
   const [spectating, setSpectating] = useState(false);
@@ -39,6 +40,7 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     player2Score: 0,
   } as GameStateProps;
   const bg = useRef<any>(0);
+  const navigate = useNavigate();
 
   //   useEffect(() => {
   //     socket?.current?.on("gameState", (state: GameStateProps) => {
@@ -60,8 +62,12 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     gameState.player2Score = state.player2Score;
   });
   socket.on("gameOver", (state: GameStateProps) => {
-    console.log("game over");
-    gameState.gameStatus = state.gameStatus;
+	console.log('gameOver', state);
+    gameState.gameStatus = "gameover";
+	// sleep for 1 second
+	setTimeout(() => {
+		navigate('/', { replace: true });
+	}, 1000);
   });
 
   const setup: any = (p5: p5Types, canvasParentRef: Element) => {
@@ -69,17 +75,18 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     p5.ellipseMode(p5.CENTER);
     p5.rectMode(p5.CENTER);
     bg.current = {
-      Fast: p5.loadImage("/maldives-island.jpg"),
+      Fast: p5.loadImage("/notebook.jpg"),
       Fierce: p5.loadImage("/fierce.svg"),
       Frisky: p5.loadImage("/frisky.svg"),
+	  Custom: p5.loadImage("/frisky.svg"),
     }[mode]!;
   };
 
   const Draw: any = (p5: p5Types) => {
-    if (gameState.gameStatus === "playing" && !spectating) {
-      console.log(p5.mouseY);
+    if (gameState.gameStatus === "playing") {
       socket.emit("movePlayer", {
         playerY: p5.mouseY,
+		gameId: gameId,
       });
     }
     // update();
@@ -142,8 +149,6 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
     p5.text(gameState.player2Score, tableWidth / 2 + 100, 50);
   };
 
-  console.log("actual hball x", gameState.ballX * tableWidth);
-  console.log("actual hball y", gameState.ballY * tableHeight);
   const windowResized: any = (p5: p5Types) => {
     setResized((prev) => !prev);
     tableWidth = Math.min(window.innerWidth - 40, 1500);
@@ -152,14 +157,19 @@ const Game: React.FC<{ mode: string }> = ({ mode }) => {
   };
 
   useEffect(() => {
+	console.log("gameId", gameId);	
+
+	console.log("socket", socket);
     return () => {
-      socket.emit("leave_queue");
+      socket.emit("leaveGame", {gameId: gameId});
     };
   }, []);
-
+  socket.on('disconnect', () => {
+	socket.emit('leaveGame', {gameId: gameId});
+  });
   return (
     <div
-      className="pattern-background blue-pattern"
+      className="pattern-background green-pattern"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -177,39 +187,56 @@ const Waiting = () => {
   const [gameReady, setGameReady] = useState(false);
   const params = useParams();
   const navigate = useNavigate();
-
-  console.log();
+  const [gameId, setGameId] = useState("");
+	// get query params
+	const [query] = useSearchParams();
+    const { user, loading } = useAuth();
 
   useEffect(() => {
-    if (!["Fast", "Frisky", "Fierce"].includes(params["mode"]!))
+if (loading) return;
+    if (!user) return;
+	// const tmpGameId = query.get("gameId")
+	// if (tmpGameId) {
+	// 	setGameId(tmpGameId);
+	// }
+    if (!["Fast", "Frisky", "Fierce", "Custom"].includes(params["mode"]!))
       navigate("/404");
-    socket.emit("join_queue", { gameMode: params.mode });
-    socket.on("gameReady", () => {
+    if (params["mode"] !== "Custom") {
+		console.log("join_queue", params.mode)
+      socket.emit("join_queue", { gameMode: params.mode });
+    }
+    socket.on("gameReady", (data: {gameId: string}) => {
+		console.log("gameready", data.gameId)
+		// print socketid
       setGameReady(true);
+	  setGameId(data.gameId);
     });
 
     return () => {
-      socket.off("gameReady");
+		socket.emit("leave_queue");
+    	socket.off("gameReady");
     };
-  }, [socket]);
+  }, [socket, user, loading]);
 
-  if (gameReady) return <Game mode={params["mode"]!} />;
+  if (gameId) return <Game mode={params["mode"]!} gameId={gameId} />;
 
   return (
-    <div style={{ 
+    <div
+      style={{
         justifyContent: "center",
-		background: "#25252b",
+        background: "#25252b",
         minHeight: "100vh",
         alignItems: "center",
-		display: "flex",
-		flexDirection: "column",
-		}}>
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <div className="pong-wrapper">
         <div className="pong-strich strich1"></div>
         <div className="pong-strich strich2"></div>
         <div className="pong-ball"></div>
       </div>
-	  <h1 style={{ color: "white" }}>Waiting for opponent...</h1>
+      <h1 style={{ color: "white" }}>Waiting for opponent...</h1>
     </div>
   );
 };

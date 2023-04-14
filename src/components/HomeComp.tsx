@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import frisky from "../assets/svg/frisky.svg";
 import fast from "../assets/svg/fast.svg";
 import fierce from "../assets/svg/fierce.svg";
@@ -10,6 +10,8 @@ import { faker } from "@faker-js/faker";
 import TopPlayers from "../assets/svg/TopPlayers.svg";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import GameSocketContext from "../game/GameContext";
+import { toast } from "react-hot-toast";
 
 interface ItemProps {
   imageSrc: string;
@@ -43,12 +45,65 @@ data.map((item) => {
 function HomeComp() {
   const [topPlayers, setTopPlayers] = React.useState<any>([]);
   const { user, loading } = useAuth();
+  const nav = useNavigate();
 
+  const socket = useContext(GameSocketContext);
+  useEffect(() => {
+    socket.on("invited", (data: any) => {
+	  // dont let two toasts appear at the same time
+	  toast.dismiss();
+      const toastId = toast(
+        <div className="toast-container">
+          <div className="toast-text">
+            {data.login} invited you to a custom game
+          </div>
+          <div className="toast-buttons">
+            <button
+              className="toast-button"
+              onClick={() => {
+				console.log('inviteId', data.inviteId);
+				nav(`/game/Custom`, { replace: true });
+                socket.emit("accept_invite", { inviteId: data.inviteId });
+                toast.dismiss(toastId);
+              }}
+            >
+              Accept
+            </button>
+            <button
+              className="toast-button"
+              onClick={() => {
+                socket.emit("decline_invite");
+                toast.dismiss(toastId);
+              }}
+            >
+              Decline
+            </button>
+          </div>
+        </div>,
+        {
+          position: "top-center",
+          style: {
+            background: "#333",
+            color: "#fff",
+            borderRadius: "10px",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            padding: "1rem",
+            width: "30rem",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)",
+          },
+          duration: 100000,
+        }
+      );
+    });
+  }, [socket, nav]);
 
   useEffect(() => {
     setTopPlayers(data);
   }, []);
-  const nav = useNavigate();
+  const joinQueue = (gameMode: string) => {
+    nav(`/game/${gameMode}`, { replace: true });
+  };
 
   //   //get top players data:
   // const { user, loading } = useAuth();
@@ -63,32 +118,20 @@ function HomeComp() {
   // 			console.log(err.response)
   // 		});
   // }, [loading])
- 
-  useEffect(() => {
-  	if (loading) return;
-      const first_login = Cookies.get('first_login');
-      if (first_login === "true") {
-        nav("/profil", { replace: true });
-        console.log("first time");
-      }
-  }, [loading])
 
   //handle top player click:
-  const handleTopPlayerClick = () => {
-    // nav(`/profile/${login}`, { replace: true });
-  };
   return (
     <div className="home-page pattern-background blue-pattern">
       <div className="home-container">
         {/* <div className="game-modes-container"> */}
           <div className="game-play-mode frisky-mode retro-border-box light-box-home">
-            <img className="game-mode-img" src={frisky} alt="" />
+            <img className="game-mode-img" src={frisky} alt="" onClick={() => joinQueue("Frisky")} />
           </div>
           <div className="game-play-mode fast-mode retro-border-box light-box-home">
-            <img className="game-mode-img" src={fast} alt="" />
+            <img className="game-mode-img" src={fast} alt="" onClick={() => joinQueue("Fast")} />
           </div>
           <div className="game-play-mode fierce-mode retro-border-box light-box-home">
-            <img className="game-mode-img" src={fierce} alt="" />
+            <img className="game-mode-img" src={fierce} alt="" onClick={() => joinQueue("Fierce")} />
           </div>
         {/* </div> */}
       </div>
