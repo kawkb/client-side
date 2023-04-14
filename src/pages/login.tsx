@@ -13,6 +13,8 @@ function Login() {
   const nav = useNavigate();
 	const handleClick = async() => {
 		authService.login()
+    // await Cookies.get("first_login")
+
 	}
 		
 	// const nav = useNavigate();

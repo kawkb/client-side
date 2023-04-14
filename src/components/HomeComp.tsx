@@ -80,7 +80,7 @@ function HomeComp() {
   return (
     <div className="home-page pattern-background blue-pattern">
       <div className="home-container">
-        <div className="game-modes-container">
+        {/* <div className="game-modes-container"> */}
           <div className="game-play-mode frisky-mode retro-border-box light-box-home">
             <img className="game-mode-img" src={frisky} alt="" />
           </div>
@@ -90,30 +90,7 @@ function HomeComp() {
           <div className="game-play-mode fierce-mode retro-border-box light-box-home">
             <img className="game-mode-img" src={fierce} alt="" />
           </div>
-        </div>
-        <div className="game-info-container">
-          <div className="game-info top-player-more copy-book-background retro-border-box light-box">
-            <div className="top-players-image-list-container">
-              <div className="top-player-img-canva">
-                <img src={TopPlayers} alt="" />
-              </div>
-              <div className="top-players-list-items">
-                {topPlayers.map((player: Data, index: number) => {
-                  return (
-                    <div className="Top-player-item" key={index}>
-                      <img
-                        src={player.avatar}
-                        alt={player.name}
-                        onClick={handleTopPlayerClick}
-                      />
-                      <div className="Top-player-name">{player.name}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* </div> */}
       </div>
     </div>
 

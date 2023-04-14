@@ -90,15 +90,12 @@ const handleToggle = (isToggled: boolean) => {
 				<ImgUpload classes="retro-button pink-header"/>
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-				<img className="svg-text svg-text-margin" src={nickname} alt="" />
 
+				<img className="svg-text svg-text-margin" src={nickname} alt="" />
 				<div className='nickname-input'>
 					<input type="text" placeholder='New Nickname' value={newNickname}  onChange={handleNicknameInputChange}/>
 					<ImgButton classes="backgroundless-image-button" src={heart} alt="confirm" onClick={handleNewNickname} />
 				</div>
-
-
-
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
 				<img className="svg-text" src={enable2fasvg} alt="" />

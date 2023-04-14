@@ -9,7 +9,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useProfileImage } from "../hooks/useProfileImage";
 import Control from "./Control";
-
+import { useActiveTab } from '../hooks/useActiveTab';
+import Cookies from "js-cookie";
 
 function ProfilComp() {
   const { login } = useParams();
@@ -22,6 +23,8 @@ function ProfilComp() {
   const[xp, setXp] = React.useState<number>(0);
   const[level, setLevel] = React.useState<number>(0);
 
+	const activeTab = useActiveTab((state) => state.activeTab);
+	const setActiveTab = useActiveTab((state) => state.setActiveTab);
 
   useEffect(() => {
     if (loading) return;
@@ -71,6 +74,20 @@ function ProfilComp() {
       ]);
     }
   }, [name, login, loading, user]);
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return;
+    const first_login = Cookies.get('first_login');
+    if (first_login === 'true') {
+      setActiveTab(1);
+      Cookies.set('first_login', 'false');
+    }
+    else
+      setActiveTab(0);
+  }, [loading, user]);
+
+
 
 
 

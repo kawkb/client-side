@@ -4,6 +4,9 @@ import baseavatar from './../assets/svg/baseavatar.svg'
 import squares from '../assets/img/squares.png'
 import ClassButton from './ClassButton';
 import ImgButton from './ImgButton';
+import zustand from "zustand";
+import { create } from "zustand";
+import { useActiveTab } from '../hooks/useActiveTab';
 
 // interface TabBoxProps {
 // 	options:[{
@@ -31,8 +34,9 @@ interface TabBoxProps {
 
 function TabBox({ imgbtn, options, tabcolor, title, avatar}:TabBoxProps) {
 	
-	const [activeTab, setActiveTab] = useState(0);
-
+	// const [activeTab, setActiveTab] = useState(0);
+	const activeTab = useActiveTab((state) => state.activeTab);
+	const setActiveTab = useActiveTab((state) => state.setActiveTab);
 	const changeTab = (index : number) => {
 		setActiveTab(index);
 	}
