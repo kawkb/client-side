@@ -25,7 +25,7 @@ function Menu() {
     setMenuClose(true);
     setMenuName("Menu");
     authService.logout();
-    nav("/login");
+    window.location.reload();
   }
   return (
     <div className="menu-container pattern-background green-pattern">
