@@ -43,32 +43,40 @@ function Settings() {
 	};
 
 //2fa logic:
-	const handleSubmitQR = () => {
-		console.log('Submit QR!');
-		setShowOptions(false);
-	};
 
-	const handleToggle = (isToggled: boolean) => {
-		setEnable2fa(isToggled);
-		setShowOptions(true);
-	};
+const handleToggle = (isToggled: boolean) => {
+	setEnable2fa(isToggled);
+	setShowOptions(true);
+};
 
-	// const handleToggle = (isToggled: boolean) => {
+// const handleToggle = (isToggled: boolean) => {
 	// 	console.log(`Toggle button is ${isToggled ? 'on' : 'off'}`);
 	// };
-
+	
 	const handleToggleClick = async () => {
 		if (enable2fa)
-			await api.post('/auth/disable2fa')
+		await api.post('/auth/disable2fa')
+		.then(response => {
+			console.log("disabaled succefly");
+		})
+		.catch(error => {
+			console.log(error);
+		})
 		setEnable2fa(!enable2fa);
 		setShowOptions(true);
 	}
-
+	
 	const [showOptions, setShowOptions] = useState(false);
-
+	
 	const handlePlusNewChat = () => {
 		
 	}
+	
+	const handleSubmitQR = () => {
+		console.log('Submit QR!');
+		setShowOptions(false);
+		// api.post{('/auth/enable2fa')}
+	};
 
 	const handleClosePopup = () => {
 		setShowOptions(false);

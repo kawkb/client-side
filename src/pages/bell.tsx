@@ -91,6 +91,7 @@ function Bell() {
   return (
     <div className="menu-container pattern-background purple-pattern">
         <div className="notif-container retro-border-box trans-purple-box menu-box copy-book-background">
+          <h2 className="friend-request-link"> Friend Requests:</h2>
           <div className="notif-list scrollable">
 
 

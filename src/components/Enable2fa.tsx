@@ -13,22 +13,22 @@ interface Enable2faProps {
 
 function Enable2fa({onClose, onSubmit} : Enable2faProps) {
 
-	const url = 'https://www.google.com';
 	const [qrCode, setQrCode] = React.useState<string>('');
 	const [code, setCode] = React.useState<string>('');
 	
 
-	// const enable2fa = useEnable2fa((state) => state.enable2fa);
-	// const setEnable2fa = useEnable2fa((state) => state.setEnable2fa);
+	const enable2fa = useEnable2fa((state) => state.enable2fa);
+	const setEnable2fa = useEnable2fa((state) => state.setEnable2fa);
 
 	const handleEnable2fa = () => {
 		console.log('enable 2fa', code);
-		api.post('/auth/confirm2fa', { code }).then(response => {
-
-		onSubmit();
+		api.post('/auth/confirm2fa', { code })
+		.then(response => {
+			onSubmit();
 		}).catch(error => {
 			console.log(error);
 			toast.error("This didn't work.")
+			onClose();
 		})
 	}
 
@@ -38,7 +38,6 @@ function Enable2fa({onClose, onSubmit} : Enable2faProps) {
 				console.log(response);
 				setQrCode(response.data.qrcode);
 			})
-
 	}, []);
 
   return (

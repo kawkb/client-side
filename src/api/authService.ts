@@ -1,4 +1,4 @@
-// import Cookies from "js-cookie"
+import Cookies from "js-cookie"
 import api from "./api"
 
 const authService = {
@@ -10,6 +10,11 @@ const authService = {
     },
     logout: () => {
         // Cookies.remove("access_token");
+        const cookies = Cookies.get();
+        for (const cookie in cookies) {
+          Cookies.remove(cookie);
+        }
+        console.log(Cookies.get());
         delete api.defaults.headers.common["Authorization"];
     },
     login: () => {

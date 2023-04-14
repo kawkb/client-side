@@ -42,14 +42,14 @@ useEffect(() => {
 
     return (
         <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<ProtectedRoute component={Home} />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/game/:mode" element={<Game />} />
-            <Route path="/chat" element={<Chat />} />
+            <Route path="/menu" element={<ProtectedRoute component={Menu} />} />
+            <Route path="/game/:mode" element={<ProtectedRoute component={Game} />} />
+            <Route path="/chat" element={<ProtectedRoute component={Chat} />} />
 			<Route path="/profil/:login" element={<ProtectedRoute component={Profil} />} />
             <Route path="/profil" element={<ProtectedRoute component={Profil} />} />
-            <Route path="/bell" element={<Bell/>} />
+            <Route path="/bell" element={<ProtectedRoute component={Bell}/>} />
             <Route path="/*" element={<Error/>} />
         </Routes>
     )

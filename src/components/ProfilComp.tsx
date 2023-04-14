@@ -51,14 +51,14 @@ function ProfilComp() {
           if (err.response.status === 404) nav("/404", { replace: true });
         }
       });
-  }, [loading, user]);
+  }, [loading, user, login,]);
 
 
 
   useEffect(() => {
     if (loading) return;
     if(!user) return;
-    if (login == null) {
+    if (login == null || login === user.login) {
       setOptions([
         { name: "Profil", content: <Profil /> },
         { name: "Settings", content: <Settings /> },
