@@ -1,38 +1,39 @@
-// useFetch.ts
 import { useState, useEffect } from 'react';
-import axios, { AxiosResponse } from 'axios';
 
-type UseFetchResult<T> = {
+interface FetchResult<T> {
   data: T | null;
-  isLoading: boolean;
+  isPending: boolean;
   error: string | null;
-};
+}
 
-export const useFetch = <T>(url: string): UseFetchResult<T> => {
+const useFetch = <T>(url: string): FetchResult<T> => {
   const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response: AxiosResponse<T> = await axios.get(url);
-        setData(response.data);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('An unexpected error occurred.');
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    setTimeout(() => {
+      fetch(url)
+      .then((res: Response) => {
+        if (!res.ok) { // error coming back from server
+          throw Error('could not fetch the data for that resource');
+        } 
+        return res.json();
+      })
+      .then((data: T) => {
+        setIsPending(false);
+        setData(data);
+        setError(null);
+      })
+      .catch((err: Error) => {
+        // auto catches network / connection error
+        setIsPending(false);
+        setError(err.message);
+      })
+    }, 1000);
+  }, [url])
 
-    fetchData();
-  }, [url]);
+  return { data, isPending, error };
+}
 
-  return { data, isLoading, error };
-};
+export default useFetch;

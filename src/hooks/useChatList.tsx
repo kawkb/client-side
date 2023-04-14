@@ -7,10 +7,7 @@ import { Status } from "../modules/user";
 import { combine } from "zustand/middleware";
 import { faker } from '@faker-js/faker';
 import { ChannelType } from "../modules/channel";
-import ChannelMsg from "../modules/channelmsg";
 import DMsMsg from "../modules/dmsmsg";
-import { createRandomMsg } from "./useCurrentChat";
-import { createRandomMsgList } from "./useCurrentChat";
 
 // interface ChannelListStore {
 // 	  channels: Channel[];
@@ -38,6 +35,21 @@ function createRandonChannelList(): Array<Channel> {
 	return channels;
 }
 
+function createRandomDM(): DMs {
+	let user: User = new User(faker.datatype.uuid(), faker.name.fullName(), faker.image.avatar(), faker.helpers.arrayElement([Status.ONLINE, Status.OFFLINE, Status.INGAME,]), faker.datatype.number(), faker.datatype.number());
+	return new DMs(faker.datatype.uuid(), user);
+}
+
+function createRandomDMList(): Array<DMs> {
+	let channels: Array<DMs> = [];
+	for (let i = 0; i < 10; i++) {
+		channels.push(createRandomDM());
+	}
+	return channels;
+}
+
+
+
 const useChatList = create(
 	combine({items: [] as Array<Channel | DMs> , activeItem: null as (Channel | DMs | null)}, (set) => ({
 		add: (item: Channel | DMs) => set((state) => ({items: [...state.items, item] as Array<Channel | DMs>})),
@@ -47,10 +59,10 @@ const useChatList = create(
 		}) as Array<Channel | DMs> })),
 		setActiveItem: (itemId: string) => set((state) => ({activeItem: state.items.find((i : Channel | DMs) => i.id === itemId) as Channel | DMs})),
 		setItems: (myitems: Array<Channel | DMs>) => set((state) => ({items: myitems as Array<Channel | DMs>})),
-		setMessages: (messages: Array<ChannelMsg | DMsMsg>) => set((state) => ({activeItem: {...state.activeItem, messages: messages} as Channel | DMs})),
 	}))
 );
 
 
 export default useChatList;
 export { createRandonChannelList, createRandomChannel };
+export { createRandomDMList, createRandomDM };
