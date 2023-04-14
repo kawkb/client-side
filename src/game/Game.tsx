@@ -193,8 +193,6 @@ const Waiting = () => {
     const { user, loading } = useAuth();
 
   useEffect(() => {
-if (loading) return;
-    if (!user) return;
 	// const tmpGameId = query.get("gameId")
 	// if (tmpGameId) {
 	// 	setGameId(tmpGameId);
@@ -216,7 +214,7 @@ if (loading) return;
 		socket.emit("leave_queue");
     	socket.off("gameReady");
     };
-  }, [socket, user, loading]);
+  }, [socket ]);
 
   if (gameId) return <Game mode={params["mode"]!} gameId={gameId} />;
 
