@@ -43,32 +43,40 @@ function Settings() {
 	};
 
 //2fa logic:
-	const handleSubmitQR = () => {
-		console.log('Submit QR!');
-		setShowOptions(false);
-	};
 
-	const handleToggle = (isToggled: boolean) => {
-		setEnable2fa(isToggled);
-		setShowOptions(true);
-	};
+const handleToggle = (isToggled: boolean) => {
+	setEnable2fa(isToggled);
+	setShowOptions(true);
+};
 
-	// const handleToggle = (isToggled: boolean) => {
+// const handleToggle = (isToggled: boolean) => {
 	// 	console.log(`Toggle button is ${isToggled ? 'on' : 'off'}`);
 	// };
-
+	
 	const handleToggleClick = async () => {
 		if (enable2fa)
-			await api.post('/auth/disable2fa')
+		await api.post('/auth/disable2fa')
+		.then(response => {
+			console.log("disabaled succefly");
+		})
+		.catch(error => {
+			console.log(error);
+		})
 		setEnable2fa(!enable2fa);
 		setShowOptions(true);
 	}
-
+	
 	const [showOptions, setShowOptions] = useState(false);
-
+	
 	const handlePlusNewChat = () => {
 		
 	}
+	
+	const handleSubmitQR = () => {
+		console.log('Submit QR!');
+		setShowOptions(false);
+		// api.post{('/auth/enable2fa')}
+	};
 
 	const handleClosePopup = () => {
 		setShowOptions(false);
@@ -82,15 +90,12 @@ function Settings() {
 				<ImgUpload classes="retro-button pink-header"/>
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
-				<img className="svg-text svg-text-margin" src={nickname} alt="" />
 
+				<img className="svg-text svg-text-margin" src={nickname} alt="" />
 				<div className='nickname-input'>
 					<input type="text" placeholder='New Nickname' value={newNickname}  onChange={handleNicknameInputChange}/>
 					<ImgButton classes="backgroundless-image-button" src={heart} alt="confirm" onClick={handleNewNickname} />
 				</div>
-
-
-
 			</div>
 			<div className='copy-book-background retro-border-box trans-pink-box setting-box'>
 				<img className="svg-text" src={enable2fasvg} alt="" />

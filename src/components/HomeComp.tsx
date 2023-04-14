@@ -9,6 +9,7 @@ import api from "../api/api";
 import { faker } from "@faker-js/faker";
 import TopPlayers from "../assets/svg/TopPlayers.svg";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import GameSocketContext from "../game/GameContext";
 import { toast } from "react-hot-toast";
 
@@ -44,11 +45,8 @@ data.map((item) => {
 function HomeComp() {
   const [topPlayers, setTopPlayers] = React.useState<any>([]);
   const { user, loading } = useAuth();
-  useEffect(() => {
-    setTopPlayers(data);
-  }, []);
-
   const nav = useNavigate();
+
   const socket = useContext(GameSocketContext);
   useEffect(() => {
     socket.on("invited", (data: any) => {
@@ -100,10 +98,10 @@ function HomeComp() {
     });
   }, [socket, nav]);
 
+  useEffect(() => {
+    setTopPlayers(data);
+  }, []);
   const joinQueue = (gameMode: string) => {
-    socket.emit("join_queue", { gameMode });
-    console.log(gameMode);
-    console.log();
     nav(`/game/${gameMode}`, { replace: true });
   };
 
@@ -122,63 +120,27 @@ function HomeComp() {
   // }, [loading])
 
   //handle top player click:
-  const handleTopPlayerClick = () => {
-    // nav(`/profile/${login}`, { replace: true });
-  };
   return (
     <div className="home-page pattern-background blue-pattern">
       <div className="home-container">
-        <div className="game-modes-container">
+        {/* <div className="game-modes-container"> */}
           <div className="game-play-mode frisky-mode retro-border-box light-box-home">
-            <img
-              className="game-mode-img"
-              src={frisky}
-              alt=""
-              onClick={() => joinQueue("Frisky")}
-            />
+            <img className="game-mode-img" src={frisky} alt="" onClick={() => joinQueue("Frisky")} />
           </div>
           <div className="game-play-mode fast-mode retro-border-box light-box-home">
-            <img
-              className="game-mode-img"
-              src={fast}
-              alt=""
-              onClick={() => joinQueue("Fast")}
-            />
+            <img className="game-mode-img" src={fast} alt="" onClick={() => joinQueue("Fast")} />
           </div>
           <div className="game-play-mode fierce-mode retro-border-box light-box-home">
-            <img
-              className="game-mode-img"
-              src={fierce}
-              alt=""
-              onClick={() => joinQueue("Fierce")}
-            />
+            <img className="game-mode-img" src={fierce} alt="" onClick={() => joinQueue("Fierce")} />
           </div>
-        </div>
-        <div className="game-info-container">
-          <div className="game-info top-player-more copy-book-background retro-border-box light-box">
-            <div className="top-players-image-list-container">
-              <div className="top-player-img-canva">
-                <img src={TopPlayers} alt="" />
-              </div>
-              <div className="top-players-list-items">
-                {topPlayers.map((player: Data, index: number) => {
-                  return (
-                    <div className="Top-player-item" key={index}>
-                      <img
-                        src={player.avatar}
-                        alt={player.name}
-                        onClick={handleTopPlayerClick}
-                      />
-                      <div className="Top-player-name">{player.name}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* </div> */}
       </div>
     </div>
+
+
+
+
+
     // 		<div className='game-info-container'>
 
     // 			<div className='game-info copy-book-background retro-border-box light-box'>
@@ -226,7 +188,11 @@ function HomeComp() {
 
     // 			<div className='game-info copy-book-background retro-border-box light-box'>
     // 				<h1>Popular Chat Rooms:</h1>
+
+
+
     // 				<div className='chat-room-list scrollable'>
+    
     // 					<div className='popular-chat-rooms-list-item' >
     // 						<img className="chat-rooms-img" src={squares} alt="" />
     // 						<span className='chat-rooms-name'>Chat Room 1</span>

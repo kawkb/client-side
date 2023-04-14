@@ -9,6 +9,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useProfileImage } from "../hooks/useProfileImage";
 import Control from "./Control";
+import { useActiveTab } from '../hooks/useActiveTab';
+import Cookies from "js-cookie";
 
 function ProfilComp() {
   const { login } = useParams();
@@ -21,6 +23,8 @@ function ProfilComp() {
   const[xp, setXp] = React.useState<number>(0);
   const[level, setLevel] = React.useState<number>(0);
 
+	const activeTab = useActiveTab((state) => state.activeTab);
+	const setActiveTab = useActiveTab((state) => state.setActiveTab);
 
   useEffect(() => {
     if (loading) return;
@@ -50,14 +54,14 @@ function ProfilComp() {
           if (err.response.status === 404) nav("/404", { replace: true });
         }
       });
-  }, [loading, user]);
+  }, [loading, user, login,]);
 
 
 
   useEffect(() => {
     if (loading) return;
     if(!user) return;
-    if (login == null) {
+    if (login == null || login === user.login) {
       setOptions([
         { name: "Profil", content: <Profil /> },
         { name: "Settings", content: <Settings /> },
@@ -70,6 +74,20 @@ function ProfilComp() {
       ]);
     }
   }, [name, login, loading, user]);
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user) return;
+    const first_login = Cookies.get('first_login');
+    if (first_login === 'true') {
+      setActiveTab(1);
+      Cookies.set('first_login', 'false');
+    }
+    else
+      setActiveTab(0);
+  }, [loading, user]);
+
+
 
 
 

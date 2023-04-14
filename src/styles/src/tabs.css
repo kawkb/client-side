@@ -48,28 +48,56 @@
 	/* margin-top: 2%; */
 }
 
+
 .tab-box-avatar-container {
-	/* height: 100;  */
-	flex: 1;
-	z-index: 50;
-	display: flex;
-	justify-content: end;
- 	overflow: visible;
-	position: relative;
-	margin-right: -5%;
-	margin-bottom: 5%;
+    flex: 1;
+    z-index: 50;
+    display: flex;
+    justify-content: end;
+    overflow: visible;
+    /* position: relative; */
+    margin-right: -5%;
+    margin-bottom: 5%;
 }
 
 
 .tab-box-avatar {
-	height: 200px;
-	width: 200px;
+	height: 300px;
+	width: 300px;
 	border-radius: 50%;
-	/* border: 10px solid var(--dark); */
+
+	/* box-shadow:
+    0 0 0 6px var(--shadow),
+    0 0 0 30px var(--green),
+    0 0 0 36px var(--shadow); */
+
+	/* outline: 20px solid var(--green);
+	border: 8px solid #000000; */
+	/* box-shadow: 2px 2px 4px #000000; */
 	/* display: block; */
 	/* clip-path: circle(); */
-  outline: 3px solid #000;
   /* outline-offset: -3px; */
+}
+
+.tab-box-avatar-online {
+	box-shadow:
+    0 0 0 6px var(--shadow),
+    0 0 0 30px var(--green),
+    0 0 0 36px var(--shadow);
+}
+
+.tab-box-avatar-offline {
+	box-shadow:
+    0 0 0 6px var(--shadow),
+    0 0 0 30px var(--hotred),
+    0 0 0 36px var(--shadow);
+}
+
+.tab-box-avatar-ingame {
+	box-shadow:
+	0 0 0 6px var(--shadow),
+	0 0 0 30px var(--sunny),
+	0 0 0 36px var(--shadow);
 }
 
 .tab {

@@ -5,6 +5,7 @@ import GameSocketContext from "./GameContext";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import "p5/lib/addons/p5.sound";
 import "../styles/src/loader.css";
+import { useAuth } from "../useAuth";
 interface GameStateProps {
   gameStatus: "waiting" | "playing" | "break" | "gameover";
   ballX: number;
@@ -189,6 +190,7 @@ const Waiting = () => {
   const [gameId, setGameId] = useState("");
 	// get query params
 	const [query] = useSearchParams();
+    const { user, loading } = useAuth();
 
   useEffect(() => {
 	// const tmpGameId = query.get("gameId")
@@ -212,7 +214,7 @@ const Waiting = () => {
 		socket.emit("leave_queue");
     	socket.off("gameReady");
     };
-  }, [socket]);
+  }, [socket ]);
 
   if (gameId) return <Game mode={params["mode"]!} gameId={gameId} />;
 

@@ -85,3 +85,6 @@
 .green-bg {
 	background-color: var(--green);
 }
+.login-bg {
+	background-image: url(/public/login.png);
+}
