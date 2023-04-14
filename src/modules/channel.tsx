@@ -1,6 +1,5 @@
 import User from "./user";
 import { Status } from "./user";
-import ChannelMsg from "./channelmsg";
 import ChannelUser from "./channeluser";
 
 enum ChannelType {

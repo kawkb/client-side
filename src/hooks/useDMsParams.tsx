@@ -7,10 +7,7 @@ import { Status } from "../modules/user";
 import { combine } from "zustand/middleware";
 import { faker } from '@faker-js/faker';
 import { ChannelType } from "../modules/channel";
-import ChannelMsg from "../modules/channelmsg";
 import DMsMsg from "../modules/dmsmsg";
-import { createRandomMsg } from "./useCurrentChat";
-import { createRandomMsgList } from "./useCurrentChat";
 import ChannelUser from "../modules/channeluser";
 
 interface DMsParamsStore {

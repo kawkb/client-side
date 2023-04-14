@@ -30,7 +30,7 @@ function DMsMessages() {
 			{
 				activeDMsMessages.map((msg, index) => {
 					return (
-						<ChatMsg content={msg.content} owner={msg.sender_id > faker.datatype.uuid()} key={index}/>
+						<ChatMsg author={msg.author} content={msg.content} owner={msg.author_id > faker.datatype.uuid()} key={index}/>
 					)
 				})
 			}

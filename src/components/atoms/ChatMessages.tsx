@@ -2,8 +2,6 @@ import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import ChatMsg from './ChatMsg';
 import useCurrentChat from '../../hooks/useCurrentChat';
 import useChatList from '../../hooks/useChatList';
-import { createRandomMsg } from '../../hooks/useCurrentChat';
-import { createRandomMsgList } from '../../hooks/useCurrentChat';
 import { createRandomChannel } from '../../hooks/useChatList';
 import { createRandonChannelList } from '../../hooks/useChatList';
 import { faker } from '@faker-js/faker';
@@ -23,7 +21,7 @@ function ChatMessages() {
   );
   const socket = useContext(ChatSocketContext);
   const ref = useRef<HTMLDivElement>(null);
-const auth = useAuth();
+  const auth = useAuth();
 
   useEffect(() => {
     if (ref.current)
@@ -53,15 +51,17 @@ const auth = useAuth();
     };
   }, [activeChannel?.id]);
 
-	const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-	const scrollToBottom = () => {
-		if (messagesEndRef.current) {
-		messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-		}
-	};
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-	useEffect(() => { scrollToBottom(); }, [activeChannelMessages]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [activeChannelMessages]);
 
   return (
     <div className="chat-messages-list scrollable" ref={ref}>
@@ -70,6 +70,7 @@ const auth = useAuth();
           // should pass weither the message is from the current user or not but just for testing it's a random boolean
           <ChatMsg
             content={msg.content}
+            author={msg.author}
             owner={msg.author_id === auth.user?.id}
             key={index}
           />

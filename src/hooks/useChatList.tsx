@@ -7,10 +7,7 @@ import { Status } from "../modules/user";
 import { combine } from "zustand/middleware";
 import { faker } from '@faker-js/faker';
 import { ChannelType } from "../modules/channel";
-import ChannelMsg from "../modules/channelmsg";
 import DMsMsg from "../modules/dmsmsg";
-import { createRandomMsg } from "./useCurrentChat";
-import { createRandomMsgList } from "./useCurrentChat";
 
 // interface ChannelListStore {
 // 	  channels: Channel[];
@@ -62,7 +59,6 @@ const useChatList = create(
 		}) as Array<Channel | DMs> })),
 		setActiveItem: (itemId: string) => set((state) => ({activeItem: state.items.find((i : Channel | DMs) => i.id === itemId) as Channel | DMs})),
 		setItems: (myitems: Array<Channel | DMs>) => set((state) => ({items: myitems as Array<Channel | DMs>})),
-		// setMessages: (messages: Array<ChannelMsg | DMsMsg>) => set((state) => ({activeItem: {...state.activeItem, messages: messages} as Channel | DMs})),
 	}))
 );
 
