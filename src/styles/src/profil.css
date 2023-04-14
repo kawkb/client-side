@@ -81,8 +81,6 @@
 }
 
 .friends-list-item {
-	height: 18%;
-	width: 95%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -102,6 +100,10 @@
 	/* overflow: hidden; */
 	/* margin: 20px 0; */
 	/* cursor: pointer; */
+}
+
+.friends-list-item small {
+	font-size: 1.5rem;
 }
 
 .friends-list-item span {
