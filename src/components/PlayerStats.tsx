@@ -29,7 +29,7 @@ function PlayerStats() {
 			setLevel(res.data.level)
 			seWins(res.data.winPercentage)
 			setLosses(res.data.lossPercentage)
-			setDraws(res.data.draws)
+			setDraws(res.data.drawPercentage)
 		  })
 		//   });
 		// api.post('/profile/update/login', {
