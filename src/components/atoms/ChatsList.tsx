@@ -21,6 +21,7 @@ function ChatsList() {
   const channelList = useChatParams((state) => state.channelList);
   const setChannelList = useChatParams((state) => state.setChannelList);
   const activeChannel = useChatParams((state) => state.activeChannel);
+  const activeChannelSettingsSave = useChatParams((state) => state.activeChannelSettingsSave);
   const activeChannelOptions = useChatParams(
     (state) => state.activeChannelOptions
   );
@@ -53,7 +54,8 @@ function ChatsList() {
               channel.type,
               channel.icon_url,
               channel.password,
-              channel.isAdmin || channel.isOwner,
+              channel.isAdmin,
+              channel.isOwner,
               channel.isMuted,
             )
         );
@@ -63,7 +65,7 @@ function ChatsList() {
         console.log(error);
         toast.error('Error while fetching channels');
       });
-  }, [auth.user]);
+  }, [auth.user, activeChannelSettingsSave]);
  
 //   const [showAdminOptions, setShowAdminOptions] =
 //     React.useState<boolean>(false);
@@ -162,7 +164,7 @@ function ChatsList() {
             )}
             {activeChannelOptions && activeChannelOptions.id === item.id && (
               <div className="chat-list-item-options">
-                {item.isAdmin && (
+                {item.isOwner && (
                   <span
                     className="chat-list-option"
                     onClick={handleShowSettings}

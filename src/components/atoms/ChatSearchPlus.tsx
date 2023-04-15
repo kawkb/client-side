@@ -30,7 +30,8 @@ function ChatSearchPlus() {
             channel.type,
             channel.icon_url,
             channel.password,
-            channel.isAdmin || channel.isOwner
+            channel.isAdmin,
+            channel.isOwner
           )
       );
       setChannelList(channelList);

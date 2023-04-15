@@ -35,7 +35,7 @@ function ChatInput() {
     return () => {
       socket.off('channel:mute');
     }
-  }, [socket, activeChannel, user]);
+  }, [socket, activeChannel, user, setChannelIsMuted]);
   
   useEffect(() => {
     if (activeChannel) {

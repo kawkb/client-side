@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import ClassButton from '../ClassButton';
 import ImgButton from '../ImgButton';
 import invite from '../../assets/img/invite.png';
-import invited from '../../assets/img/invited.png';
 import useChatParams from '../../hooks/useChatParams';
 import ChannelUser, { ChannelUserRole, ChannelUserStatus } from '../../modules/channeluser';
 import api from '../../api/api';
@@ -11,8 +10,7 @@ import { toast } from 'react-hot-toast';
 function ChannelInvite({ onClose }: { onClose: () => void }) {
   const activeChannelOptions = useChatParams().activeChannelOptions;
 
-  const [searchedUser, setSearchedUser] = React.useState<string>('');
-  const [invitedUser, setInvitedUser] = React.useState<boolean>(false);
+
 
   const activeChannelOptionsInviteUsers =
     useChatParams().activeChannelOptionsInviteUsers;
@@ -53,7 +51,6 @@ const handleInvite = () => {
     api.post(`/channels/invites/${activeChannelOptions?.id}`, {
       invitee_id: userId,}).then((res) => {
         console.log('res data invite', res.data);
-        setInvitedUser(true);
       });
       toast.success('User invited');
 // handleInvite( );

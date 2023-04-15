@@ -15,6 +15,7 @@ interface ChatParamsStore {
 	activeChannelOptionsMembers: ChannelUser[];
 	activeChannelMemberOptions: ChannelUser | null
 	activeChannelOptionsInviteUsers: ChannelUser[];
+	activeChannelSettingsSave: boolean;
 	setActiveChannel: (channelId: number) => void;
 	setActiveChannelOptions: (channelId: number) => void;
 	setChannelList: (channelList: Array<Channel>) => void;
@@ -24,6 +25,7 @@ interface ChatParamsStore {
 	setChannelTab: (channelTab: boolean) => void;
 	setActiveChannelOptionsName: (channelId: number, channelName: string) => void;
 	setActiveChannelOptionsAvatar: (channelId: number, channelAvatar: string) => void;
+	setActiveChannelNull: () => void;
 	setActiveChannelOptionsNull: () => void;
 	setActiveChannelOptionsMembers: (members: ChannelUser[]) => void;
 	setActiveChannelMemberOptions: (member: ChannelUser) => void;
@@ -31,6 +33,7 @@ interface ChatParamsStore {
 	setActiveChannelOptionsInviteUsers: (users: ChannelUser[]) => void;
 	setActiveChannelPassword: (password: string) => void;
 	setChannelIsMuted: (channelId: number, isMuted: boolean) => void;
+	setActiveChannelSettingsSave: (save: boolean) => void;
 }
 
 const useChatParams = create<ChatParamsStore>() ((set) => ({
@@ -46,6 +49,7 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 	activeChannelOptionsMembers: [],
 	activeChannelMemberOptions: null,
 	activeChannelOptionsInviteUsers: [],
+	activeChannelSettingsSave: false,
 	setActiveChannel: (channelId: number) => set((state) => {
 		const match = state.channelList.find((channel) => channel.id === channelId) as Channel;
 		return {activeChannel: match || null, activeItem: match || null};
@@ -87,6 +91,8 @@ const useChatParams = create<ChatParamsStore>() ((set) => ({
 	setActiveChannelMemberOptionsNull: () => set((state) => ({activeChannelMemberOptions: null})),
 	setActiveChannelOptionsInviteUsers: (users:	ChannelUser[]) => set((state) => ({activeChannelOptionsInviteUsers: users})),
 	setActiveChannelPassword: (password: string) => set((state) => ({activeChannelPassword: password})),
+	setActiveChannelSettingsSave: (save: boolean) => set((state) => ({activeChannelSettingsSave: save})),
+	setActiveChannelNull: () => set((state) => ({activeChannel: null})),
 }));
 
 export default useChatParams;
