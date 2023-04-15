@@ -149,3 +149,11 @@
 	}
   }
   
+  .canvas-wrapper {
+	border-radius: 20px;
+	overflow: hidden;
+  }
+  .canvas-background {
+	background: url("../../../public/notebook.jpg") no-repeat center center fixed;
+	background-size: cover;
+  }
