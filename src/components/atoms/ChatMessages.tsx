@@ -1,9 +1,9 @@
-import { useCallback, useContext, useEffect, useRef } from 'react';
-import ChatMsg from './ChatMsg';
-import useChatParams from '../../hooks/useChatParams';
-import api from '../../api/api';
-import ChatSocketContext from '../ChatContext';
-import { useAuth } from '../../useAuth';
+import { useCallback, useContext, useEffect, useRef } from "react";
+import ChatMsg from "./ChatMsg";
+import useChatParams from "../../hooks/useChatParams";
+import api from "../../api/api";
+import ChatSocketContext from "../ChatContext";
+import { useAuth } from "../../useAuth";
 
 function ChatMessages() {
   const activeChannel = useChatParams((state) => state.activeChannel);
@@ -19,14 +19,14 @@ function ChatMessages() {
   const socket = useContext(ChatSocketContext);
   const ref = useRef<HTMLDivElement>(null);
   const auth = useAuth();
-    // check if message author is the current user
-    
+  // check if message author is the current user
+
   useEffect(() => {
     if (ref.current)
       ref.current.scrollTo({
         left: 0,
         top: ref.current.scrollHeight,
-        behavior: 'smooth',
+        behavior: "smooth",
       });
   }, [activeChannelMessages]);
 
@@ -39,14 +39,14 @@ function ChatMessages() {
   useEffect(() => {
     if (!activeChannel) return;
     load();
-    socket.emit('channel:join', activeChannel?.id);
-    socket.on('message', (data) => {
+    socket.emit("channel:join", activeChannel?.id);
+    socket.on("channel:message", (data) => {
       updateActiveChannelMessages(data);
       // safely update zustand state
     });
     return () => {
-      socket.emit('channel:leave', activeChannel?.id);
-      socket.off('message');
+      socket.emit("channel:leave", activeChannel?.id);
+      socket.off("channel:message");
     };
   }, [activeChannel?.id]);
 
@@ -54,7 +54,7 @@ function ChatMessages() {
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 

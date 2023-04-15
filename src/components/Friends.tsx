@@ -20,7 +20,7 @@ function Friends() {
     if (login == null) {
       param = user.login;
     }
-    api.get("/friend/" + param).then((res) => {
+    api.get("/friend/friends/" + param).then((res) => {
       console.log(res.data);
       setFriends(res.data);
     });
