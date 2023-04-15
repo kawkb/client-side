@@ -105,6 +105,12 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
 
   const handleTimeoutMember = () => {
     console.log('Timeout Member');
+    chatSocket.emit('channel:mute', {
+      channel_id: activeChannelOptions?.id,
+      user_id: activeChannelMemberOptions?.id,
+      time: 60000,
+    });
+    // console.log('Timeout Member');
   };
 
   const handleMuteMember = () => {

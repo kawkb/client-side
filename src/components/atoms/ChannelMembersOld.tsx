@@ -7,7 +7,7 @@ import timeout from '../../assets/img/clock.png'
 import ClassButton from '../ClassButton'
 import admin from '../../assets/img/adminuser.png'
 import demote from '../../assets/img/down-arrow.png'
-import { createRandomChannelUserList } from '../../hooks/useCurrentChat'
+// import { createRandomChannelUserList } from '../../hooks/useCurrentChat'
 import useChatParams from '../../hooks/useChatParams'
 import { ChannelUserRole } from '../../modules/channeluser'
 
@@ -26,7 +26,7 @@ function ChannelMembers({onClose}: {onClose: () => void}) {
 
 
 	// fetch members from channel with id activeChannelOptions.id
-	useEffect(() => { setActiveChannelOptionsMembers(createRandomChannelUserList()) }, [activeChannelOptions]);
+	// useEffect(() => { setActiveChannelOptionsMembers(createRandomChannelUserList()) }, [activeChannelOptions]);
 
 	const handleBanMember = () => {
 		console.log('Ban Member');

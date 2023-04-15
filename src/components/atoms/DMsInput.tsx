@@ -20,6 +20,7 @@ function DMsInput() {
       <input
         type="text"
         placeholder="write a something..."
+        className="chat-msg-input-input"
         onChange={(e) => setMessage(e.target.value)}
         value={message}
       />

@@ -39,15 +39,15 @@ function ChatSearchPlus() {
 
   return (
     <div className="chat-search-plus">
-      {/* <input
+      <input
         className="chat-search-plus-input"
         type="text"
         placeholder="Search"
         onChange={handleSearch}
-      /> */}
+      />
       <ClassButton
         name="+"
-        classes="chat-plus-buttonow"
+        classes="chat-plus-button"
         onClick={handlePlusNewChat}
       />
       {/* {showOptions && <BlurredBackground />} */}

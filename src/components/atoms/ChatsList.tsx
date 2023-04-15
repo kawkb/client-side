@@ -9,6 +9,9 @@ import ChannelInvite from './ChannelInvite';
 import api from '../../api/api';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '../../useAuth';
+import protectedlogo from '../../assets/svg/protected.svg';
+import privatelogo from '../../assets/svg/private.svg';
+import { ChannelType } from '../../modules/channel';
 
 // type ChatListProps = {
 // 	  chats: ChatModel[];
@@ -34,6 +37,8 @@ function ChatsList() {
   const [showInviteToChannel, setShowInviteToChannel] = useState(false);
   const auth = useAuth();
 
+  // const [channelType, setChannelType] = useState<ChannelType>(ChannelType.PUBLIC);
+    
   useEffect(() => {
     if (!auth.user) return;
     api
@@ -48,7 +53,8 @@ function ChatsList() {
               channel.type,
               channel.icon_url,
               channel.password,
-              channel.isAdmin || channel.isOwner
+              channel.isAdmin || channel.isOwner,
+              channel.isMuted,
             )
         );
         setChannelList(channelList);
@@ -66,13 +72,13 @@ function ChatsList() {
     console.log(menuItem);
   };
 
-  const handleButtonClick = (itemId: string, itemName: string) => {
+  const handleButtonClick = (itemId: number, itemName: string) => {
     console.log(`item id: ${itemId} ${itemName}`);
     setActiveChannelOptions(itemId);
   };
 
   const handleCloseOptions = () => {
-    setActiveChannelOptions('');
+    setActiveChannelOptions(0);
   };
 
   const handleLeaveChannel = () => {
@@ -83,7 +89,7 @@ function ChatsList() {
         .then((response) => {
           toast.success('Left channel');
           removeChannel(activeChannelOptions.id);
-          setActiveChannelOptions('');
+          setActiveChannelOptions(0);
         })
         .catch((error) => {
           console.log(error);
@@ -124,11 +130,17 @@ function ChatsList() {
     <div className="chat-list scrollable">
       {channelList.map((item, index) => {
         const itemName = item.name;
+        console.log(item);
         return (
           <div key={index}>
             {(activeChannelOptions === null ||
               activeChannelOptions?.id !== item.id) && (
               <div className="chat-list-item">
+                <div className='chat-list-item-channel-type'>
+                  { (item.type === ChannelType.PRIVATE) && <img className='chat-list-item-channel-type-private' src={privatelogo} alt="private channel" />}
+                  { (item.type === ChannelType.PROTECTED) && <img className='chat-list-item-channel-type-private' src={protectedlogo} alt="private channel" />}
+                  {/* { (channelType === "public") && <img className='chat-list-item-channel-type-private' src={privatelogo} alt="private channel" />} */}                  
+                </div>
                 <span
                   className="chat-list-item-name"
                   onClick={() => {

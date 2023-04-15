@@ -4,3 +4,6 @@
 //send me friend avatarurl in 
 //add protected chanel 
 //change chanel list to take its tupe
+//Muted in channel chanege message input if muted
+//change settings from public to protected for channels
+//settings should show only for owner not admin

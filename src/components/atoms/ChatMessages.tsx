@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 
 function ChatMessages() {
   const activeChannel = useChatParams((state) => state.activeChannel);
+  const activeChannelPassword = useChatParams((state) => state.activeChannelPassword);
   const activeChannelMessages = useChatParams(
     (state) => state.activeChannelMessages
   );
@@ -40,7 +41,8 @@ function ChatMessages() {
   useEffect(() => {
     if (!activeChannel) return;
     load();
-    socket.emit("channel:join", activeChannel?.id);
+    socket.emit("channel:join", {channel_id: activeChannel?.id, password: activeChannelPassword});
+    // socket.emit("channel:join", activeChannel?.id);
     socket.on("channel:message", (data) => {
       updateActiveChannelMessages(data);
       // safely update zustand state

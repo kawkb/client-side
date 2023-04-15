@@ -21,30 +21,30 @@ import { ChannelType } from "../modules/channel";
 // 	  activeDMs: DMs | null;
 // }
 
-function createRandomChannel(): Channel {
-	return new Channel(faker.datatype.uuid(), faker.name.fullName(), faker.datatype.uuid(), faker.helpers.arrayElement([ChannelType.PUBLIC, ChannelType.PROTECTED,, ChannelType.PRIVATE,]), faker.image.avatar(), faker.name.lastName());
-}
+// function createRandomChannel(): Channel {
+// 	return new Channel(faker.datatype.uuid(), faker.name.fullName(), faker.datatype.uuid(), faker.helpers.arrayElement([ChannelType.PUBLIC, ChannelType.PROTECTED,, ChannelType.PRIVATE,]), faker.image.avatar(), faker.name.lastName());
+// }
 
-function createRandonChannelList(): Array<Channel> {
-	let channels: Array<Channel> = [];
-	for (let i = 0; i < 10; i++) {
-		channels.push(createRandomChannel());
-	}
-	return channels;
-}
+// function createRandonChannelList(): Array<Channel> {
+// 	let channels: Array<Channel> = [];
+// 	for (let i = 0; i < 10; i++) {
+// 		channels.push(createRandomChannel());
+// 	}
+// 	return channels;
+// }
 
-function createRandomDM(): DMs {
-	let user: User = new User(faker.datatype.uuid(), faker.name.fullName(), faker.image.avatar(), faker.helpers.arrayElement([Status.ONLINE, Status.OFFLINE, Status.INGAME,]), faker.datatype.number(), faker.datatype.number());
-	return new DMs(faker.datatype.uuid(), user);
-}
+// function createRandomDM(): DMs {
+// 	let user: User = new User(faker.datatype.uuid(), faker.name.fullName(), faker.image.avatar(), faker.helpers.arrayElement([Status.ONLINE, Status.OFFLINE, Status.INGAME,]), faker.datatype.number(), faker.datatype.number());
+// 	return new DMs(faker.datatype.uuid(), user);
+// }
 
-function createRandomDMList(): Array<DMs> {
-	let channels: Array<DMs> = [];
-	for (let i = 0; i < 10; i++) {
-		channels.push(createRandomDM());
-	}
-	return channels;
-}
+// function createRandomDMList(): Array<DMs> {
+// 	let channels: Array<DMs> = [];
+// 	for (let i = 0; i < 10; i++) {
+// 		channels.push(createRandomDM());
+// 	}
+// 	return channels;
+// }
 
 
 
@@ -62,5 +62,5 @@ const useChatList = create(
 
 
 export default useChatList;
-export { createRandonChannelList, createRandomChannel };
-export { createRandomDMList, createRandomDM };
+// export { createRandonChannelList, createRandomChannel };
+// export { createRandomDMList, createRandomDM };

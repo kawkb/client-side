@@ -257,4 +257,9 @@
 
 .nickname-button img:hover {
 	cursor: url("../../assets/svg/hover.svg"), auto;
-}	
+}
+
+.confirm-protected-channel-password{
+	height: 25%;
+	margin-bottom: 100px;	
+}
