@@ -20,7 +20,7 @@ function MatchHistory() {
 		api
 		  .get("/profile/" + param + "/info")
 		  .then((res) => {
-			console.log(res.data);
+			console.log("here matches", res.data);
 			setMatches(res.data.matchHistory)
 		  })
 		  .catch((err: AxiosError) => {
@@ -41,12 +41,13 @@ function MatchHistory() {
 					<div className='match-history-list-item match-history-draw' key={index}>
 						<div className='match-history-mode'>{match.game_mode}</div>
 						<div className='match-history-details'>
-							{/* <span className='match-history-owner'>{match.player_one.login}</span> */}
+							<span className='match-history-owner'>{match.player_one}</span>
 							<span className='match-history-owner-score'>{match.player_one_score}</span>
 							<span className='match-history-dash'>-</span>
 							<span className='match-history-opponent-score'>{match.player_two_score}</span>
-							{/* <span className='match-history-opponent'>{match.player_two.login}</span> */}
+							<span className='match-history-opponent'>{match.player_two}</span>
 						</div>
+						<div className='match-history-xp'>+{match.exp}XP</div>
 					</div>
 				)
 			})

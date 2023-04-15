@@ -197,7 +197,7 @@
 .xp-level-bar {
 	width:90%;
 	height: 70%;
-	background-color: rgba(253,225,175,0.7);
+	background-color: var(--sunny);
 	border: 1px solid var(--dark);
 	border-radius: 10px;
 	position: relative;

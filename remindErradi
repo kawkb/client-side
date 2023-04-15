@@ -1,4 +1,6 @@
 // get rid of error 500 catch it
 //when unblocked friendship  status becomes ACCEPTED meanwhile it should become NOTFRIENDS cant befriend
 //add /logout api something is wrong here
-//send me friend avatarurl in friends
+//send me friend avatarurl in 
+//add protected chanel 
+//change chanel list to take its tupe

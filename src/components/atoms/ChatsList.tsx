@@ -58,7 +58,7 @@ function ChatsList() {
         toast.error('Error while fetching channels');
       });
   }, [auth.user]);
-
+ 
 //   const [showAdminOptions, setShowAdminOptions] =
 //     React.useState<boolean>(false);
 

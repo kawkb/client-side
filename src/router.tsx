@@ -15,6 +15,9 @@ import Game from './game/Game';
 
 
 import Error from './pages/error';
+import twofa from './pages/twofa';
+import Twofa from './pages/twofa';
+import Search from './components/search';
 
 function Router() {
 const auth = useAuth();
@@ -49,7 +52,9 @@ useEffect(() => {
 			<Route path="/profil/:login" element={<ProtectedRoute component={Profil} />} />
             <Route path="/profil" element={<ProtectedRoute component={Profil} />} />
             <Route path="/bell" element={<ProtectedRoute component={Bell}/>} />
+            <Route path="/search" element={<ProtectedRoute component={Search}/>} />
             <Route path="/*" element={<Error/>} />
+            <Route path="/2fa" element={<Twofa />} />
         </Routes>
     )
 }

@@ -6,7 +6,7 @@ function DMsDisplay() {
   return (
 		<div className='chat-container'>
 			<div className='chat-side-bar copy-book-background retro-border-box trans-orange-box'>
-				<ChatSearch/>
+				{/* <ChatSearch/> */}
 				<DMsList />
 			</div>
 			<DMsBox />
