@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import login from '../assets/img/login.png';
 
 import { useAuth } from '../useAuth';
+import Cookies from 'js-cookie';
+import { useEnable2fa } from '../hooks/useEnable2fa';
 
 function Login() {
   const nav = useNavigate();
@@ -15,7 +17,12 @@ function Login() {
 
   useEffect(() => {
     if (user) {
-      nav('/');
+        nav('/');
+    }
+    const twofa = Cookies.get('2fa');
+    if (twofa === "true") {
+      Cookies.set("__2fa", "true");
+      nav("/2fa", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);

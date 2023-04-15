@@ -60,26 +60,10 @@
     margin-bottom: 5%;
 }
 
-
-.tab-box-avatar {
+.tab-box-avatar-online {
 	height: 300px;
 	width: 300px;
 	border-radius: 50%;
-
-	/* box-shadow:
-    0 0 0 6px var(--shadow),
-    0 0 0 30px var(--green),
-    0 0 0 36px var(--shadow); */
-
-	/* outline: 20px solid var(--green);
-	border: 8px solid #000000; */
-	/* box-shadow: 2px 2px 4px #000000; */
-	/* display: block; */
-	/* clip-path: circle(); */
-  /* outline-offset: -3px; */
-}
-
-.tab-box-avatar-online {
 	box-shadow:
     0 0 0 6px var(--shadow),
     0 0 0 30px var(--green),
@@ -87,13 +71,28 @@
 }
 
 .tab-box-avatar-offline {
+	height: 300px;
+	width: 300px;
+	border-radius: 50%;
 	box-shadow:
     0 0 0 6px var(--shadow),
     0 0 0 30px var(--hotred),
     0 0 0 36px var(--shadow);
 }
+.tab-box-avatar-none {
+	height: 300px;
+	width: 300px;
+	border-radius: 50%;
+	box-shadow:
+	0 0 0 6px var(--shadow),
+	0 0 0 30px var(--candy),
+	0 0 0 36px var(--shadow);
+}
 
 .tab-box-avatar-ingame {
+	height: 300px;
+	width: 300px;
+	border-radius: 50%;
 	box-shadow:
 	0 0 0 6px var(--shadow),
 	0 0 0 30px var(--sunny),

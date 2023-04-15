@@ -25,6 +25,7 @@ function Friends() {
       setFriends(res.data);
     });
   }, [loading, login, user]);
+  
   useEffect(() => {
     load();
     socket.on("status-updated", load);

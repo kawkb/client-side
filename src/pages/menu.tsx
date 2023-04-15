@@ -30,6 +30,9 @@ function Menu() {
   return (
     <div className="menu-container pattern-background green-pattern">
       <div className="retro-border-box light-box menu-box copy-book-background">
+        <Link to="/search" className="menu-links" onClick={() => toggleMenu()}>
+          search
+        </Link>
         <Link to="/" className="menu-links" onClick={() => toggleMenu()}>
           home
         </Link>

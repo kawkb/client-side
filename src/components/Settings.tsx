@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import enable2fasvg from './../assets/svg/enable2fa.svg'
 import nickname from './../assets/svg/nickname.svg'
 import editpic from './../assets/svg/editpic.svg'
@@ -13,12 +13,19 @@ import Enable2fa from './Enable2fa'
 import { useEnable2fa } from '../hooks/useEnable2fa'
 import { useAuth } from '../useAuth'
 import api from '../api/api'
+import Cookies from 'js-cookie'
 
 function Settings() {
 
 	const { user, setUserState } = useAuth();
 	const enable2fa = useEnable2fa((state) => state.enable2fa);
 	const setEnable2fa = useEnable2fa((state) => state.setEnable2fa);
+
+	useEffect(()=>{
+		const twofa = Cookies.get('__2fa');
+		setEnable2fa(twofa === "true");
+
+	}, [])
 
 //nickname logic:	
 	const [newNickname, setNickname] = useState('');

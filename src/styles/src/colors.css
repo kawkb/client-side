@@ -11,6 +11,9 @@
 .trans-pink-box {
 	background-color: var(--transpink);
 }
+.trans-brown-box {
+	background-color: #F6F1DF;
+}
 
 .trans-orange-box {
 	background-color: var(--transorange);
@@ -30,6 +33,9 @@
 
 .purple-pattern {
 	background-image: url(/public/purplebg.svg);
+}
+.brown-pattern {
+	background-image: url(/public/brown.svg);
 }
 
 .pink-pattern {
@@ -53,6 +59,10 @@
 
 .pink-header {
 	background-color: var(--hotpink);
+}
+
+.brown-header {
+	background-color: #C58666;
 }
 
 .red-header {
