@@ -121,7 +121,6 @@
 .login-button:hover {
     cursor: url("../../assets/svg/hover.svg"), auto;
 	background-color: var(--sunny);
-	/* opacity: 0.8; */
-    scale: 1.1;
+    transform: scale(1.1);
     transition: all 0.3s ease-in-out;
 }

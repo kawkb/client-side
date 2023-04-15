@@ -13,7 +13,7 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
     React.useState<boolean>(false);
   const [showOwnerOptions, setShowOwnerOptions] =
     React.useState<boolean>(false);
-  const [promoteToAdmin, setPromoteToAdmin] = React.useState<boolean>(false);
+  const [memberTitle, setMemberTitle] = React.useState<string>('Mod');
 
   const activeChannelOptions = useChatParams().activeChannelOptions;
   const activeChannelOptionsMembers =
@@ -63,7 +63,8 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
         setShowOwnerOptions(true);
       }
     });
-  }, [activeChannelOptions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeChannelOptions, ]);
 
   const handleButtonClick = (member: ChannelUser) => {
     setActiveChannelMemberOptions(member);
@@ -100,27 +101,63 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
     console.log('Kick Member');
   };
 
-  const handleModMember = () => {
-    console.log('Mod Member');
-  };
-
+  
   const handleTimeoutMember = () => {
     console.log('Timeout Member');
+    chatSocket.emit('channel:mute', {
+      channel_id: activeChannelOptions?.id,
+      user_id: activeChannelMemberOptions?.id,
+      time: 60000,
+    });
+    // console.log('Timeout Member');
   };
-
-  const handleMuteMember = () => {
-    console.log('Mute Member');
-  };
-
+  
   const handlePromoteToAdmin = () => {
     console.log('Promote to Admin');
-    setPromoteToAdmin(true);
+    api.post(`/channels/promote/${activeChannelOptions?.id}`, {
+      memberId: activeChannelMemberOptions?.id,
+    })
+    .then((res) => {
+      toast.success('User promoted to admin');
+      return true;
+    })
+    .catch((err) => {
+      console.log('promote err', err);
+      return false;
+    });
+    return true;
+  };
+  
+  const handleDemoteToMember = ()  => {
+    console.log('Demote to Member');
+    api.post(`/channels/demote/${activeChannelOptions?.id}`, {
+      memberId: activeChannelMemberOptions?.id,
+    })
+    .then((res) => {
+      toast.success('User demoted to member');
+      return true;
+    })
+    .catch((err) => {
+      console.log('demote err', err);
+      return false;
+    });
+    return true;
+  };
+  
+  const handleModMember = () => {
+    console.log('Mod Member');
+    if (memberTitle === "Mod")
+    {
+      if (handlePromoteToAdmin())
+        setMemberTitle("Unmod");
+    }
+    else
+    {
+      if (handleDemoteToMember())
+      setMemberTitle("Mod");
+    }
   };
 
-  const handleDemoteToMember = () => {
-    console.log('Demote to Member');
-    setPromoteToAdmin(false);
-  };
 
   const handleCloseOptions = () => {
     setActiveChannelMemberOptionsNull();
@@ -147,7 +184,7 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
                       />
                       <span className="channel-member-name">{member.name}</span>
                     </div>
-                    {showAdminOptions && member.id !== user?.id && (
+                    {showAdminOptions && member.id !== user?.id && member.id !== activeChannelOptions?.owner_id && (
                       <button
                         className="three-dot-menu-button"
                         onClick={() => handleButtonClick(member)}
@@ -168,7 +205,7 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
                           className="chat-list-option"
                           onClick={handleModMember}
                         >
-                          Mod
+                          {memberTitle}
                         </span>
                       )}
                       <span

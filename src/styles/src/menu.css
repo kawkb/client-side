@@ -15,7 +15,7 @@
     margin-bottom: 150px;
 }
 .menu-links {
-    color: env(--shadow); 
+    color: var(--shadow); 
     display: flex;
     font-size: 3.7vw;
     text-transform: uppercase;
@@ -26,12 +26,12 @@
 .menu-links:hover {
     cursor: url("../../assets/svg/hover.svg"), auto;
     opacity: 0.8;
-    scale: 1.2;
+    transform: scale(1.2);
     transition: all 0.3s ease-in-out;
 }
 .friend-request-link
 {
-    color: env(--shadow); 
+    color: var(--shadow); 
     display: flex;
     font-size: 90px;
     text-transform: uppercase;

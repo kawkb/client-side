@@ -3,23 +3,26 @@ import { Status } from "./user";
 import ChannelUser from "./channeluser";
 
 enum ChannelType {
-	PUBLIC = "public",
-	PROTECTED = "protected",
-	PRIVATE = "private"
+	PUBLIC = "PUBLIC",
+	PROTECTED = "PROTECTED",
+	PRIVATE = "PRIVATE"
 }
 
 class Channel {
-	private _id: string;
+	private _id: number;
 	private _name: string;
 	private _owner_id : string;
 	private _type: ChannelType;
 	private _avatar: string;
 	private _password: string;
     private _isAdmin: boolean;
+	// add is owner
+	private _isOwner: boolean;
+	private _isMuted: boolean;
 	// private _messages: ChannelMsg[];
 	// private _members: ChannelUser[];
 
-	constructor(id: string, name: string, owner_id: string, type: ChannelType = ChannelType.PUBLIC, avatar: string, password: string, isAdmin: boolean = false) {
+	constructor(id: number, name: string, owner_id: string, type: ChannelType = ChannelType.PUBLIC, avatar: string, password: string, isAdmin: boolean = false, isOwner: boolean, isMuted: boolean = false) {
 		this._id = id;
 		this._name = name;
 		this._owner_id = owner_id;
@@ -27,6 +30,8 @@ class Channel {
 		this._avatar = avatar;
 		this._password = password;
         this._isAdmin = isAdmin;
+		this._isOwner = isOwner;
+		this._isMuted = isMuted;
 		// this._messages = messages;
 		// this._members = members;
 	}
@@ -58,6 +63,14 @@ class Channel {
     get isAdmin() {
         return this._isAdmin;
     }
+
+	get isMuted() {
+		return this._isMuted;
+	}
+
+	get isOwner() {
+		return this._isOwner;
+	}
 
 	// get messages() {
 	// 	return this._messages;
@@ -91,6 +104,14 @@ class Channel {
     set isAdmin(isAdmin: boolean) {
         this._isAdmin = isAdmin;
     }
+
+	set isMuted(isMuted: boolean) {
+		this._isMuted = isMuted;
+	}
+
+	set isOwner(isOwner: boolean) {
+		this._isOwner = isOwner;
+	}
 	// set messages(messages: ChannelMsg[]) {
 	// 	this._messages = messages;
 	// }
@@ -100,7 +121,7 @@ class Channel {
 	// }
 
 	static fromJson(json: any) {
-		return new Channel(json.id, json.name, json.owner_id, json.type, json.avatar, json.password);
+		return new Channel(json.id, json.name, json.owner_id, json.type, json.avatar, json.password, json.isAdmin, json.isOwner, json.isMuted);
 	}
 
 	static fromJsonArray(json: any[]) {
@@ -116,6 +137,8 @@ class Channel {
 			password: this._password,
             avatar: this._avatar,
             isAdmin: this._isAdmin,
+			isMuted: this._isMuted,
+			isOwner: this._isOwner,
 			// messages: this._messages.map((msg) => msg.toJson()),
 			// members: this._members.map((member) => member.toJson()),
 		};

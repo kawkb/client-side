@@ -32,18 +32,14 @@
     width: 100px;
     border-radius: 50%;
     border: 5px solid var(--shadow);
-    hover: {
-        cursor: url("../../assets/svg/hover.svg"), auto;
-        scale: 1.1;
-        transition: all 0.3s ease-in-out;
-    }
 }
-.Top-player-item img:hover {
 
+.Top-player-item  img:hover {
     cursor: url("../../assets/svg/hover.svg"), auto;
-    scale: 1.1;
+    transform: scale(1.1);
     transition: all 0.3s ease-in-out;
 }
+
 .Top-player-name {
     font-size: 1vw;
     font-weight: 600;

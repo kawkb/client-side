@@ -8,6 +8,9 @@ import { toast } from 'react-hot-toast';
 
 function ChatMessages() {
   const activeChannel = useChatParams((state) => state.activeChannel);
+  const activeChannelPassword = useChatParams(
+    (state) => state.activeChannelPassword
+  );
   const activeChannelMessages = useChatParams(
     (state) => state.activeChannelMessages
   );
@@ -17,9 +20,7 @@ function ChatMessages() {
   const updateActiveChannelMessages = useChatParams(
     (state) => state.updateActiveChannelMessages
   );
-  const removeFromChannelList = useChatParams(
-    (state) => state.removeFromChannelList
-  );
+  const removeChannel = useChatParams((state) => state.removeChannel);
   const setActiveChannel = useChatParams((state) => state.setActiveChannel);
   const socket = useContext(ChatSocketContext);
   const ref = useRef<HTMLDivElement>(null);
@@ -39,12 +40,17 @@ function ChatMessages() {
     api.get(`/channels/${activeChannel?.id}/messages`).then((response) => {
       setActiveChannelMessages(response.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeChannel?.id]);
 
   useEffect(() => {
     if (!activeChannel) return;
     load();
-    socket.emit('channel:join', activeChannel?.id);
+    socket.emit('channel:join', {
+      channel_id: activeChannel?.id,
+      password: activeChannelPassword,
+    });
+    // socket.emit("channel:join", activeChannel?.id);
     socket.on('channel:message', (data) => {
       updateActiveChannelMessages(data);
       // safely update zustand state
@@ -55,8 +61,8 @@ function ChatMessages() {
         toast.error('You have been banned from this channel');
         if (activeChannel.id === data.channel_id) {
           setActiveChannelMessages([]);
-          setActiveChannel('');
-          removeFromChannelList(data.channel_id);
+          setActiveChannel(0);
+          removeChannel(data.channel_id);
         }
       }
     });
@@ -64,6 +70,7 @@ function ChatMessages() {
       socket.emit('channel:leave', activeChannel?.id);
       socket.off('channel:message');
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeChannel?.id]);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);

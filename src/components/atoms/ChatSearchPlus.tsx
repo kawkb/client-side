@@ -30,7 +30,8 @@ function ChatSearchPlus() {
             channel.type,
             channel.icon_url,
             channel.password,
-            channel.isAdmin || channel.isOwner
+            channel.isAdmin,
+            channel.isOwner
           )
       );
       setChannelList(channelList);
@@ -39,15 +40,15 @@ function ChatSearchPlus() {
 
   return (
     <div className="chat-search-plus">
-      {/* <input
+      <input
         className="chat-search-plus-input"
         type="text"
         placeholder="Search"
         onChange={handleSearch}
-      /> */}
+      />
       <ClassButton
         name="+"
-        classes="chat-plus-buttonow"
+        classes="chat-plus-button"
         onClick={handlePlusNewChat}
       />
       {/* {showOptions && <BlurredBackground />} */}

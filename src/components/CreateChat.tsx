@@ -77,7 +77,9 @@ function CreateChat({ onClose }: { onClose: () => void }) {
             channel.owner_id,
             channel.type,
             channel.icon_url,
-            channel.password
+            channel.password,
+            false,
+            true
           ),
         ]);
         toast.success('New room created!');

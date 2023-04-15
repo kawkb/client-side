@@ -2,51 +2,58 @@ import React, { useEffect } from 'react';
 import ClassButton from '../ClassButton';
 import ImgButton from '../ImgButton';
 import invite from '../../assets/img/invite.png';
-import invited from '../../assets/img/invited.png';
 import useChatParams from '../../hooks/useChatParams';
 import ChannelUser, { ChannelUserRole, ChannelUserStatus } from '../../modules/channeluser';
 import api from '../../api/api';
+import { toast } from 'react-hot-toast';
 
 function ChannelInvite({ onClose }: { onClose: () => void }) {
   const activeChannelOptions = useChatParams().activeChannelOptions;
 
-  const [searchedUser, setSearchedUser] = React.useState<string>('');
-  const [invitedUser, setInvitedUser] = React.useState<boolean>(false);
+
 
   const activeChannelOptionsInviteUsers =
     useChatParams().activeChannelOptionsInviteUsers;
   const setActiveChannelOptionsInviteUsers =
     useChatParams().setActiveChannelOptionsInviteUsers;
 
-  useEffect(() => {
-    api
-      .get(`/channels/${activeChannelOptions?.id}/nonmembers`)
-      .then((res) => {
-        setActiveChannelOptionsInviteUsers(
-          res.data.map(
-            (user: any) =>
-              new ChannelUser(
-                user.id,
-                user.login,
-                user.avatar_url.startsWith('http')
-                  ? user.avatar_url
-                  : process.env.REACT_APP_API_URL + 'static' + user.avatar_url,
-                activeChannelOptions!.id,
-                ChannelUserStatus.MEMBER,
-                ChannelUserRole.REGULAR,
-                user.created_at
-              )
-          )
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+const handleInvite = () => {
+  api
+    .get(`/channels/${activeChannelOptions?.id}/nonmembers`)
+    .then((res) => {
+      setActiveChannelOptionsInviteUsers(
+        res.data.map(
+          (user: any) =>
+            new ChannelUser(
+              user.id,
+              user.login,
+              user.avatar_url.startsWith('http')
+                ? user.avatar_url
+                : process.env.REACT_APP_API_URL + 'static' + user.avatar_url,
+              activeChannelOptions!.id,
+              ChannelUserStatus.MEMBER,
+              ChannelUserRole.REGULAR,
+              user.created_at
+            )
+        )
+      );
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
-  const handleInviteUser = () => {
-    console.log('Invite User');
-    setInvitedUser(!invitedUser);
+  useEffect(handleInvite, []);
+
+  const handleInviteUser = (userId: string) => {
+    // console.log('Invite User');
+    // setInvitedUser(!invitedUser);
+    api.post(`/channels/invites/${activeChannelOptions?.id}`, {
+      invitee_id: userId,}).then((res) => {
+        console.log('res data invite', res.data);
+      });
+      toast.success('User invited');
+// handleInvite( );
   };
 
   return (
@@ -74,22 +81,22 @@ function ChannelInvite({ onClose }: { onClose: () => void }) {
                         />
                         <span className="channel-member-name">{user.name}</span>
                       </div>
-                      {!invitedUser && (
+                      {/* {!invitedUser && ( */}
                         <ImgButton
                           src={invite}
                           alt="invite user"
                           classes="invite-user-to-channel-btn"
-                          onClick={handleInviteUser}
+                          onClick={() => handleInviteUser(user.id)}
                         />
-                      )}
-                      {invitedUser && (
+                      {/* )} */}
+                      {/* {invitedUser && (
                         <ImgButton
                           src={invited}
                           alt="invited user"
                           classes="invite-user-to-channel-btn"
                           onClick={handleInviteUser}
                         />
-                      )}
+                      )} */}
                     </div>
                   </div>
                 );

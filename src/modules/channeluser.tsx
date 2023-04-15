@@ -15,12 +15,12 @@ class ChannelUser {
 	private _id: string;
 	private _name: string;
 	private _avatar: string;
-	private _channelId: string;
+	private _channelId: number;
 	private _status: ChannelUserStatus;
 	private _role: ChannelUserRole;
 	private _muted_until: Date;
 
-	constructor(id: string, name:string, avatar: string, channelId: string, status: ChannelUserStatus, role: ChannelUserRole, muted_until: Date) {
+	constructor(id: string, name:string, avatar: string, channelId: number, status: ChannelUserStatus, role: ChannelUserRole, muted_until: Date) {
 		this._id = id;
 		this._name = name;
 		this._avatar = avatar;
