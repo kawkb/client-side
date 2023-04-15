@@ -3,7 +3,6 @@ import Sketch from "react-p5";
 import p5Types from "p5";
 import GameSocketContext from "./GameContext";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import "p5/lib/addons/p5.sound";
 import "../styles/src/loader.css";
 import { useAuth } from "../useAuth";
 interface GameStateProps {
@@ -18,14 +17,16 @@ interface GameStateProps {
   player1Score: number;
   player2Score: number;
 }
-const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
+const Game: React.FC<{ mode: string; gameId: string }> = ({ mode, gameId }) => {
   const FACTOR = 2;
   const path = window.location.pathname.split("/").at(-1);
   const [spectating, setSpectating] = useState(false);
   const socket = useContext(GameSocketContext);
   const [resized, setResized] = useState(false);
   let tableWidth = Math.min(window.innerWidth - 40, 1500);
-  const soundFile = useRef<p5Types.SoundFile>();
+  const ballImage = useRef<p5Types.Image>();
+  const ballWidth = 20; // Adjust the width as needed
+  const ballHeight = 20;
   let tableHeight = tableWidth / FACTOR;
   const gameState = {
     gameStatus: "waiting",
@@ -62,12 +63,12 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     gameState.player2Score = state.player2Score;
   });
   socket.on("gameOver", (state: GameStateProps) => {
-	console.log('gameOver', state);
+    console.log("gameOver", state);
     gameState.gameStatus = "gameover";
-	// sleep for 1 second
-	setTimeout(() => {
-		navigate('/', { replace: true });
-	}, 1000);
+    // sleep for 1 second
+    setTimeout(() => {
+      navigate("/", { replace: true });
+    }, 1000);
   });
 
   const setup: any = (p5: p5Types, canvasParentRef: Element) => {
@@ -75,18 +76,19 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     p5.ellipseMode(p5.CENTER);
     p5.rectMode(p5.CENTER);
     bg.current = {
-      Fast: p5.loadImage("/notebook.jpg"),
+      Fast: p5.loadImage("/stars.jpg"),
       Fierce: p5.loadImage("/fierce.svg"),
       Frisky: p5.loadImage("/frisky.svg"),
-	  Custom: p5.loadImage("/frisky.svg"),
+      Custom: p5.loadImage("/frisky.svg"),
     }[mode]!;
+    ballImage.current = p5.loadImage("/smiley.png");
   };
 
   const Draw: any = (p5: p5Types) => {
     if (gameState.gameStatus === "playing") {
       socket.emit("movePlayer", {
         playerY: p5.mouseY,
-		gameId: gameId,
+        gameId: gameId,
       });
     }
     // update();
@@ -96,23 +98,25 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     p5.noStroke();
 
     // Draw paddle A
-    p5.fill("black");
+    p5.fill("#cde223");
     p5.stroke("white");
     p5.rect(
       20 * (tableWidth / 1000),
       gameState.player1Y * tableHeight,
       20 * (tableWidth / 1000),
-      gameState.player1H * tableHeight
+      gameState.player1H * tableHeight,
+      20
     );
 
     // Draw paddle B
-    p5.fill("black");
+    p5.fill("#cde223");
     p5.stroke("white");
     p5.rect(
       tableWidth - 20 * (tableWidth / 1000),
       gameState.player2Y * tableHeight,
       20 * (tableWidth / 1000),
-      gameState.player2H * tableHeight
+      gameState.player2H * tableHeight,
+      20
     );
 
     for (let i = 0; i < tableHeight; i += 20) {
@@ -122,28 +126,30 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
     }
     // Draw the ball
 
-    p5.fill("black");
-    p5.stroke("white");
+    // p5.fill("black");
+    // p5.stroke("white");
     // console.log(gameState.ballX, gameState.ballY);
-    p5.ellipse(
-      gameState.ballX * tableWidth,
-      gameState.ballY * tableHeight,
-      15,
-      15
+    p5.image(
+      ballImage.current!,
+      gameState.ballX * tableWidth - ballWidth / 2,
+      gameState.ballY * tableHeight - ballHeight / 2,
+      ballWidth,
+      ballHeight
     );
     // console.log(gameState);
     // drawGameOver
     if (gameState.gameStatus === "gameover") {
-      p5.fill("black");
-      p5.textSize(32);
+      p5.fill("#cde223");
+      p5.textSize(50);
       p5.textFont("Helvetica");
       p5.textAlign(p5.CENTER, p5.CENTER);
       p5.text("Game Over", tableWidth / 2, tableHeight / 2);
     }
     // drawScore
-    p5.fill("black");
+    p5.stroke("black");
+    p5.fill("#cde223");
     p5.textFont("Helvetica");
-    p5.textSize(32);
+    p5.textSize(50);
     p5.textAlign(p5.CENTER, p5.CENTER);
     p5.text(gameState.player1Score, tableWidth / 2 - 100, 50);
     p5.text(gameState.player2Score, tableWidth / 2 + 100, 50);
@@ -157,15 +163,15 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
   };
 
   useEffect(() => {
-	console.log("gameId", gameId);	
+    console.log("gameId", gameId);
 
-	console.log("socket", socket);
+    console.log("socket", socket);
     return () => {
-      socket.emit("leaveGame", {gameId: gameId});
+      socket.emit("leaveGame", { gameId: gameId });
     };
   }, []);
-  socket.on('disconnect', () => {
-	socket.emit('leaveGame', {gameId: gameId});
+  socket.on("disconnect", () => {
+    socket.emit("leaveGame", { gameId: gameId });
   });
   return (
     <div
@@ -177,7 +183,21 @@ const Game: React.FC<{ mode: string, gameId: string }> = ({ mode, gameId }) => {
         alignItems: "center",
       }}
     >
-      <Sketch setup={setup} draw={Draw} windowResized={windowResized} />
+      <div
+        style={{
+          background: 'url("/notebook.jpg") no-repeat center center',
+          border: "10px solid black",
+          backgroundSize: "cover",
+          display: "inline-block",
+          padding: 20, // Adjust the padding to control the space between the canvas and the background image
+          borderRadius: 20,
+          overflow: "hidden",
+        }}
+      >
+        <div className="canvas-wrapper">
+          <Sketch setup={setup} draw={Draw} windowResized={windowResized} />
+        </div>
+      </div>
     </div>
   );
 };
@@ -188,33 +208,33 @@ const Waiting = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [gameId, setGameId] = useState("");
-	// get query params
-	const [query] = useSearchParams();
-    const { user, loading } = useAuth();
+  // get query params
+  const [query] = useSearchParams();
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-	// const tmpGameId = query.get("gameId")
-	// if (tmpGameId) {
-	// 	setGameId(tmpGameId);
-	// }
+    // const tmpGameId = query.get("gameId")
+    // if (tmpGameId) {
+    // 	setGameId(tmpGameId);
+    // }
     if (!["Fast", "Frisky", "Fierce", "Custom"].includes(params["mode"]!))
       navigate("/404");
     if (params["mode"] !== "Custom") {
-		console.log("join_queue", params.mode)
+      console.log("join_queue", params.mode);
       socket.emit("join_queue", { gameMode: params.mode });
     }
-    socket.on("gameReady", (data: {gameId: string}) => {
-		console.log("gameready", data.gameId)
-		// print socketid
+    socket.on("gameReady", (data: { gameId: string }) => {
+      console.log("gameready", data.gameId);
+      // print socketid
       setGameReady(true);
-	  setGameId(data.gameId);
+      setGameId(data.gameId);
     });
 
     return () => {
-		socket.emit("leave_queue");
-    	socket.off("gameReady");
+      socket.emit("leave_queue");
+      socket.off("gameReady");
     };
-  }, [socket ]);
+  }, [socket]);
 
   if (gameId) return <Game mode={params["mode"]!} gameId={gameId} />;
 
