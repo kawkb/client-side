@@ -17,6 +17,10 @@ function ChatMessages() {
   const updateActiveChannelMessages = useChatParams(
     (state) => state.updateActiveChannelMessages
   );
+  const removeFromChannelList = useChatParams(
+    (state) => state.removeFromChannelList
+  );
+  const setActiveChannel = useChatParams((state) => state.setActiveChannel);
   const socket = useContext(ChatSocketContext);
   const ref = useRef<HTMLDivElement>(null);
   const auth = useAuth();
@@ -27,7 +31,7 @@ function ChatMessages() {
       ref.current.scrollTo({
         left: 0,
         top: ref.current.scrollHeight,
-        behavior: "smooth",
+        behavior: 'smooth',
       });
   }, [activeChannelMessages]);
 
@@ -40,23 +44,25 @@ function ChatMessages() {
   useEffect(() => {
     if (!activeChannel) return;
     load();
-    socket.emit("channel:join", activeChannel?.id);
-    socket.on("channel:message", (data) => {
+    socket.emit('channel:join', activeChannel?.id);
+    socket.on('channel:message', (data) => {
       updateActiveChannelMessages(data);
       // safely update zustand state
     });
     socket.on('channel:ban', (data) => {
       console.log('channel:ban', data);
-      if (data.channel_id === activeChannel?.id) {
-        load();
-      }
-    if (data.user_id === auth.user?.id) {
+      if (data.user_id === auth.user?.id) {
         toast.error('You have been banned from this channel');
+        if (activeChannel.id === data.channel_id) {
+          setActiveChannelMessages([]);
+          setActiveChannel('');
+          removeFromChannelList(data.channel_id);
+        }
       }
-    }); 
+    });
     return () => {
-      socket.emit("channel:leave", activeChannel?.id);
-      socket.off("channel:message");
+      socket.emit('channel:leave', activeChannel?.id);
+      socket.off('channel:message');
     };
   }, [activeChannel?.id]);
 
@@ -64,7 +70,7 @@ function ChatMessages() {
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
