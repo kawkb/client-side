@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import ClassButton from '../ClassButton';
 import useChatParams from '../../hooks/useChatParams';
 import ChannelUser from '../../modules/channeluser';
 import api from '../../api/api';
+import { toast } from 'react-hot-toast';
+import { useAuth } from '../../useAuth';
+import ChatSocketContext from '../ChatContext';
 
 function ChannelMembers({ onClose }: { onClose: () => void }) {
+  const { user } = useAuth();
   const [showAdminOptions, setShowAdminOptions] =
     React.useState<boolean>(false);
   const [showOwnerOptions, setShowOwnerOptions] =
@@ -22,6 +26,7 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
     useChatParams().setActiveChannelMemberOptions;
   const setActiveChannelMemberOptionsNull =
     useChatParams().setActiveChannelMemberOptionsNull;
+  const chatSocket = useContext(ChatSocketContext);
 
   // fetch members from channel with id activeChannelOptions.id
   useEffect(() => {
@@ -65,8 +70,29 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
   };
 
   const handleBanMember = () => {
-    console.log('Ban Member');
-    // banactiveChannelMemberOptions.id
+    // console.log('Ban Member');
+    console.log(activeChannelMemberOptions?.id);
+    api
+      .post(`/channels/${activeChannelOptions?.id}/ban`, {
+        memberId: activeChannelMemberOptions?.id,
+      })
+      .then((res) => {
+        toast.success('User banned');
+        chatSocket.emit('channel:ban', {
+          channel_id: activeChannelOptions?.id,
+          member_id: activeChannelMemberOptions?.id,
+        });
+        setActiveChannelOptionsMembers(
+          activeChannelOptionsMembers.filter(
+            (member) => member.id !== activeChannelMemberOptions?.id
+          )
+        );
+        setActiveChannelMemberOptionsNull();
+      })
+      .catch((err) => {
+        console.log('ban err', err);
+      });
+    // activeChannelMemberOptions.id
   };
 
   const handleKickMember = () => {
@@ -120,7 +146,7 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
                       />
                       <span className="channel-member-name">{member.name}</span>
                     </div>
-                    {showAdminOptions && (
+                    {showAdminOptions && member.id !== user?.id && (
                       <button
                         className="three-dot-menu-button"
                         onClick={() => handleButtonClick(member)}

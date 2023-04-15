@@ -1,9 +1,10 @@
-import { useCallback, useContext, useEffect, useRef } from "react";
-import ChatMsg from "./ChatMsg";
-import useChatParams from "../../hooks/useChatParams";
-import api from "../../api/api";
-import ChatSocketContext from "../ChatContext";
-import { useAuth } from "../../useAuth";
+import { useCallback, useContext, useEffect, useRef } from 'react';
+import ChatMsg from './ChatMsg';
+import useChatParams from '../../hooks/useChatParams';
+import api from '../../api/api';
+import ChatSocketContext from '../ChatContext';
+import { useAuth } from '../../useAuth';
+import { toast } from 'react-hot-toast';
 
 function ChatMessages() {
   const activeChannel = useChatParams((state) => state.activeChannel);
@@ -44,6 +45,15 @@ function ChatMessages() {
       updateActiveChannelMessages(data);
       // safely update zustand state
     });
+    socket.on('channel:ban', (data) => {
+      console.log('channel:ban', data);
+      if (data.channel_id === activeChannel?.id) {
+        load();
+      }
+    if (data.user_id === auth.user?.id) {
+        toast.error('You have been banned from this channel');
+      }
+    }); 
     return () => {
       socket.emit("channel:leave", activeChannel?.id);
       socket.off("channel:message");

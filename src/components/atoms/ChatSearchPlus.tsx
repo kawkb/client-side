@@ -20,7 +20,6 @@ function ChatSearchPlus() {
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
     api.get(`/channels/search?q=${e.target.value}`).then((response) => {
       const channelList: Channel[] = response.data.map(
         (channel: any) =>
@@ -34,7 +33,6 @@ function ChatSearchPlus() {
             channel.isAdmin || channel.isOwner
           )
       );
-        console.log(channelList);
       setChannelList(channelList);
     });
   };
