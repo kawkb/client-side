@@ -215,3 +215,18 @@
 	cursor: url("../../assets/svg/hover.svg"), auto;
 	background-color: var(--lightorange);
 }
+.tab-box-avatar {
+	height: 300px;
+	width: 300px;
+	border-radius: 50%;
+
+	box-shadow:
+    0 0 0 15px black;
+
+	/* outline: 20px solid var(--green);
+	border: 8px solid #000000; */
+	/* box-shadow: 2px 2px 4px #000000; */
+	/* display: block; */
+	/* clip-path: circle(); */
+  /* outline-offset: -3px; */
+}

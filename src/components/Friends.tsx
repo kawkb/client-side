@@ -25,6 +25,18 @@ function Friends() {
       setFriends(res.data);
     });
   }, [loading, login, user]);
+
+  useEffect(() => {
+    if (loading) return;
+    let param = login;
+    if (login == null) {
+      param = user.login;
+    }
+    api.get("/friend/friends/" + param).then((res) => {
+      console.log(res.data);
+      setFriends(res.data);
+    });
+  }, [friendButton]);
   
   useEffect(() => {
     load();

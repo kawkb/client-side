@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useMenuClose } from "../hooks/useMenuClose";
 import Cookies from "js-cookie";
 import authService from "../api/authService";
+import { useActiveTab } from "../hooks/useActiveTab";
 
 function deleteAllCookies() {
   const cookies = Cookies.get();
@@ -15,6 +16,8 @@ function Menu() {
   // const menuName = useMenuClose((state) => state.menuName);
   const setMenuClose = useMenuClose((state) => state.setMenuClose);
   const setMenuName = useMenuClose((state) => state.setMenuName);
+
+  const setActiveTab = useActiveTab((state) => state.setActiveTab);
   const nav = useNavigate();  
   function toggleMenu() {
     setMenuClose(true);
@@ -36,7 +39,9 @@ function Menu() {
         <Link to="/" className="menu-links" onClick={() => toggleMenu()}>
           home
         </Link>
-        <Link to="/profil" className="menu-links" onClick={() => toggleMenu()}>
+        <Link to="/profil" className="menu-links" onClick={() => {
+          setActiveTab(0);
+          toggleMenu()}}>
           profil
         </Link>
         <Link to="/chat" className="menu-links" onClick={() => toggleMenu()}>

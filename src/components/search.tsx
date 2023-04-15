@@ -49,7 +49,7 @@ function Search() {
                 
             }
             >
-                <div className="notif-msg-container" >
+                <div className=" notif-msg-container-name" >
                     {
                         res?.login
                     }

@@ -33,6 +33,8 @@ function Settings() {
 		api.post('/profile/update/login', { login: newNickname })
 		  .then(response => {
 			console.log(response);
+
+			setNickname('');
 			setUserState({ ...user, login: newNickname });
 		  })
 		  .catch(error => {

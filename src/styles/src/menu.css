@@ -12,12 +12,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2%;
 }
 .menu-links {
     color: env(--shadow); 
     display: flex;
-    font-size: 120px;
+    font-size: 100px;
     text-transform: uppercase;
 }
 .logout-link{
@@ -92,7 +91,16 @@
     height: 90%;
     position: relative;
 }
-
+.notif-msg-container-name
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-size: 1.5rem;
+}
 .notif-msg-name {
     font-size: 2rem;
     /* font-weight: bold; */
