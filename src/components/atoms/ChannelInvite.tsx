@@ -43,7 +43,10 @@ const handleInvite = () => {
     });
 }
 
-  useEffect(handleInvite, []);
+  useEffect(
+    handleInvite,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+     []);
 
   const handleInviteUser = (userId: string) => {
     // console.log('Invite User');

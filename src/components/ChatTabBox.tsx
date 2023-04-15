@@ -9,10 +9,7 @@ import ChatDisplay from './ChatDisplay';
 import DMsDisplay from './DMsDisplay';
 
 
-interface ChatTabBoxProps {
-	title: string;
-	avatar: string;
-}
+
 
 function ChatTabBox() {
 

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useBell } from "../hooks/useBell";
-import Notif from "../components/atoms/Notif";
-import ImgButton from "../components/ImgButton";
 import accept from '../assets/img/accept.png';
 import decline from '../assets/img/decline.png';
 import { useAuth } from "../useAuth";
@@ -29,20 +27,12 @@ function FriendButton(props: FriendButtonProps) {
 }
 
 function Bell() {
-  const setBellClose = useBell((state) => state.setBellClose);
-  const setBellName = useBell((state) => state.setBellName);
   const [visible, setVisible] = useState(true);
   const [friendrequest, setfriendrequest] = React.useState<any>([]);
-  const { user, loading } = useAuth();
+  const {loading } = useAuth();
   const nav = useNavigate();
-  const notifList = [];
 
-  function toggleBell() {
-    setBellClose(true);
-    setBellName("Close");
-  }
 
-  const notifNumber = 5;
 
   function handleAcceptFriend(login: string){
     console.log("Accept");
@@ -84,6 +74,7 @@ function Bell() {
           if (err.response.status === 404) nav("/404", { replace: true });
         }
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
 

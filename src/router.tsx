@@ -15,13 +15,11 @@ import Game from './game/Game';
 
 
 import Error from './pages/error';
-import twofa from './pages/twofa';
 import Twofa from './pages/twofa';
 import Search from './components/search';
 
 function Router() {
 const auth = useAuth();
-const location = useLocation();
 
 useEffect(() => {
     console.log(auth);
@@ -40,6 +38,7 @@ useEffect(() => {
     } else {
         auth.setUserState(null);
 }
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, []);
 
     return (

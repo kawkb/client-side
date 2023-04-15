@@ -1,24 +1,16 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link} from "react-router-dom";
 import { useMenuClose } from "../hooks/useMenuClose";
-import Cookies from "js-cookie";
 import authService from "../api/authService";
 import { useActiveTab } from "../hooks/useActiveTab";
 
-function deleteAllCookies() {
-  const cookies = Cookies.get();
-  for (const cookie in cookies) {
-    Cookies.remove(cookie);
-  }
-}
 function Menu() {
   // const menuClose = useMenuClose((state) => state.menuClose);
   // const menuName = useMenuClose((state) => state.menuName);
   const setMenuClose = useMenuClose((state) => state.setMenuClose); 
   const setMenuName = useMenuClose((state) => state.setMenuName);
 
-  const setActiveTab = useActiveTab((state) => state.setActiveTab);
-  const nav = useNavigate();  
+  const setActiveTab = useActiveTab((state) => state.setActiveTab); 
   function toggleMenu() {
     setMenuClose(true);
     setMenuName("Menu");

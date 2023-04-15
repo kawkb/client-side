@@ -1,8 +1,6 @@
 import ChatMessages from "./ChatMessages";
 import ChatInput from "./ChatInput";
 import useChatParams from "../../hooks/useChatParams";
-import bigcat from "../../assets/svg/bigcat.svg";
-import { ChannelType } from "../../modules/channel";
 import { useState } from "react";
 import protectedlogo from "../../assets/svg/protected.svg";
 import api from "../../api/api";

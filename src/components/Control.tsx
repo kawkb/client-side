@@ -70,6 +70,7 @@ function Control() {
         console.log(error);
         nav('/404', { replace: true });
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
 
   // add friend logic:

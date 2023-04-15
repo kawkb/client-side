@@ -20,7 +20,6 @@ import { ChannelType } from '../../modules/channel';
 function ChatsList() {
   const channelList = useChatParams((state) => state.channelList);
   const setChannelList = useChatParams((state) => state.setChannelList);
-  const activeChannel = useChatParams((state) => state.activeChannel);
   const activeChannelSettingsSave = useChatParams((state) => state.activeChannelSettingsSave);
   const activeChannelOptions = useChatParams(
     (state) => state.activeChannelOptions
@@ -65,14 +64,12 @@ function ChatsList() {
         console.log(error);
         toast.error('Error while fetching channels');
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth.user, activeChannelSettingsSave]);
  
 //   const [showAdminOptions, setShowAdminOptions] =
 //     React.useState<boolean>(false);
 
-  const handleMenuClick = (menuItem: string) => {
-    console.log(menuItem);
-  };
 
   const handleButtonClick = (itemId: number, itemName: string) => {
     console.log(`item id: ${itemId} ${itemName}`);

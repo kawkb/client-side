@@ -24,8 +24,7 @@ function Settings() {
 	useEffect(()=>{
 		const twofa = Cookies.get('__2fa');
 		setEnable2fa(twofa === "true");
-
-	}, [])
+	}, [setEnable2fa])
 
 //nickname logic:	
 	const [newNickname, setNickname] = useState('');
@@ -47,10 +46,6 @@ function Settings() {
 
 //2fa logic:
 
-const handleToggle = (isToggled: boolean) => {
-	setEnable2fa(isToggled);
-	setShowOptions(true);
-};
 
 // const handleToggle = (isToggled: boolean) => {
 	// 	console.log(`Toggle button is ${isToggled ? 'on' : 'off'}`);
@@ -70,10 +65,7 @@ const handleToggle = (isToggled: boolean) => {
 	}
 	
 	const [showOptions, setShowOptions] = useState(false);
-	
-	const handlePlusNewChat = () => {
-		
-	}
+
 	
 	const handleSubmitQR = () => {
 		console.log('Submit QR!');

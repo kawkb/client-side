@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import ClassButton from "../components/ClassButton";
 import insertwofa from "../assets/svg/insert2fa.svg";
 import Cookies from "js-cookie";
@@ -20,6 +20,7 @@ function Twofa() {
       Cookies.remove("__2fa");
       nav("/login", { replace: true });
     }, 1000 * 60 * 2);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function submit2fa() {

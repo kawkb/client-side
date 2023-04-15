@@ -1,11 +1,8 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React from 'react';
 import ClassButton from './ClassButton';
 import ImgButton from './ImgButton';
 import { useActiveTab } from '../hooks/useActiveTab';
-import { useAuth } from '../useAuth';
-import { useParams } from 'react-router-dom';
-import api from '../api/api';
-import GameSocketContext from "../game/GameContext";
+
 import { useLoggedState } from '../hooks/useLoggedState';
 
 // interface TabBoxProps {
@@ -33,14 +30,11 @@ interface TabBoxProps {
 }
 
 function TabBox({ imgbtn, options, tabcolor, title, avatar}:TabBoxProps) {
-	const[meh, setMeh] = React.useState<any>([]);
-	const { user, loading } = useAuth();
-	const { login } = useParams();
+
 	// const [activeTab, setActiveTab] = useState(0);
 	const activeTab = useActiveTab((state) => state.activeTab);
 	const setActiveTab = useActiveTab((state) => state.setActiveTab);
 	const loggedState = useLoggedState((state) => state.loggedState);
-	const socket = useContext(GameSocketContext);
 	const changeTab = (index : number) => {
 		setActiveTab(index);
 	}

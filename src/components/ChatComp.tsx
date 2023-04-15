@@ -1,15 +1,7 @@
-import ChatDisplay from './ChatDisplay';
-import le_chat from './../assets/svg/le_chat.svg';
-import les_chats from './../assets/svg/les_chats.svg';
-import DMsDisplay from './DMsDisplay';
+
 import ChatTabBox from './ChatTabBox';
 
 function ChatComp() {
-	const options = [
-		{ name: le_chat, content: <DMsDisplay />},
-		{ name: les_chats, content: <ChatDisplay />},
-	];
-	const color:string = "orange";
 
 	// const activeChannel = useChatParams(state => state.activeChannel);
 	// const activeDMs = useChatParams(state => state.activeDMs);

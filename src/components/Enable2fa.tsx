@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import QRCode from 'qrcode.react';
 import ClassButton from './ClassButton';
-import { useEnable2fa } from '../hooks/useEnable2fa';
 import api from '../api/api';
 import { toast } from 'react-hot-toast';
 
@@ -17,8 +16,6 @@ function Enable2fa({onClose, onSubmit} : Enable2faProps) {
 	const [code, setCode] = React.useState<string>('');
 	
 
-	const enable2fa = useEnable2fa((state) => state.enable2fa);
-	const setEnable2fa = useEnable2fa((state) => state.setEnable2fa);
 
 	const handleEnable2fa = () => {
 		console.log('enable 2fa', code);

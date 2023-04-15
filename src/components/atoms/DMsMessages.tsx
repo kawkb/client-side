@@ -46,6 +46,7 @@ function DMsMessages() {
       socket.emit("dms:leave", activeDMs?.id);
       socket.off("dms:message");
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDMs?.id]);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
@@ -58,6 +59,7 @@ function DMsMessages() {
 
   useEffect(() => {
     scrollToBottom();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeDMsMessages]);
 
   return (

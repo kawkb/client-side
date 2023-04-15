@@ -1,20 +1,9 @@
 
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useBell } from "../hooks/useBell";
-import Notif from "../components/atoms/Notif";
-import ImgButton from "../components/ImgButton";
-import accept from '../assets/img/accept.png';
-import decline from '../assets/img/decline.png';
-import { useAuth } from "../useAuth";
-import { AxiosError } from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import search from './../assets/svg/search.svg'
-interface FriendButtonProps {
-  login: string;
-  source:string;
-  onClick: (request: string) => void;
-}
+
 function Search() {
     const [searchResults, setSearchResults] = useState<any>([]);
     const nav = useNavigate();

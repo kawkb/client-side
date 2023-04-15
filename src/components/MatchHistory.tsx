@@ -28,8 +28,8 @@ function MatchHistory() {
 			  if (err.response.status === 404) nav("/404", { replace: true });
 			}
 		  });
-
-	  }, [loading, login]);
+		  // eslint-disable-next-line react-hooks/exhaustive-deps
+	  }, [loading]);
   return (
 	<div className='match-history-box retro-border-box trans-pink-box copy-book-background'>
 		<h1>Match History:</h1>

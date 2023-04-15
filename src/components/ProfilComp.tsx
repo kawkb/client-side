@@ -8,8 +8,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AxiosError } from "axios";
 import { useProfileImage } from "../hooks/useProfileImage";
 import Control from "./Control";
-import { useActiveTab } from "../hooks/useActiveTab";
-import Cookies from "js-cookie";
 import { useLoggedState } from "../hooks/useLoggedState";
 import GameSocketContext from "../game/GameContext";
 
@@ -21,12 +19,7 @@ function ProfilComp() {
   const setProfilImage = useProfileImage((state) => state.setImage);
   const profileImage = useProfileImage((state) => state.image);
   const [options, setOptions] = React.useState<any>([]);
-  const [xp, setXp] = React.useState<number>(0);
-  const [level, setLevel] = React.useState<number>(0);
 
-  const activeTab = useActiveTab((state) => state.activeTab);
-  const setActiveTab = useActiveTab((state) => state.setActiveTab);
-  const loggedState = useLoggedState((state) => state.loggedState);
   const setLoggedState = useLoggedState((state) => state.setLoggedState);
   const socket = useContext(GameSocketContext);
   useEffect(() => {
@@ -52,13 +45,13 @@ function ProfilComp() {
               res.data.avatar_url
           );
         }
-        setXp(res.data.exp);
       })
       .catch((err: AxiosError) => {
         if (err.response) {
           if (err.response.status === 404) nav("/404", { replace: true });
         }
       });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, user, login]);
 
   useEffect(() => {

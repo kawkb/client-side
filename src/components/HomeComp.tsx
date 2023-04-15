@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import frisky from '../assets/svg/frisky.svg';
 import fast from '../assets/svg/fast.svg';
 import fierce from '../assets/svg/fierce.svg';
-import { faker } from '@faker-js/faker';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useAuth } from '../useAuth';
@@ -41,9 +40,8 @@ import { useActiveTab } from '../hooks/useActiveTab';
 
 function HomeComp() {
   const nav = useNavigate();
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const [isFirstLogin, setIsFirstLogin] = useState<any>(null);
-  const activeTab = useActiveTab((state) => state.activeTab);
   const setActiveTab = useActiveTab((state) => state.setActiveTab);
   useEffect(() => {
     if (loading) return;
@@ -55,6 +53,7 @@ function HomeComp() {
         console.log("first time");
       }else
         setIsFirstLogin(true);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading])
 
   const joinQueue = (gameMode: string) => {

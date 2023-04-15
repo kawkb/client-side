@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../useAuth";
 import api from "../api/api";
-import { AxiosError } from "axios";
 import { useFriendButton } from "../hooks/useFriendButton";
 import GameSocketContext from "../game/GameContext";
 
@@ -36,6 +35,7 @@ function Friends() {
       console.log(res.data);
       setFriends(res.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [friendButton]);
   
   useEffect(() => {
