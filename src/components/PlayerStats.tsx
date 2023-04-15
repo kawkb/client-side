@@ -31,10 +31,6 @@ function PlayerStats() {
 			setLosses(res.data.lossPercentage)
 			setDraws(res.data.drawPercentage)
 		  })
-		//   });
-		// api.post('/profile/update/login', {
-		//   login: user.login,
-		// });
 	  }, [loading]);
 
   return (

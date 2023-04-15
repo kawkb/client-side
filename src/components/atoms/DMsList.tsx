@@ -7,6 +7,7 @@ import { useAuth } from '../../useAuth';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import GameSocketContext from '../../game/GameContext';
+import ChatSocketContext from '../ChatContext';
 
 function DMsList() {
   const dmsList = useDMsParams((state) => state.dmsList);
@@ -19,6 +20,7 @@ function DMsList() {
   const { user } = useAuth();
   const nav = useNavigate();
   const socket = useContext(GameSocketContext);
+  const chatSocket = useContext(ChatSocketContext);
 
   const load = useCallback(async () => {
     api.get('/message').then((response) => {
@@ -41,15 +43,17 @@ function DMsList() {
   useEffect(() => {
     if (!user) return;
     load();
-    // socket
-    socket.on('dms:block', (data: any) => {
+    chatSocket.on('dms:block', (data: any) => {
       console.log('dms:block', data);
-      if (data.userId === user.id) {
+      if (data.user_id === user.id) {
         setActiveDMs(null);
         load();
       }
     });
-  }, [load, user, setActiveDMs, socket]);
+    return () => {
+      chatSocket.off('dms:block');
+    };
+  }, [load, user, chatSocket, setActiveDMs]);
 
   const handleButtonClick = (itemId: string, itemName: string) => {
     console.log(`item id: ${itemId} ${itemName}`);
@@ -69,6 +73,7 @@ function DMsList() {
           load();
           socket.emit('dms:block', { userId: activeDMsOptions.user.id });
           setActiveDMs(null);
+          chatSocket.emit('dms:block', { user_id: activeDMsOptions.user.id });
         })
         .catch(() => {
           toast.error('user could not be blocked!');

@@ -29,7 +29,7 @@ function MatchHistory() {
 			}
 		  });
 
-	  }, [loading]);
+	  }, [loading, login]);
   return (
 	<div className='match-history-box retro-border-box trans-pink-box copy-book-background'>
 		<h1>Match History:</h1>
