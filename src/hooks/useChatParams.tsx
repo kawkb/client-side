@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import Channel from "../modules/channel";
-import type ChannelMsg from "../modules/channelmsg";
-import ChannelUser from "../modules/channeluser";
+import { create } from 'zustand';
+import Channel from '../modules/channel';
+import type ChannelMsg from '../modules/channelmsg';
+import ChannelUser from '../modules/channeluser';
 
 interface ChatParamsStore {
 	channelTab: boolean;

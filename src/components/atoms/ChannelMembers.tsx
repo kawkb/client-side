@@ -81,6 +81,7 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
         chatSocket.emit('channel:ban', {
           channel_id: activeChannelOptions?.id,
           member_id: activeChannelMemberOptions?.id,
+          member_login: activeChannelMemberOptions?.name,
         });
         setActiveChannelOptionsMembers(
           activeChannelOptionsMembers.filter(

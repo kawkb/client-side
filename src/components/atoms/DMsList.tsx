@@ -1,12 +1,12 @@
-import { useCallback, useContext, useEffect } from "react";
-import useDMsParams from "../../hooks/useDMsParams";
-import api from "../../api/api";
-import User, { Status } from "../../modules/user";
-import DMs from "../../modules/dms";
-import { useAuth } from "../../useAuth";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
-import GameSocketContext from "../../game/GameContext";
+import { useCallback, useContext, useEffect } from 'react';
+import useDMsParams from '../../hooks/useDMsParams';
+import api from '../../api/api';
+import User, { Status } from '../../modules/user';
+import DMs from '../../modules/dms';
+import { useAuth } from '../../useAuth';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import GameSocketContext from '../../game/GameContext';
 
 function DMsList() {
   const dmsList = useDMsParams((state) => state.dmsList);
@@ -21,7 +21,7 @@ function DMsList() {
   const socket = useContext(GameSocketContext);
 
   const load = useCallback(async () => {
-    api.get("/message").then((response) => {
+    api.get('/message').then((response) => {
       setDMsList(
         response.data.map((dms: any) => {
           let user: User = new User(
@@ -41,7 +41,15 @@ function DMsList() {
   useEffect(() => {
     if (!user) return;
     load();
-  }, [load, user]);
+    // socket
+    socket.on('dms:block', (data: any) => {
+      console.log('dms:block', data);
+      if (data.userId === user.id) {
+        setActiveDMs(null);
+        load();
+      }
+    });
+  }, [load, user, setActiveDMs, socket]);
 
   const handleButtonClick = (itemId: string, itemName: string) => {
     console.log(`item id: ${itemId} ${itemName}`);
@@ -49,43 +57,44 @@ function DMsList() {
   };
 
   const handleCloseOptions = () => {
-    setActiveDMsOptions("");
+    setActiveDMsOptions('');
   };
 
   const handleBlockUser = () => {
     if (activeDMsOptions) {
       api
-        .post("/friend/block/" + activeDMsOptions.user.name)
+        .post('/friend/block/' + activeDMsOptions.user.name)
         .then(() => {
-          toast.success("user has been blocked with style!");
+          toast.success('user has been blocked with style!');
           load();
+          socket.emit('dms:block', { userId: activeDMsOptions.user.id });
           setActiveDMs(null);
         })
         .catch(() => {
-          toast.error("user could not be blocked!");
+          toast.error('user could not be blocked!');
         });
-      setActiveDMsOptions("");
+      setActiveDMsOptions('');
     }
   };
 
   const handleInviteToPlay = () => {
-    console.log("invite to play", activeDMsOptions);
+    console.log('invite to play', activeDMsOptions);
     if (activeDMsOptions) {
-      setActiveDMsOptions("");
-      toast.success("game invitation has been sent with style!", {
-        position: "top-right",
+      setActiveDMsOptions('');
+      toast.success('game invitation has been sent with style!', {
+        position: 'top-right',
       });
-      console.log("invite", activeDMsOptions.user.id);
-      socket.emit("invite", { userId: activeDMsOptions.user.id });
-      nav("/game/Custom", { replace: true });
+      console.log('invite', activeDMsOptions.user.id);
+      socket.emit('invite', { userId: activeDMsOptions.user.id });
+      nav('/game/Custom', { replace: true });
     }
   };
 
   const handleGotoProfile = () => {
-    console.log("goto profile", activeDMsOptions);
+    console.log('goto profile', activeDMsOptions);
     // activeDMsOptions.id is the user id of the user we want to go to
     if (activeDMsOptions) {
-      setActiveDMsOptions("");
+      setActiveDMsOptions('');
       nav(`/profil/${activeDMsOptions.user.name}`);
     }
   };
@@ -105,8 +114,8 @@ function DMsList() {
                     setActiveDMs(item.id);
                   }}
                 >
-                  {" "}
-                  {itemName}{" "}
+                  {' '}
+                  {itemName}{' '}
                 </span>
                 <button
                   className="three-dot-menu-button"
