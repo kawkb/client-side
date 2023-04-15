@@ -77,9 +77,9 @@ const Game: React.FC<{ mode: string; gameId: string }> = ({ mode, gameId }) => {
     p5.rectMode(p5.CENTER);
     bg.current = {
       Fast: p5.loadImage("/stars.jpg"),
-      Fierce: p5.loadImage("/fierce.svg"),
-      Frisky: p5.loadImage("/frisky.svg"),
-      Custom: p5.loadImage("/frisky.svg"),
+      Fierce: p5.loadImage("/fierce.jpg"),
+      Frisky: p5.loadImage("/frisky.jpg"),
+      Custom: p5.loadImage("/frisky.jpg"),
     }[mode]!;
     ballImage.current = p5.loadImage("/smiley.png");
   };
@@ -98,7 +98,7 @@ const Game: React.FC<{ mode: string; gameId: string }> = ({ mode, gameId }) => {
     p5.noStroke();
 
     // Draw paddle A
-    p5.fill("#cde223");
+    p5.fill("#f5f5f5");
     p5.stroke("white");
     p5.rect(
       20 * (tableWidth / 1000),
@@ -109,7 +109,7 @@ const Game: React.FC<{ mode: string; gameId: string }> = ({ mode, gameId }) => {
     );
 
     // Draw paddle B
-    p5.fill("#cde223");
+    p5.fill("#f5f5f5");
     p5.stroke("white");
     p5.rect(
       tableWidth - 20 * (tableWidth / 1000),
