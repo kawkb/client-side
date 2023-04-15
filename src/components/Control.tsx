@@ -5,7 +5,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { useFriendButton } from '../hooks/useFriendButton';
 import GameSocketContext from '../game/GameContext';
-
+import addFriend from './../assets/svg/addFriend.svg'
+import playinvite from './../assets/svg/playinvite.svg'
+import Block from './../assets/svg/Block.svg'
 // import { useProfileImage } from "../hooks/useProfileImage";
 // import { useAuth } from "../useAuth";
 // import { useNickname } from "../hooks/useNickname";
@@ -146,10 +148,10 @@ function Control() {
   return (
     <div className="settings-container">
       <div className="copy-book-background retro-border-box trans-pink-box setting-box">
-        <h1> Update your gaming bond! </h1>
+        <img className="svg-text-edit-add" src={addFriend} alt="" />
         <div className="retro-button-container">
           <button
-            className={'retro-button ' + friendButtonColor}
+            className={'retro-button-ami ' + friendButtonColor}
             onClick={friendHandleCLick}
           >
             {friendButton}
@@ -158,10 +160,10 @@ function Control() {
       </div>
 
       <div className="copy-book-background retro-border-box trans-pink-box setting-box">
-        <h1> Are you feeling lucky? </h1>
+      <img className="svg-text-edit-add" src={playinvite} alt="" />
         <div className="retro-button-container">
           <button
-            className="retro-button pink-header"
+            className="retro-button-ami pink-header"
             onClick={playHandleCLick}
           >
             Let's play!
@@ -170,10 +172,10 @@ function Control() {
       </div>
 
       <div className="copy-book-background retro-border-box trans-pink-box setting-box">
-        <h1> Block Out the Noise! </h1>
+      <img className="svg-text-edit-add" src={Block} alt="" />
         <div className="retro-button-container">
           <button
-            className="retro-button pink-header"
+            className="retro-button-ami pink-header"
             onClick={blockHandleCLick}
           >
             {blockButton}

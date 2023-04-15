@@ -71,10 +71,10 @@
 }
 .the-twofa-popup-input {
 	border: 3px solid var(--dark);
-	background-color: rgb(247, 215, 186, 0.7);
+	background-color: rgba(186, 154, 228, 0.8);
 	padding: 10px;
 	font-size: 2rem;
-	width: 65%;
+	width: 90%;
 	height: 10%;
 	font-family: var(--font);
 	outline: none;

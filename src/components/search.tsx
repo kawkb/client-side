@@ -9,7 +9,7 @@ import decline from '../assets/img/decline.png';
 import { useAuth } from "../useAuth";
 import { AxiosError } from "axios";
 import api from "../api/api";
-
+import search from './../assets/svg/search.svg'
 interface FriendButtonProps {
   login: string;
   source:string;
@@ -30,13 +30,14 @@ function Search() {
   return (
     <div className="menu-container pattern-background purple-pattern">
         <div className="notif-container retro-border-box trans-purple-box menu-box copy-book-background">
-          <h2 className="friend-request-link"> Search:</h2>
+          {/* <h2 className="friend-request-link"> Search:</h2> */}
+          <img className="svg-text-edit-search" src={search} alt="" />
           <input type="text" className="the-twofa-popup-input" placeholder="Search for a friend" onChange={handleSearchChange}/>
-          <div className="notif-list scrollable">
+          <div className="notif-list-search scrollable">
         {
           searchResults.map((res: any, index:number) => {
             return (
-              <div className="notif-box"
+              <div className="notif-box-search"
               
               style={{
                 cursor: "pointer",
@@ -49,7 +50,7 @@ function Search() {
                 
             }
             >
-                <div className=" notif-msg-container-name" >
+                <div className=" notif-msg-container-search-name" >
                     {
                         res?.login
                     }

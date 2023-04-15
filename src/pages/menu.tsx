@@ -14,7 +14,7 @@ function deleteAllCookies() {
 function Menu() {
   // const menuClose = useMenuClose((state) => state.menuClose);
   // const menuName = useMenuClose((state) => state.menuName);
-  const setMenuClose = useMenuClose((state) => state.setMenuClose);
+  const setMenuClose = useMenuClose((state) => state.setMenuClose); 
   const setMenuName = useMenuClose((state) => state.setMenuName);
 
   const setActiveTab = useActiveTab((state) => state.setActiveTab);
@@ -33,11 +33,11 @@ function Menu() {
   return (
     <div className="menu-container pattern-background green-pattern">
       <div className="retro-border-box light-box menu-box copy-book-background">
-        <Link to="/search" className="menu-links" onClick={() => toggleMenu()}>
-          search
-        </Link>
         <Link to="/" className="menu-links" onClick={() => toggleMenu()}>
           home
+        </Link>
+        <Link to="/search" className="menu-links" onClick={() => toggleMenu()}>
+          search
         </Link>
         <Link to="/profil" className="menu-links" onClick={() => {
           setActiveTab(0);

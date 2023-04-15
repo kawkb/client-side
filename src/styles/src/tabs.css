@@ -172,6 +172,19 @@
 	max-width: 100%;
 	height: 65%;
 }
+.svg-text-edit-add {
+	/* position: absolute; */
+	max-width: 100%;
+	height: 65%;
+	padding: 5%;
+}
+.svg-text-edit-search {
+	/* position: absolute; */
+	max-width: 30%;
+	margin-right: 60%;
+	height: 35%;
+	/* padding: 4% 1%; */
+}
 
 .retro-button-container {
 	display: flex;
@@ -193,7 +206,22 @@
 	border-radius: 40px;
 	box-shadow: -10px 10px 0px var(--shadow);
 }
-
+.retro-button-ami {
+	/* background-color: var(--hotpink); */
+	cursor: pointer;
+	outline: none;
+	font-family: var(--font);
+	font-size: 2.5rem;
+	height: 80%;
+	width: 40%;
+	border: 5px solid var(--shadow);
+	border-radius: 40px;
+	box-shadow: -10px 10px 0px var(--shadow);
+}
+.retro-button-ami:hover {
+	background-color: var(--sunny);
+	cursor: url("../../assets/svg/hover.svg"), auto;
+}
 .retro-button:hover {
 	background-color: var(--sunny);
 	cursor: url("../../assets/svg/hover.svg"), auto;
