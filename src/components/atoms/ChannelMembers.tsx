@@ -63,7 +63,8 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
         setShowOwnerOptions(true);
       }
     });
-  }, [activeChannelOptions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeChannelOptions, ]);
 
   const handleButtonClick = (member: ChannelUser) => {
     setActiveChannelMemberOptions(member);
@@ -109,10 +110,6 @@ function ChannelMembers({ onClose }: { onClose: () => void }) {
       time: 60000,
     });
     // console.log('Timeout Member');
-  };
-  
-  const handleMuteMember = () => {
-    console.log('Mute Member');
   };
   
   const handlePromoteToAdmin = () => {

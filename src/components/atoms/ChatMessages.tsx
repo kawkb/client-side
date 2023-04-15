@@ -40,6 +40,7 @@ function ChatMessages() {
     api.get(`/channels/${activeChannel?.id}/messages`).then((response) => {
       setActiveChannelMessages(response.data);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeChannel?.id]);
 
   useEffect(() => {
@@ -69,6 +70,7 @@ function ChatMessages() {
       socket.emit('channel:leave', activeChannel?.id);
       socket.off('channel:message');
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeChannel?.id]);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
